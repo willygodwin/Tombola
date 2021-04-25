@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import AppMaster from './../pages/layout/app/AppMaster'
-import PostContainer from '../containers/wall/post/PostContainer';
+import PostContainer from '../containers/newsfeed/PostContainer';
 import axios from 'axios'
 
 function Wall(){
@@ -25,7 +25,7 @@ function Wall(){
 
     return (
         <AppMaster>
-                  
+            <PostContainer/>
 
             {/* profile page */}
             {/* profile page */}
