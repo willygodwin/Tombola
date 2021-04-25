@@ -13,6 +13,7 @@ async function seedData() {
             name: faker.name.findName(),
             email: faker.internet.email(),
             password: "secret",
+            profile_desc: 'Hello World'
         })
     
         User.create(user)

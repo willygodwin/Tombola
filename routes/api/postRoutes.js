@@ -1,5 +1,9 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const Post = require("./../../models/Post");
+const Follow = require("./../../models/Follow");
+const User = require("../../models/User");
+
 const router = express.Router();
 
 const loadCommentsAggregate = [
@@ -20,7 +24,48 @@ const loadCommentsAggregate = [
     }
 ];
 
+const loadFolloweesAggregate = (user) =>{
+    return [
+        { $match: { _id: mongoose.Types.ObjectId(user._id) }},
+        {   
+            $lookup: {
+                from: "follows",
+                let: { followeeId: '$_id'},
+                pipeline: [
+                    {  
+                        $match: { 
+                        $expr: { $eq: ["$followee_id", "$$followeeId"] } 
+                        } 
+                    },
+                ],
+                as: "followedby",
+            },
+        },
+        {   
+            $lookup: {
+                from: "follows",
+                let: { followerId: '$_id'},
+                pipeline: [
+                    {  
+                        $match: { 
+                        $expr: { $eq: ["$follower_id", "$$followerId"] } 
+                        } 
+                    },
+                ],
+                as: "isfollowing",
+            },
+        },
+        {
+            $sort: {
+                createdAt: -1
+            }
+        }
+    ];
+} 
+
 router.get("/posts", (req, res) => {
+
+    console.log(req.user)
 
     // loading the inverse relationship, ie getting comments from post
 
@@ -34,10 +79,50 @@ router.get("/posts", (req, res) => {
         })
     })
     .then((posts) => {
+        
         res.json({
             data: posts,
         });
     });
+});
+
+router.get("/newsfeed", (req, res) => {
+
+    // loading the inverse relationship, ie getting comments from post
+    console.log(typeof (req.user._id.toString()))
+    
+    User.aggregate(loadFolloweesAggregate(req.user)
+
+    ).then((user) => {
+        console.log(user)
+        return User.populate(user, {
+            path: 'followee',
+        })
+    })
+    .then((user) => {
+        console.log(user)
+        const isFollowingArray = user.map((currentuser) => {
+            return currentuser.isfollowing
+        })
+        const isfollowingIDs = isFollowingArray.flat().map((array) => {
+            return array.followee_id
+   
+        })
+        console.log(isFollowingArray.flat())
+        console.log(isfollowingIDs)
+        return Post.find({
+            'user_id': { $in: isfollowingIDs}
+        }).sort({createdAt: -1})
+
+    })
+    .then((posts) => {
+        console.log(posts)
+        res.json({
+            data: posts,
+        });
+    });
+
+ 
 });
 
 router.get("/posts/:id", (req, res) => {

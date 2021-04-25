@@ -13,11 +13,23 @@ async function seedData() {
     for (let index = 0; index < 50; index++) {
 
         const randomUser = await getRandomModel("User");
+        const randomPrice = Math.random() * 1000
+        const roundedPrice = Math.round(randomPrice / 100) * 100
+        const numberTicks = 100
+        const pricePerTick = roundedPrice/100
+        const images = ["/hello", 'Moto', 'GP']
+
 
         const post = new Post({
             title: faker.lorem.sentence(),
             body: faker.lorem.paragraph(),
-            user_id: randomUser._id
+            user_id: randomUser._id,
+            description: faker.lorem.paragraph(), 
+            price_per_ticket: pricePerTick,
+            no_tickets: numberTicks,
+            total_price: roundedPrice, 
+            image_refs: images
+
         });
 
         post.save();

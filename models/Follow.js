@@ -14,14 +14,14 @@ const followSchema = new Schema(
     }
 );
 
-commentSchema.virtual("follower", {
+followSchema.virtual("follower", {
     ref: "User",
     localField: "follower_id",
     foreignField: "_id",
     justOne: true,
 });
 
-commentSchema.virtual("followee", {
+followSchema.virtual("followee", {
     ref: "User",
     localField: "followee_id",
     foreignField: "_id",
@@ -30,6 +30,6 @@ commentSchema.virtual("followee", {
 
 
 
-const Comment = mongoose.model("Follow", followSchema);
+const Follow = mongoose.model("Follow", followSchema);
 
-module.exports = Comment; 
+module.exports = Follow; 
