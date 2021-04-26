@@ -3,7 +3,7 @@ import AppMaster from './../pages/layout/app/AppMaster'
 import PostContainer from '../containers/newsfeed/PostContainer';
 import axios from 'axios'
 
-function Wall(){
+function Newsfeed(){
 
     useEffect(() => {
         axios.get('http://localhost:3001/api/newsfeed', {
@@ -37,4 +37,4 @@ function Wall(){
 
 }
 
-export default Wall;
+export default Newsfeed;

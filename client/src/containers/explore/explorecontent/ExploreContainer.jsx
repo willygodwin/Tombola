@@ -5,26 +5,26 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
 import axios from 'axios'
 
-import PostCard from './PostCard';
 
 
 
-function PostContainer(){
+
+function UploadContainer(){
 
     const history = useHistory();
     const [posts, setPosts] = useState([])
 
 
     // call post api to load all the post in page
+    // call post api to load all the post in page
     useEffect(() => {
-        axios.get('http://localhost:3001/api/newsfeed', {
+        axios.get('http://localhost:3001/api/posts', {
             withCredentials: true,
         })
             .then((response) => {
-                
+                console.log(response);
                 setPosts(response.data.data)
             }).catch((err) => {
                 console.log({err});
@@ -35,9 +35,9 @@ function PostContainer(){
     }, [])
 
 
+
     // text area
     return (
-        
         <Box>
             <Container>
                 {/* text area to create new post */}
@@ -48,16 +48,16 @@ function PostContainer(){
                 </Typography>
                 {/* <PostCard/> */}
 
-                {posts.map((post, index) => {
+                {/* {posts.map((post, index) => {
                     const postEdit = [post]
                     return <PostCard
                         postIndex={index} 
                         key={post._id} 
                         post={postEdit} 
                     />
-                })}
+                })} */}
             </Container>
         </Box>
     );
 }
-export default PostContainer;
+export default UploadContainer;

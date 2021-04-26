@@ -55,10 +55,11 @@ function Navbar(props) {
                     Tombola
                 </Typography>
 
-                <Button color="inherit"> <FontAwesomeIcon icon={faHome}  /></Button>
-                <Button color="inherit"> <FontAwesomeIcon icon={faSearch}  /> </Button>
-                <Button color="inherit"> <FontAwesomeIcon icon={faPlusSquare} /> </Button>
-                <Button color="inherit"> <FontAwesomeIcon icon={faUserCircle}  /> </Button>
+                <Button color="inherit"> <a href='/newsfeed' style={{textDecoration:'none', color:'white'}}><FontAwesomeIcon icon={faHome} /></a></Button>
+                <Button color="inherit"> <a href='/explore' style={{textDecoration:'none', color:'white'}}><FontAwesomeIcon icon={faSearch} /></a> </Button>
+                <Button color="inherit"> <a href='/newsfeed' style={{textDecoration:'none', color:'white'}}><FontAwesomeIcon icon={faPlusSquare} /></a> </Button>
+                <Button color="inherit"> <a href='/newsfeed' style={{textDecoration:'none', color:'white'}}><FontAwesomeIcon icon={faUserCircle} /></a> </Button>
+
 
                 {/* if user is not logged in then we display the logout button */}
                 

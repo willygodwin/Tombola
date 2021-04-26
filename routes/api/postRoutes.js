@@ -6,25 +6,25 @@ const User = require("../../models/User");
 
 const router = express.Router();
 
-// const loadCommentsAggregate = [
-//     {
-//         $lookup: {
-//             from: "comments",
-//             let: { postId: "$_id" },
-//             pipeline: [
-//                 { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
-//             ],
-//             as: "comments",
-//         },
-//     },
-//     {
-//         $sort: {
-//             createdAt: -1
-//         }
-//     }
-// ];
+const loadCommentsAggregate = [
+    {
+        $lookup: {
+            from: "comments",
+            let: { postId: "$_id" },
+            pipeline: [
+                { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
+            ],
+            as: "comments",
+        },
+    },
+    {
+        $sort: {
+            createdAt: -1
+        }
+    }
+];
 
-const loadCommentsAggregate = (followID) => {
+const loadCommentsAggregateFunction = (followID) => {
 
     return  [
         { $match: { user_id : { $in: followID }}},
@@ -135,7 +135,7 @@ router.get("/newsfeed", (req, res) => {
         // return Post.find({
         //     'user_id': { $in: isfollowingIDs}
         // }).sort({createdAt: -1})
-        return Post.aggregate(loadCommentsAggregate(isfollowingIDs))
+        return Post.aggregate(loadCommentsAggregateFunction(isfollowingIDs))
 
     })
     .then((posts) => {
