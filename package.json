@@ -21,6 +21,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "antd": "^4.15.2",
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",

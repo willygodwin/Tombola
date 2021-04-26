@@ -9,7 +9,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import GlobalStore from "../../../utils/context/GlobalStore";
 import isEmpty from "lodash/isEmpty";
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { faHome, faSearch, faUserCircle, faPlusSquare  } from '@fortawesome/free-solid-svg-icons'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,10 +52,13 @@ function Navbar(props) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    Facepalm
+                    Tombola
                 </Typography>
 
-                <Button color="inherit"> Profile </Button>
+                <Button color="inherit"> <FontAwesomeIcon icon={faHome}  /></Button>
+                <Button color="inherit"> <FontAwesomeIcon icon={faSearch}  /> </Button>
+                <Button color="inherit"> <FontAwesomeIcon icon={faPlusSquare} /> </Button>
+                <Button color="inherit"> <FontAwesomeIcon icon={faUserCircle}  /> </Button>
 
                 {/* if user is not logged in then we display the logout button */}
                 

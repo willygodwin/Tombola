@@ -81,31 +81,60 @@ function PostCard(props) {
                 {images()}
      
                 </Carousel>
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" style={{display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between'}}>
+                    <div style={{display:'flex', flexDirection:'row', alignContent:'center'}}>
+
+                    {props.post[0].user.name}
+                    {/* <div style={{fontSize:'10px', display:'flex', alignItems:'center'}}>
                     {props.post[0].title}
+                    
+                    </div> */}
+                    <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
+                    {props.post[0].title}
+                     </Typography>
+                    </div>
+                    <div>
+                    <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
+                        <div>
+                            Ticket Price: ${props.post[0].price_per_ticket}
+                        </div>
+                        <div  style={{ marginLeft:'0.5rem'}}>
+                            Tickets Remaining: {props.post[0].no_tickets}
+                        </div>
+                     </Typography>
+                    </div>
                 </Typography>
+
+                <CardActions>
+                    <CommentList 
+                        comments={comments}
+                        toggleComments={toggleComments}
+                        post={props.post[0]} postIndex={props.postIndex} 
+                    />
+                    <NewComment
+                        addComment={addComment}
+                        post={props.post[0]}
+                    />
+                </CardActions>
 
                 <Typography gutterBottom variant="caption" component="p">
                     {/* {props.post[0].user.email} posted on{" "} */}
                     {moment(props.post[0].createdAt).format("Do MMMM YYYY")}
                 </Typography>
 
-                <Typography variant="body2" color="textSecondary" component="p">
+                {/* <Typography variant="body2" color="textSecondary" component="p">
                     {props.post[0].body}
-                </Typography>
+                </Typography> */}
 
-                <CommentList 
-                    comments={comments}
-                    toggleComments={toggleComments}
-                    post={props.post[0]} postIndex={props.postIndex} 
-                />
+                
+                
             </CardContent>
-            <CardActions>
+            {/* <CardActions>
                 <NewComment
                     addComment={addComment}
                     post={props.post[0]}
                 />
-            </CardActions>
+            </CardActions> */}
         </Card>  
         
       );

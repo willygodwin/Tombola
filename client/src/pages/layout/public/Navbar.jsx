@@ -40,7 +40,7 @@ function Navbar(props) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    Facepalm
+                    Tombola
                 </Typography>
 
                 {/* if user is not logged in then we display the logout button */}
