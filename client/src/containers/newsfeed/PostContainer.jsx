@@ -23,7 +23,7 @@ function PostContainer(){
             withCredentials: true,
         })
             .then((response) => {
-                console.log(response);
+                
                 setPosts(response.data.data)
             }).catch((err) => {
                 console.log({err});

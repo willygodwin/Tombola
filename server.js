@@ -18,9 +18,9 @@ connectDb();
 
 
 // Configure body parsing for AJAX requests
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.SESSION_SECRET));
  
 
 app.use(cors(corsConfig));

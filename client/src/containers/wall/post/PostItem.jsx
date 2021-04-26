@@ -45,6 +45,7 @@ function PostItem(props){
         axios
             .get(`http://localhost:3001/api/comments?post_id=${props.post._id}`)
             .then((response) => {
+                console.log(response);
                 setComments(response.data.data);
             });
     };

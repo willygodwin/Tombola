@@ -6,23 +6,45 @@ const User = require("../../models/User");
 
 const router = express.Router();
 
-const loadCommentsAggregate = [
-    {
-        $lookup: {
-            from: "comments",
-            let: { postId: "$_id" },
-            pipeline: [
-                { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
-            ],
-            as: "comments",
+// const loadCommentsAggregate = [
+//     {
+//         $lookup: {
+//             from: "comments",
+//             let: { postId: "$_id" },
+//             pipeline: [
+//                 { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
+//             ],
+//             as: "comments",
+//         },
+//     },
+//     {
+//         $sort: {
+//             createdAt: -1
+//         }
+//     }
+// ];
+
+const loadCommentsAggregate = (followID) => {
+
+    return  [
+        { $match: { user_id : { $in: followID }}},
+        {            
+            $lookup: {
+                from: "comments",
+                let: { postId: "$_id" },
+                pipeline: [
+                    { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
+                ],
+                as: "comments",
+            },
         },
-    },
-    {
-        $sort: {
-            createdAt: -1
+        {
+            $sort: {
+                createdAt: -1
+            }
         }
-    }
-];
+    ];
+}
 
 const loadFolloweesAggregate = (user) =>{
     return [
@@ -105,15 +127,22 @@ router.get("/newsfeed", (req, res) => {
             return currentuser.isfollowing
         })
         const isfollowingIDs = isFollowingArray.flat().map((array) => {
-            return array.followee_id
+            return mongoose.Types.ObjectId(array.followee_id)
    
         })
-        console.log(isFollowingArray.flat())
-        console.log(isfollowingIDs)
-        return Post.find({
-            'user_id': { $in: isfollowingIDs}
-        }).sort({createdAt: -1})
+        // console.log(isFollowingArray.flat())
+        // console.log(isfollowingIDs)
+        // return Post.find({
+        //     'user_id': { $in: isfollowingIDs}
+        // }).sort({createdAt: -1})
+        return Post.aggregate(loadCommentsAggregate(isfollowingIDs))
 
+    })
+    .then((posts) => {
+        console.log(posts)
+        return Post.populate(posts, {
+            path: 'user',
+        })
     })
     .then((posts) => {
         console.log(posts)
