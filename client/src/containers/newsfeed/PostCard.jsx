@@ -56,7 +56,8 @@ function PostCard(props) {
         
         return props.post[0].image_refs.map((image) => {
             return (<div>
-                    <h3 style={contentStyle}>{image}</h3>
+                    {/* <h3 style={contentStyle}>{image}</h3> */}
+                    <img style={contentStyle} src={image}></img>
                     </div>)
         })
     } 
@@ -67,11 +68,9 @@ function PostCard(props) {
       }
 
     const contentStyle = {
-        height: '160px',
-        color: '#fff',
-        lineHeight: '160px',
-        textAlign: 'center',
-        background: '#364d79',
+        height: '400px',
+        width: 'inherit'
+
       };
       
       return(

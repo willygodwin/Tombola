@@ -17,8 +17,9 @@ async function seedData() {
         const roundedPrice = Math.round(randomPrice / 100) * 100
         const numberTicks = 100
         const pricePerTick = roundedPrice/100
-        const images = ["/hello", 'Moto', 'GP']
-
+        const images = ["images/dirtbike.jpg", 'images/electricbike.jfif', 'images/ipad.jpg', 'images/yeezy.jpg', 'images/diamond.jpg', 'images/bracelets.jpg', 'images/iphone.jpg']
+        const randomNo1 = Math.floor(Math.random() * 7)
+        const randomNo2 = Math.floor(Math.random() * 7)
 
         const post = new Post({
             title: faker.lorem.sentence(),
@@ -28,7 +29,7 @@ async function seedData() {
             price_per_ticket: pricePerTick,
             no_tickets: numberTicks,
             total_price: roundedPrice, 
-            image_refs: images
+            image_refs: [images[randomNo1], images[randomNo2]]
 
         });
 

@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import ExploreGrid from './ExploreGrid'
 import axios from 'axios'
 
 
@@ -47,6 +48,8 @@ function UploadContainer(){
                     See what others are up to...
                 </Typography>
                 {/* <PostCard/> */}
+
+                <ExploreGrid posts={posts}/>
 
                 {/* {posts.map((post, index) => {
                     const postEdit = [post]
