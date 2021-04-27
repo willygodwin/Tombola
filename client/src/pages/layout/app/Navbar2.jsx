@@ -119,7 +119,7 @@ export default function SearchAppBar() {
                 <div>
                     <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a>
                     <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></a> 
-                    <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></a>
+                    <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></a>
                     <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a> 
                     <Button onClick={logout} color="inherit"> Logout</Button>
                 </div>

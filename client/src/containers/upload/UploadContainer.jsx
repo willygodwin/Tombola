@@ -6,33 +6,14 @@ import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import axios from 'axios'
+import FileList from './FileList'
 
 
 
 
 
-function ExploreContainer(){
+function UploadContainer(){
 
-    const history = useHistory();
-    const [posts, setPosts] = useState([])
-
-
-    // call post api to load all the post in page
-    // call post api to load all the post in page
-    useEffect(() => {
-        axios.get('http://localhost:3001/api/posts', {
-            withCredentials: true,
-        })
-            .then((response) => {
-                console.log(response);
-                setPosts(response.data.data)
-            }).catch((err) => {
-                console.log({err});
-                if(err.response.status === 401){
-                    
-                }
-            })
-    }, [])
 
 
 
@@ -56,8 +37,9 @@ function ExploreContainer(){
                         post={postEdit} 
                     />
                 })} */}
+                <FileList></FileList>
             </Container>
         </Box>
     );
 }
-export default ExploreContainer;
+export default UploadContainer;

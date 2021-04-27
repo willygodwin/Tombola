@@ -1,6 +1,6 @@
 import React from 'react';
 import AppMaster from './../pages/layout/app/AppMaster'
-import UploadContainer from '../containers/explore/explorecontent/ExploreContainer';
+import UploadContainer from '../containers/upload/UploadContainer';
 
 
 function Upload(){
