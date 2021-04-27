@@ -5,7 +5,6 @@ const Comment = require('./Comment');
 const postSchema = new Schema(
     {
         title: { type: String, required: true },
-        body: { type: String, required: true },
         total_price: {type: Number},
         no_tickets: {type: Number},
         price_per_ticket: {type:Number},

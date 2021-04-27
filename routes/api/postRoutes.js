@@ -3,8 +3,15 @@ const mongoose = require("mongoose");
 const Post = require("./../../models/Post");
 const Follow = require("./../../models/Follow");
 const User = require("../../models/User");
+const multer  = require('multer');
+const upload = multer({ dest: 'client/public/images/' })
+
+
+   
 
 const router = express.Router();
+
+/// router.use(express.urlencoded({extended: true}));
 
 const loadCommentsAggregate = [
     {
@@ -167,12 +174,19 @@ router.get("/posts/:id", (req, res) => {
     });
 });
 
-router.post("/posts", (req, res) => {
+router.post("/posts", upload.any('files'), (req, res) => {
     // validation
+    console.log(req.body)
+    console.log(req.files)
+    const filenames = req.files.map((file)=> {
+        return `images/${file.filename}`
+    })
+    console.log(filenames)
     Post.create({
         title: req.body.title,
-        body: req.body.body,
-        user_id: req.user._id
+        description: req.body.description,
+        user_id: req.user._id,
+        image_refs: filenames
     }).then(async (created) => {
 
 

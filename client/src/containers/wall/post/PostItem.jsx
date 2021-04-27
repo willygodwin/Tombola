@@ -68,6 +68,8 @@ function PostItem(props){
                     {props.post.body}
                 </Typography>
 
+                <img src={props.post.image_refs[2]} alt=""/>
+
                 <CommentList 
                     comments={comments}
                     toggleComments={toggleComments}

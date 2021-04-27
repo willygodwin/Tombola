@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, createRef} from 'react';
-
+import './styles.css'
 
 function DragAndDrop(props){
 
@@ -57,37 +57,13 @@ function DragAndDrop(props){
 
     // text area
     return (
-     <div ref={dropRef} style={{display: 'inline-block', position: 'relative'}}>
-        {dragging &&
-        <div 
-            style={{
-              border: 'dashed grey 4px',
-              backgroundColor: 'rgba(255,255,255,.8)',
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0, 
-              right: 0,
-              zIndex: 9999
-            }}
-        >
-        <div 
-            style={{
-            position: 'absolute',
-            top: '50%',
-            right: 0,
-            left: 0,
-            textAlign: 'center',
-            color: 'grey',
-            fontSize: 36
-            }}
-        >
-        <div>drop here :)</div>
+        <div  ref={dropRef} id="drop-area">
+            <form className="my-form">
+                <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+                <input type="file" id="fileElem" multiple accept="image/*" />
+                <label className="button" for="fileElem">Select some files</label>
+            </form>
         </div>
-        </div>
-        }
-         {props.children}
-     </div>
     );
 }
 export default DragAndDrop;
