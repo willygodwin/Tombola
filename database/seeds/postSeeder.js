@@ -17,7 +17,7 @@ async function seedData() {
         const roundedPrice = Math.round(randomPrice / 100) * 100
         const numberTicks = 100
         const pricePerTick = roundedPrice/100
-        const images = ["images/dirtbike.jpg", 'images/electricbike.jfif', 'images/ipad.jpg', 'images/yeezy.jpg', 'images/diamond.jpg', 'images/bracelets.jpg', 'images/iphone.jpg']
+        const images = ["images/dirtbike.jpg", 'images/jimiguitar.png', 'images/ipad.jpg', 'images/yeezy.jpg', 'images/diamond.jpg', 'images/bracelets.jpg', 'images/iphone.jpg']
         const randomNo1 = Math.floor(Math.random() * 7)
         const randomNo2 = Math.floor(Math.random() * 7)
 

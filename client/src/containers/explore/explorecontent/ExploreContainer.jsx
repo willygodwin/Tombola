@@ -41,24 +41,11 @@ function UploadContainer(){
     return (
         <Box>
             <Container>
-                {/* text area to create new post */}
                 
-
-                <Typography variant="h4">
-                    See what others are up to...
-                </Typography>
-                {/* <PostCard/> */}
 
                 <ExploreGrid posts={posts}/>
 
-                {/* {posts.map((post, index) => {
-                    const postEdit = [post]
-                    return <PostCard
-                        postIndex={index} 
-                        key={post._id} 
-                        post={postEdit} 
-                    />
-                })} */}
+              
             </Container>
         </Box>
     );

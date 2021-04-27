@@ -70,7 +70,7 @@ function LoginForm() {
             })
             .catch((err) => {
                 // not authenticated
-                console.log(err.response);
+                console.log(err);
                 if (err.response.data.errors) {
                     const errorMsg = err.response.data.errors.map(
                         (err) => err.msg

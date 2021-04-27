@@ -1,0 +1,22 @@
+.hover {
+    position: absolute;
+
+}
+.hover:hover .hover__no-hover {
+    opacity: 0;
+}
+.hover:hover .hover__hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.hover__hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1000;
+    
+}
+.hover__no-hover {
+    opacity: 1;
+}

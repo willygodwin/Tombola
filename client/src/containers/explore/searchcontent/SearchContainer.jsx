@@ -43,9 +43,7 @@ function SearchContainer(){
                 {/* text area to create new post */}
                 
 
-                <Typography variant="h4">
-                    See what others are up to...
-                </Typography>
+                
                 {/* <PostCard/> */}
 
                 {/* {posts.map((post, index) => {

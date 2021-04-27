@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -94,11 +96,14 @@ function PostCard(props) {
                     </div>
                     <div>
                     <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
-                        <div>
-                            Ticket Price: ${props.post[0].price_per_ticket}
+                        <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
+                        <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
+                        {props.post[0].price_per_ticket}
                         </div>
-                        <div  style={{ marginLeft:'0.5rem'}}>
-                            Tickets Remaining: {props.post[0].no_tickets}
+                        <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
+                        <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
+                        {props.post[0].no_tickets}
+                        
                         </div>
                      </Typography>
                     </div>
