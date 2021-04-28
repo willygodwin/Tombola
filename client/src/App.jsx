@@ -19,6 +19,7 @@ function App() {
             <GlobalStore.GlobalProvider>
                 <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Home} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/wall" component={Wall} />
                     <Route exact path="/newsfeed" component={Newsfeed} />

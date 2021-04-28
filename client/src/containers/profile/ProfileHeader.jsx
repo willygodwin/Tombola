@@ -22,6 +22,7 @@ function ProfileHeader(props) {
 
 
         return (
+            <div>
             <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
                         
                         <Avatar alt="Kanye" src="/images/kanye.png" className={classes.large}/>
@@ -42,6 +43,9 @@ function ProfileHeader(props) {
                         
 
                         
+            </div>
+
+            <button  style={{cursor:'pointer',width: '3rem',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center', backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}}>Follow</button>
             </div>
         )
     }

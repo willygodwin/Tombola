@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  let id 
 
   const logout = () => {
     axios.get('http://localhost:3001/api/logout')
@@ -82,6 +83,18 @@ export default function SearchAppBar() {
             console.log(err);
         })
 }
+
+  const getProfile = () => {
+    axios.get('http://localhost:3001/api/current-user')
+    .then((response) => {
+      console.log(response.data.data._id);
+      id = response.data.data._id
+      window.location.href = `/profile/${id}`
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+ 
 
 
   return (
@@ -120,7 +133,7 @@ export default function SearchAppBar() {
                     <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a>
                     <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></a> 
                     <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></a>
-                    <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a> 
+                    <a onClick={getProfile} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a> 
                     <Button onClick={logout} color="inherit"> Logout</Button>
                 </div>
 
