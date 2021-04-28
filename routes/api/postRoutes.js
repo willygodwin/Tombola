@@ -53,9 +53,9 @@ const loadCommentsAggregateFunction = (followID) => {
     ];
 }
 
-const loadFolloweesAggregate = (user) =>{
+const loadFolloweesAggregate = (id) =>{
     return [
-        { $match: { _id: mongoose.Types.ObjectId(user._id) }},
+        { $match: { _id: mongoose.Types.ObjectId(id) }},
         {   
             $lookup: {
                 from: "follows",
@@ -114,12 +114,67 @@ router.get("/posts", (req, res) => {
     });
 });
 
+router.get("/profile/:id", (req, res) => {
+    console.log(req.params.id)
+
+
+   
+    // loading the inverse relationship, ie getting comments from post
+
+    // find a way to populate user in comments
+    Post.aggregate(
+        [
+            { $match: { user_id: mongoose.Types.ObjectId(req.params.id) }},
+            {
+                $sort: {
+                    createdAt: -1
+                }
+            }
+    
+        ])
+    // Post.find({})
+    // .populate('user')
+    .then((posts) => {
+        console.log(posts)
+        return Post.populate(posts, {
+            path: 'user',
+        })
+    })
+    .then((posts) => {
+        
+        res.json({
+            data: posts,
+        });
+    });
+});
+
+router.get("/followinfo/:id", (req, res) => {
+    console.log(req.params.id)
+
+    User.aggregate(loadFolloweesAggregate(req.params.id)
+
+    ).then((user) => {
+        // console.log(user)
+        return User.populate(user, {
+            path: 'followee',
+        })
+    })
+    .then((posts) => {
+        
+        res.json({
+            data: posts,
+        });
+    });
+});
+
+
+
 router.get("/newsfeed", (req, res) => {
 
     // loading the inverse relationship, ie getting comments from post
     // console.log(typeof (req.user._id.toString()))
     
-    User.aggregate(loadFolloweesAggregate(req.user)
+    User.aggregate(loadFolloweesAggregate(req.user._id)
 
     ).then((user) => {
         // console.log(user)
@@ -188,9 +243,7 @@ router.post("/posts", upload.any('files'), (req, res) => {
 
     }).then(async (created) => {
 
-
         await created.populate('user').execPopulate()
-
         // to keep data structure consistent
         created.comments = [];
 

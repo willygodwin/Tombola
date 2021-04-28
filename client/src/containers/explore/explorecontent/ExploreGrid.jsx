@@ -119,29 +119,28 @@ function ImageGridList(props) {
     <div className={classes.root}>
       <GridList spacing={15} cellHeight={200} className={classes.gridList} cols={getGridListCols()}>
         {shuffledPosts.map((post, i) => {
-          return (
-          
-            <GridListTile ref={elRefs.current[i]} key={post.image_refs[0]} cols={layoutColumns(i)}
-              onMouseOver={e => (e)}  
-              onMouseOut={e => (e)}  
-            >
-              <a href={`/posts/${(post._id).toString()}`}>
-              <Hover height='200px'width='700px' onHover={
-                <div className={classes.hoverText}  >
-                  <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                    <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
-                    {post.price_per_ticket}
-                  </div>
-                  <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                    <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
-                    {post.no_tickets}
-                  </div>
-                </div>}>
-              <div ></div>
-            </Hover>
-            </a>
-            <img src={post.image_refs[0]} alt={post.title}/>
-            </GridListTile>
+          return (<GridListTile ref={elRefs.current[i]} key={post.image_refs[0]} cols={layoutColumns(i)}
+            onMouseOver={e => (e)}  
+            onMouseOut={e => (e)}  
+          >
+            <a href={`/posts/${(post._id).toString()}`}>
+            <Hover height='200px'width='700px' onHover={
+              <div className={classes.hoverText}  >
+                <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
+                  <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
+                  {post.price_per_ticket}
+                </div>
+                <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
+                  <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
+                  {post.no_tickets}
+                </div>
+              </div>}>
+            <div ></div>
+          </Hover>
+          </a>
+          <img src={post.image_refs[0]} alt={post.title}/>
+
+          </GridListTile>
         )})}
         
       </GridList>

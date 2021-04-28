@@ -8,6 +8,7 @@ import Newsfeed from "./pages/Newsfeed"
 import Explore from "./pages/Explore";
 import Upload from "./pages/Upload";
 import ViewPost from "./pages/ViewPost"; 
+import Profile from "./pages/Profile";
 import GlobalStore from "./utils/context/GlobalStore";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                     <Route exact path="/explore" component={Explore} />
                     <Route exact path="/upload" component={Upload} />
                     <Route exact path="/posts/:id" component={ViewPost} />
+                    <Route exact path="/profile/:id" component={Profile} />
                     
                     {/* <Route component={NoMatch} />  */}
                 </Switch>
