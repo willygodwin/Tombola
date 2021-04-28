@@ -31,15 +31,10 @@ function CommentList(props){
     const renderButton = () => {
         const hasCommentLoaded = props.comments !== null;
         return (
-            <Button onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation()
-                props.toggleComments(hasCommentLoaded)}}>
-                
+            <Button onClick={() => props.toggleComments(hasCommentLoaded)}>
                 {!hasCommentLoaded ? "View" : "Hide"} Comments (
                 {props.post.comments ? props.post.comments.length : 0})
             </Button>
-            
         );
     }
 

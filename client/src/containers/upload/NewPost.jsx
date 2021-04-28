@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import FileList from './FileList'
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-
+import { useHistory } from 'react-router';
 
 
 const useStyles = makeStyles({
@@ -22,9 +22,14 @@ const useStyles = makeStyles({
         marginBottom: 30,
         width: 400
     },
+    numberInput: {
+        width: 100,
+        marginRight:50
+    }
 });
 
 function NewPost(props){
+    const history = useHistory()
 
     const classes = useStyles();
     axios.defaults.withCredentials = true;
@@ -32,8 +37,9 @@ function NewPost(props){
     
     const [description, setDescription] = useState("")
     const [title, setTitle] = useState("")
-    
-
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [ticketPrice, setTicketPrice] = useState(0)
+    const [noTickets, setNoTickets] = useState(0)
     const [files, setFiles] = useState([]);
 
     const handlePostBody = (event) => {
@@ -42,6 +48,78 @@ function NewPost(props){
 
     const handlePostTitle = (event) => {
         setTitle(event.target.value)
+    }
+
+    const handleTotalPrice = (event) => {
+        
+        if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
+            setTotalPrice(event.target.value)
+            return
+        }
+        else if(noTickets > 0 && ticketPrice > 0) {
+            console.log('hello');
+            setTotalPrice(noTickets * ticketPrice)
+        }
+        else {
+            setTotalPrice(event.target.value)
+        }
+        
+    }
+
+    const handleNoTickets = (event) => {
+        
+        let number
+        if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
+            setNoTickets(event.target.value)
+            return
+        }
+        else if(ticketPrice > 0 && totalPrice > 0){
+            number = Math.round(totalPrice/ticketPrice)
+            setNoTickets(number)
+            setTotalPrice(number * ticketPrice)
+        }
+        else {
+            setNoTickets(event.target.value)
+        }
+    }
+    
+        const handleTicketPrice = (event) => {
+            let number
+            if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
+                setTicketPrice(event.target.value)
+                return
+            }
+            else if(noTickets > 0 && totalPrice > 0) {
+                number = Math.round(totalPrice/noTickets)
+                setTicketPrice(number)
+                setTotalPrice(number * noTickets)
+            }
+            else {
+                setTicketPrice(event.target.value)
+            }
+        }
+    
+
+        // const handlePrices = (event) => {
+        //     console.log("hello");
+        //     let number
+ 
+        //     else if(ticketPrice > 0 && totalPrice > 0){
+        //         number = Math.round(totalPrice/ticketPrice)
+        //         setNoTickets(number)
+        //         setTotalPrice(number * ticketPrice)
+        //     } 
+        //     else if(noTickets > 0 && ticketPrice > 0) {
+        //         console.log('hello');
+        //         setTotalPrice(noTickets * ticketPrice)
+        //     }
+          
+        // }
+    
+
+
+    const handleDrop = (filesDropped) => {
+        setFiles(filesDropped)
     }
 
     function createFormData(payload) {
@@ -77,6 +155,11 @@ function NewPost(props){
             title,
             description,
             files,
+            totalPrice,
+            ticketPrice,
+            noTickets
+
+
         }
 
         const formData = createFormData(payload)
@@ -100,6 +183,8 @@ function NewPost(props){
         .then((res) => res.json())
         .then((response) => {
             console.log(response);
+
+            history.push("/wall");
             // const newPost = response.data.data;
             // props.setPosts([
             //     newPost,
@@ -108,10 +193,7 @@ function NewPost(props){
         });
     }
 
-    const handleDrop = (filesDropped) => {
-        setFiles(filesDropped)
-    }
-
+  
     return (
         <>
         <Grid container justify="center">
@@ -126,6 +208,34 @@ function NewPost(props){
                 className={classes.newPost}
                 placeholder="Title"
             />
+            <div style={{display:'flex', flexDirection: 'row', }}>
+                <OutlinedInput
+                    onChange={handleTotalPrice}
+                    className={classes.numberInput}
+                    placeholder="Total Price"
+                    type='number'
+                    value ={totalPrice}
+                />
+                <OutlinedInput
+                    onChange={handleTicketPrice}
+                    className={classes.numberInput}
+                    placeholder="Price Per Ticket"
+                    type='number'
+                    value ={ticketPrice}
+                />
+                
+                <OutlinedInput
+                    onChange={handleNoTickets}
+                    className={classes.numberInput}
+                    placeholder="Number of Tickets"
+                    type='number'
+                    value ={noTickets}
+                />
+                
+               
+            </div>
+      
+
         </Grid>
 
         <Grid container justify="center">

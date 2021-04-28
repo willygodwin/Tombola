@@ -7,6 +7,7 @@ import Wall from "./pages/Wall";
 import Newsfeed from "./pages/Newsfeed"
 import Explore from "./pages/Explore";
 import Upload from "./pages/Upload";
+import ViewPost from "./pages/ViewPost"; 
 import GlobalStore from "./utils/context/GlobalStore";
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
                     <Route exact path="/newsfeed" component={Newsfeed} />
                     <Route exact path="/explore" component={Explore} />
                     <Route exact path="/upload" component={Upload} />
+                    <Route exact path="/posts/:id" component={ViewPost} />
+                    
                     {/* <Route component={NoMatch} />  */}
                 </Switch>
             </GlobalStore.GlobalProvider>

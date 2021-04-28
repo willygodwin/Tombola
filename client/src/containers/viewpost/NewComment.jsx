@@ -11,19 +11,11 @@ function NewComment(props){
     const [comment, setComment] = useState("")
 
     const handleChange = (event) => {
-        event.preventDefault();
-        event.stopPropagation()
         setComment(event.target.value);
-    }
-
-    const handleClick = (event) => {
-        event.preventDefault();
-        event.stopPropagation()
     }
 
     const onSubmit = (event) => {
         event.preventDefault();
-        event.stopPropagation()
         axios.post('http://localhost:3001/api/comments', {
             post_id: props.post._id,
             body: comment
@@ -45,7 +37,7 @@ function NewComment(props){
         <form onSubmit={onSubmit}>
             <TextField 
                 name="comment" 
-                onClick={handleClick} onChange={handleChange} type="text" value={comment} label="Comment" />
+                onChange={handleChange} type="text" value={comment} label="Comment" />
         </form>
     )
 

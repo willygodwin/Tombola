@@ -94,8 +94,7 @@ const loadFolloweesAggregate = (user) =>{
 
 router.get("/posts", (req, res) => {
 
-    console.log(req.user)
-
+   
     // loading the inverse relationship, ie getting comments from post
 
     // find a way to populate user in comments
@@ -118,18 +117,18 @@ router.get("/posts", (req, res) => {
 router.get("/newsfeed", (req, res) => {
 
     // loading the inverse relationship, ie getting comments from post
-    console.log(typeof (req.user._id.toString()))
+    // console.log(typeof (req.user._id.toString()))
     
     User.aggregate(loadFolloweesAggregate(req.user)
 
     ).then((user) => {
-        console.log(user)
+        // console.log(user)
         return User.populate(user, {
             path: 'followee',
         })
     })
     .then((user) => {
-        console.log(user)
+        // console.log(user)
         const isFollowingArray = user.map((currentuser) => {
             return currentuser.isfollowing
         })
@@ -137,22 +136,18 @@ router.get("/newsfeed", (req, res) => {
             return mongoose.Types.ObjectId(array.followee_id)
    
         })
-        // console.log(isFollowingArray.flat())
-        // console.log(isfollowingIDs)
-        // return Post.find({
-        //     'user_id': { $in: isfollowingIDs}
-        // }).sort({createdAt: -1})
+
         return Post.aggregate(loadCommentsAggregateFunction(isfollowingIDs))
 
     })
     .then((posts) => {
-        console.log(posts)
+        // console.log(posts)
         return Post.populate(posts, {
             path: 'user',
         })
     })
     .then((posts) => {
-        console.log(posts)
+        // console.log(posts)
         res.json({
             data: posts,
         });
@@ -162,6 +157,7 @@ router.get("/newsfeed", (req, res) => {
 });
 
 router.get("/posts/:id", (req, res) => {
+    console.log(req.params.id)
     Post.findOne({
         _id: req.params.id
     })
@@ -176,17 +172,20 @@ router.get("/posts/:id", (req, res) => {
 
 router.post("/posts", upload.any('files'), (req, res) => {
     // validation
-    console.log(req.body)
-    console.log(req.files)
+    //Mapping filenames to store references
     const filenames = req.files.map((file)=> {
-        return `images/${file.filename}`
+        return `/images/${file.filename}`
     })
-    console.log(filenames)
+    // console.log(filenames)
     Post.create({
         title: req.body.title,
         description: req.body.description,
         user_id: req.user._id,
-        image_refs: filenames
+        image_refs: filenames,
+        price_per_ticket: req.body.ticketPrice,
+        total_price: req.body.totalPrice,
+        no_tickets: req.body.noTickets
+
     }).then(async (created) => {
 
 
@@ -195,7 +194,7 @@ router.post("/posts", upload.any('files'), (req, res) => {
         // to keep data structure consistent
         created.comments = [];
 
-        console.log({created});
+        // console.log({created});
 
         res.json({
             data: created,

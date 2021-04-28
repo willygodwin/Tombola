@@ -76,6 +76,8 @@ function PostCard(props) {
       };
       
       return(
+        <a href={`/posts/${(props.post[0]._id).toString()}`}> 
+
         <Card className={classes.postItem}>
             <CardContent>
                 <Carousel afterChange={onChange}>
@@ -122,8 +124,8 @@ function PostCard(props) {
                 </CardActions>
 
                 <Typography gutterBottom variant="caption" component="p">
-                    {/* {props.post[0].user.email} posted on{" "} */}
-                    {moment(props.post[0].createdAt).format("Do MMMM YYYY")}
+                    {moment(props.post[0].createdAt).from(moment()).toLocaleUpperCase()}
+                    {/* {moment(props.post[0].createdAt).format("Do MMMM YYYY")} */}
                 </Typography>
 
                 {/* <Typography variant="body2" color="textSecondary" component="p">
@@ -140,6 +142,7 @@ function PostCard(props) {
                 />
             </CardActions> */}
         </Card>  
+        </a>
         
       );
 }

@@ -4,7 +4,9 @@ const whitelist = [
     // config.appUrl,
     "*",
     "http://localhost:3000",
-    "localhost:3000"
+    "http://localhost:3000/posts/*",
+    "localhost:3000", 
+    
 ];
 
 module.exports =  {
