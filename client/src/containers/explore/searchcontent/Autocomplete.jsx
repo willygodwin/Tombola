@@ -1,70 +1,95 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
-import useAutocomplete from '@material-ui/lab/useAutocomplete';
-import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const useStyles = makeStyles((theme) => ({
-  label: {
-    display: 'block',
-  },
-  input: {
-    width: 200,
-  },
-  listbox: {
-    width: 200,
-    margin: 0,
-    padding: 0,
-    zIndex: 1,
-    position: 'absolute',
-    listStyle: 'none',
-    backgroundColor: theme.palette.background.paper,
-    overflow: 'auto',
-    maxHeight: 200,
-    border: '1px solid rgba(0,0,0,.25)',
-    '& li[data-focus="true"]': {
-      backgroundColor: '#4a8df6',
-      color: 'white',
-      cursor: 'pointer',
-    },
-    '& li:active': {
-      backgroundColor: '#2977f5',
-      color: 'white',
-    },
-  },
-}));
+export default function Grouped(props) {
+  console.log(props);
+  
+  // const options = top100Films.map((option) => {
+  //   const firstLetter = option.title[0].toUpperCase();
+  //   return {
+  //     firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+  //     ...option,
+  //   };
+  // });
 
-export default function UseAutocomplete() {
-  const classes = useStyles();
-  const {
-    getRootProps,
-    getInputLabelProps,
-    getInputProps,
-    getListboxProps,
-    getOptionProps,
-    groupedOptions,
-  } = useAutocomplete({
-    id: 'use-autocomplete-demo',
-    options: top100Films,
-    getOptionLabel: (option) => option.title,
+  const options = () =>{
+    let posts
+    let users
+    users = props.users.map((option) => {
+      console.log(option);
+      let firstLetter
+      if (option.name === undefined) {
+        firstLetter = 'Z'
+      } else{
+        firstLetter = option.name[0].toUpperCase();
+      }
+      console.log(firstLetter);
+      return {
+        firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+        type: "Users",
+        ...option,
+    };
+    });
+    
+    posts = props.posts.map((option) => {
+      console.log(option);
+      let firstLetter
+      if (option.name === undefined) {
+        firstLetter = 'Z'
+      } else{
+        firstLetter = option.title[0].toUpperCase();
+      }
+      console.log(firstLetter);
+      return {
+        firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+        type: 'Posts',
+        name: option.title,
+        ...option,
+    };
+
+ 
   });
+  return [...users, ...posts]
+} 
+
+console.log(options());
+
+  const renderSearchBar = () => {
+    if (props.posts.length === 0 ) {
+      return (<div>Loaddingnngngng.......</div>)
+    }
+    else if(props.users.length === 0 )
+    {
+      return (<div>Loaddingnngngng.......</div>)
+    }
+
+    return (
+      // <div>Data fetched</div>)
+      <Autocomplete
+        id="grouped-demo"
+        options={options().sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+        groupBy={(option) => option.type}
+        getOptionLabel={(option) => (option.name === undefined)?'Zilla':option.name}
+        style={{ width: 300 }}
+        renderInput={(params) => {return (
+
+          <div>
+            
+            <TextField {...params} label="With categories" variant="outlined"  InputProps={<img src="/images/kanye.png" alt="" style={{height:'5px', width:'5px'}}/>}>
+            
+              </TextField>
+            </div>
+        )}}
+      />
+    );
+  }
 
   return (
-    <div>
-      <div {...getRootProps()}>
-        <label className={classes.label} {...getInputLabelProps()}>
-          useAutocomplete
-        </label>
-        <input className={classes.input} {...getInputProps()} />
-      </div>
-      {groupedOptions.length > 0 ? (
-        <ul className={classes.listbox} {...getListboxProps()}>
-          {groupedOptions.map((option, index) => (
-            <li {...getOptionProps({ option, index })}>{option.title}</li>
-          ))}
-        </ul>
-      ) : null}
-    </div>
-  );
+    renderSearchBar()
+  )
+  
 }
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top

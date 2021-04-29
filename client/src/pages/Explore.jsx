@@ -10,7 +10,7 @@ function Explore(){
 
     return (
         <AppMaster>
-            <SearchContainer/>
+            {/* <SearchContainer/> */}
             <ExploreContainer/>            
 
             {/* profile page */}

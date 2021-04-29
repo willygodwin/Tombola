@@ -10,6 +10,8 @@ import Upload from "./pages/Upload";
 import ViewPost from "./pages/ViewPost"; 
 import Profile from "./pages/Profile";
 import GlobalStore from "./utils/context/GlobalStore";
+import Search from "./pages/Search";
+
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
                     <Route exact path="/upload" component={Upload} />
                     <Route exact path="/posts/:id" component={ViewPost} />
                     <Route exact path="/profile/:id" component={Profile} />
+                    <Route exact path="/search" component={Search} />
                     
                     {/* <Route component={NoMatch} />  */}
                 </Switch>

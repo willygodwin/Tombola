@@ -14,6 +14,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faSearch, faUserCircle, faPlusSquare, faSafari  } from '@fortawesome/free-solid-svg-icons'
 import Grid from '@material-ui/core/Grid';
+import SearchContainer from '../../../containers/explore/searchcontent/SearchContainer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,17 +113,22 @@ export default function SearchAppBar() {
                 </Grid>
                 <Grid item  sm={3}>
                     <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                    <SearchIcon />
-                    </div>
-                    <InputBase
-                    placeholder="Search…"
-                    classes={{
+                      <div className={classes.searchIcon}>
+                      <SearchIcon />
+                      </div>
+                      <SearchContainer
+                      classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    />
+                    }}/>
+                      {/* <InputBase
+                      placeholder="Search…"
+                      classes={{
+                          root: classes.inputRoot,
+                          input: classes.inputInput,
+                      }}
+                      inputProps={{ 'aria-label': 'search' }}
+                      /> */}
                     </div>
                 </Grid>
                 <Grid item  sm={1}>
