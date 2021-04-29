@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { useHistory, useParams} from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-
+import { useHistory, useParams} from "react-router-dom";
 
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment'
@@ -41,7 +40,7 @@ function ProfileContainer(){
                     
                 }
             })
-    }, [])
+    }, [id])
 
     useEffect(() => {
         axios.get(`http://localhost:3001/api/followinfo/${id}`, {
@@ -56,7 +55,7 @@ function ProfileContainer(){
                     
                 }
             })
-    }, [])
+    }, [id])
 
     
 
@@ -74,7 +73,7 @@ function ProfileContainer(){
                 <Grid container spacing={3}>
                 
                 <Grid item xs={12} sm={12}>
-                <ProfileHeader user={userInfo}></ProfileHeader>
+                <ProfileHeader user={userInfo} ></ProfileHeader>
                 
                    
                 </Grid>

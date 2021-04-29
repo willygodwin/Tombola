@@ -38,7 +38,7 @@ function ViewPostContainer(){
                     
                 }
             })
-    }, [])
+    }, [id])
 
     console.log(post);
 

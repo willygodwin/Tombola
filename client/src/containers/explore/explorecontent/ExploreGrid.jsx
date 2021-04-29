@@ -7,6 +7,7 @@ import ImgWrapper from './ImgWrapper';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 // import tileData from './tileData';
 
 const useStyles = makeStyles((theme) => ({
@@ -119,11 +120,11 @@ function ImageGridList(props) {
     <div className={classes.root}>
       <GridList spacing={15} cellHeight={200} className={classes.gridList} cols={getGridListCols()}>
         {shuffledPosts.map((post, i) => {
-          return (<GridListTile ref={elRefs.current[i]} key={post.image_refs[0]} cols={layoutColumns(i)}
+          return (<GridListTile ref={elRefs.current[i]} key={i} cols={layoutColumns(i)}
             onMouseOver={e => (e)}  
             onMouseOut={e => (e)}  
           >
-            <a href={`/posts/${(post._id).toString()}`}>
+            <Link to={`/posts/${(post._id).toString()}`}>
             <Hover height='200px'width='700px' onHover={
               <div className={classes.hoverText}  >
                 <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
@@ -137,7 +138,7 @@ function ImageGridList(props) {
               </div>}>
             <div ></div>
           </Hover>
-          </a>
+          </Link>
           <img src={post.image_refs[0]} alt={post.title}/>
 
           </GridListTile>

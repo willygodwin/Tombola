@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
+import { useHistory, useParams} from "react-router-dom";
+import Follow from '../../components/follow/FollowButton'
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfileHeader(props) {
     const classes = useStyles();
+    let { id } = useParams();
     console.log(props);
 
     const renderList = () =>{
@@ -44,6 +47,7 @@ function ProfileHeader(props) {
 
                         
             </div>
+            <Follow id={id}></Follow>
 
             <button  style={{cursor:'pointer',width: '3rem',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center', backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}}>Follow</button>
             </div>

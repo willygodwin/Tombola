@@ -6,8 +6,9 @@ const postSchema = new Schema(
     {
         title: { type: String, required: true },
         total_price: {type: Number},
-        no_tickets: {type: Number},
         price_per_ticket: {type:Number},
+        no_tickets: {type: Number},
+        no_tickets_remaining: {type: Number},
         description: { type: String},
         image_refs: [String],
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },

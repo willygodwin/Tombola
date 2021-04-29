@@ -115,11 +115,6 @@ router.get("/posts", (req, res) => {
 });
 
 router.get("/profile/:id", (req, res) => {
-    console.log(req.params.id)
-
-
-   
-    // loading the inverse relationship, ie getting comments from post
 
     // find a way to populate user in comments
     Post.aggregate(
@@ -239,7 +234,8 @@ router.post("/posts", upload.any('files'), (req, res) => {
         image_refs: filenames,
         price_per_ticket: req.body.ticketPrice,
         total_price: req.body.totalPrice,
-        no_tickets: req.body.noTickets
+        no_tickets: req.body.noTickets,
+        no_tickets_remaining: req.body.noTickets
 
     }).then(async (created) => {
 

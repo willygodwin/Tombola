@@ -14,8 +14,8 @@ function ImageCarousel(props) {
             return (<div>Loading.....</div>)
         }
         
-        return props.post.image_refs.map((image) => {
-            return (<div>
+        return props.post.image_refs.map((image, key) => {
+            return (<div key={key}> 
                     {/* <h3 style={contentStyle}>{image}</h3> */}
                     <img style={contentStyle} src={`${image}`}></img>
                     </div>)

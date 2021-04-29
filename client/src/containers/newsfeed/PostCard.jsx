@@ -56,8 +56,8 @@ function PostCard(props) {
 
     const images = () => {
         
-        return props.post[0].image_refs.map((image) => {
-            return (<div>
+        return props.post[0].image_refs.map((image, key) => {
+            return (<div key={key}>
                     {/* <h3 style={contentStyle}>{image}</h3> */}
                     <img style={contentStyle} src={image}></img>
                     </div>)
@@ -97,7 +97,7 @@ function PostCard(props) {
                      </Typography>
                     </div>
                     <div>
-                    <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
+                    <Typography variant="body1" color="textSecondary" component="div" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
                         <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
                         <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
                         {props.post[0].price_per_ticket}

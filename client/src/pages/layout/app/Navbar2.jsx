@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faSearch, faUserCircle, faPlusSquare, faSafari  } from '@fortawesome/free-solid-svg-icons'
 import Grid from '@material-ui/core/Grid';
 import SearchContainer from '../../../containers/explore/searchcontent/SearchContainer'
+import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,8 +76,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const store = GlobalStore.useGlobalContext()
   let id 
 
+  console.log(store.auth.authState.currentUser._id); 
   const logout = () => {
     axios.get('http://localhost:3001/api/logout')
         .then((response) => {
@@ -85,16 +89,7 @@ export default function SearchAppBar() {
         })
 }
 
-  const getProfile = () => {
-    axios.get('http://localhost:3001/api/current-user')
-    .then((response) => {
-      console.log(response.data.data._id);
-      id = response.data.data._id
-      window.location.href = `/profile/${id}`
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
+
  
 
 
@@ -136,10 +131,14 @@ export default function SearchAppBar() {
                 </Grid>
                 <Grid item  sm={3}>
                 <div>
-                    <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a>
-                    <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></a> 
-                    <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></a>
-                    <a onClick={getProfile} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a> 
+                    {/* <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a> */}
+                    {/* <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a>  */}
+                    {/* <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a> */}
+                    <Link to='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faHome} size="lg"/></Link>
+                    <Link to='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></Link>
+                    <Link to='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></Link>
+                    <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></Link>
+                    {/* <a onClick={getProfile} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a>  */}
                     <Button onClick={logout} color="inherit"> Logout</Button>
                 </div>
 

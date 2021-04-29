@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from '@material-ui/core/InputBase';
 
 import "./Autocomplete.css";
+import { Link } from "react-router-dom";
 
 const Auto = (props) => {
   const [display, setDisplay] = useState(false);
@@ -92,7 +93,7 @@ useEffect(() => {
   };
 
   const updatePokeDex = poke => {
-    setSearch(poke);
+    setSearch('');
     setDisplay(false);
   };
 
@@ -122,12 +123,12 @@ const renderSuggestion = (type, searchInfo) => {
                     key={i}
                     tabIndex="0"
                     >
-                        <a href={`${link}/${value._id}`} className="option">
+                        <Link to={`/${link}/${value._id}`} className="option">
                             <Avatar alt="Kanye" src={value.image} />
                             <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center',}}>
                                 {value.name}
                             </Typography>
-                        </a>
+                        </Link>
                     
                     </div>
                 );
