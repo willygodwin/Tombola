@@ -15,6 +15,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
 import { Avatar } from '@material-ui/core';
+import BuyModal from '../../components/buy/BuyModal'
 
 
 
@@ -156,8 +157,9 @@ function PostCard(props) {
                 
             </table>
             <div >
-
-            <a style={{width: '100%',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center',backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}} href={`/buytickets/${props.post.id}`}>Buy Tickets</a>
+                <BuyModal></BuyModal>
+            
+            {/* <a style={{width: '100%',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center',backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}} href={`/buytickets/${props.post.id}`}>Buy Tickets</a> */}
             </div>
         </div>
         )

@@ -12,6 +12,29 @@ const upload = multer({ dest: 'client/public/images/' })
 
 const router = express.Router();
 
+
+router.get("/follow/:id", (req, res) => {
+    // validation
+    //Mapping filenames to store references
+
+    console.log('Followee',req.params.id)
+    console.log('Follower',req.user._id)
+    const query = {followee_id: mongoose.Types.ObjectId(req.params.id),follower_id:  mongoose.Types.ObjectId(req.user._id)}
+   
+    // console.log(filenames)
+    Follow.find(query)
+    .exec()
+    .then((created) => {
+
+        // console.log({created});
+
+        res.json({
+            data: created,
+        });
+    });
+});
+
+
 router.post("/follow", (req, res) => {
     // validation
     //Mapping filenames to store references

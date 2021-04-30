@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { green } from "@material-ui/core/colors";
 import Button from "@material-ui/core/Button";
+import { useHistory, useParams} from "react-router-dom";
 
 
 
@@ -45,34 +46,56 @@ const useStyles = makeStyles((theme) => ({
 function CircularIntegration(props) {
   const classes = useStyles();
   
-  const [loading, setLoading] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const {id} = useParams()
+  console.log(id);
   
 
-  const timer = React.useRef();
+  const timer = useRef();
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setIsFollowing(false)
+    getfollow()
+    .then((response) => {
+        console.log(response.data);
+        if (response.data.length === 1){
+            setIsFollowing(true)
+        }   
+    });
 
     return () => {
       clearTimeout(timer.current);
     };
-  }, []);
+  }, [id, props]);
 
-  const follow = () => {
+  //Get the info whether the people are following eachother
+  const getfollow = () => {
     console.log(props.id);
 
-    // const followee_id = props.id
+    return fetch(`http://localhost:3001/api/follow/${props.id}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+            
+          },
+    } )
+    .then((res) => res.json())
+    
+}
+    
+  const follow = () => {
+    console.log(props.id);
 
     const payload =  {
         followee_id: props.id,
     }
-
-    
 
     fetch(`http://localhost:3001/api/follow`, {
         method: 'POST',
@@ -86,6 +109,7 @@ function CircularIntegration(props) {
     .then((res) => res.json())
     .then((response) => {
         console.log(response);
+        setIsFollowing(true)
 
   
     });
@@ -111,27 +135,28 @@ const unfollow = (event) => {
     .then((res) => res.json())
     .then((response) => {
         console.log(response);
+        setIsFollowing(false)
 
   
     });
 }
 
   const handleButtonClick = () => {
-    // if(success){
+    if(isFollowing){
         unfollow()
-    // }
-    // else {
-    //     unfollow()
-    // }
-
-    if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-      timer.current = window.setTimeout(() => {
-        setSuccess(!success);
-        setLoading(false);
-      }, 2000);
     }
+    else {
+        follow()
+    }
+
+    // if (!loading) {
+    //   setSuccess(false);
+    //   setLoading(true);
+    //   timer.current = window.setTimeout(() => {
+    //     setSuccess(!success);
+    //     setLoading(false);
+    //   }, 2000);
+    // }
     // else {
     //   setSuccess(true)
     // }
@@ -147,7 +172,7 @@ const unfollow = (event) => {
           disabled={loading}
           onClick={handleButtonClick}
         >
-          {!success ? "Follow" : "Unfollow"}
+          {!isFollowing ? "Follow" : "Unfollow"}
         </Button>
         {loading && (
           <CircularProgress size={24} className={classes.buttonProgress} />
