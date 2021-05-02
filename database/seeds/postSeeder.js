@@ -17,19 +17,37 @@ async function seedData() {
         const roundedPrice = Math.round(randomPrice / 100) * 100
         const numberTicks = 100
         const pricePerTick = roundedPrice/100
-        const images = ["/images/dirtbike.jpg", '/images/jimiguitar.png', '/images/ipad.jpg', '/images/yeezy.jpg', '/images/diamond.jpg', '/images/bracelets.jpg', '/images/iphone.jpg']
+        const postInfo = [
+            {name: 'Dirtbike',
+             images: ["/images/dirtbike.jpg", "/images/dirtbike.jpg"]}, 
+            {name: 'Jimihendricks Guitar',
+            images: ['/images/jimiguitar.png', '/images/jimiguitar.png']}, 
+            {name: 'iPad',
+            images: ['/images/ipad.jpg', '/images/ipad.jpg',]}, 
+            {name: 'Yeezy Sneakers',
+            images: ['/images/yeezy.jpg', '/images/yeezy.jpg',]}, 
+            {name: 'Diamond Necklace',
+            images: ['/images/diamond.jpg', '/images/diamond.jpg']}, 
+            {name: 'Bracelet',
+            images: ['/images/bracelets.jpg', '/images/bracelets.jpg']}, 
+            {name: 'iPhone',
+            images: ['/images/iphone.jpg','/images/iphone.jpg']}, 
+        ]
+        
+        
         const randomNo1 = Math.floor(Math.random() * 7)
         const randomNo2 = Math.floor(Math.random() * 7)
 
         const post = new Post({
-            title: faker.lorem.sentence(),
+            title: postInfo[randomNo1].name,
             body: faker.lorem.paragraph(),
             user_id: randomUser._id,
             description: faker.lorem.paragraph(), 
             price_per_ticket: pricePerTick,
             no_tickets: numberTicks,
+            no_tickets_remaining: numberTicks,
             total_price: roundedPrice, 
-            image_refs: [images[randomNo1], images[randomNo2]]
+            image_refs: [postInfo[randomNo1].images[0], postInfo[randomNo1].images[1]]
 
         });
 

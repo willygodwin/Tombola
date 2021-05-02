@@ -11,6 +11,7 @@ const postSchema = new Schema(
         no_tickets_remaining: {type: Number},
         description: { type: String},
         image_refs: [String],
+        isClosed: {type: Boolean, default:false},
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
     },
     { 

@@ -19,24 +19,103 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function FormDialog() {
+export default function FormDialog(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [tickets, setTickets] = useState(null);
+  const [tickets, setTickets] = useState('');
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
     setOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    const no_tickets_remaining = (parseInt(props.post.no_tickets_remaining) - parseInt(tickets))
+    let isClosed = false
+    
+    //Make sure people don't buy negative tickets
+    if(tickets < 0) {
+        return
+    }
+    //make sure people don't buy more than set ticket amount
+    if (no_tickets_remaining < 0) {
+        return
+    } else if (no_tickets_remaining === 0){
+        isClosed = true
+    }
+    postTickets()
+    .then((response) => {
+        patchPosts(no_tickets_remaining, isClosed)
+        .then((response) => {
+            console.log(response);
+            setOpen(false)
+
+        });
+    });
   };
 
   const handleTicketInput = (event) => {
     setTickets(event.target.value);
-    setTotalPrice(event.target.value * 10);
+    setTotalPrice(event.target.value * props.post.price_per_ticket);
   };
+
+  const postTickets = () => {
+
+    const lower_limit = (props.post.no_tickets - props.post.no_tickets + 1)
+    const upper_limit = (parseInt(lower_limit) + parseInt(tickets) - 1)
+
+    const payload =  {
+        no_tickets_bought: tickets,
+        lower_limit,
+        upper_limit,
+        post_id: props.post._id,
+    }
+
+    return fetch(`http://localhost:3001/api/tickets`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+            
+          },
+    } )
+    .then((res) => res.json())
+   
+}
+
+
+const patchPosts = (no_tickets_remaining, isClosed=false) => {
+
+    console.log(no_tickets_remaining);
+    const payload =  {
+        no_tickets_remaining,
+        isClosed
+
+    }
+
+    return fetch(`http://localhost:3001/api/posts/${props.post._id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(payload),
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+            
+          },
+    } )
+    .then((res) => res.json())
+
+}
 
   return (
     <div>
@@ -60,9 +139,11 @@ export default function FormDialog() {
           </DialogTitle>
 
           <p style={{ fontSize: "8px", margin: "0px" }}>
-            Tickets Remaining: 100 Total Price: 1000{" "}
+            Tickets Remaining: {props.post.no_tickets_remaining} Total Price: {props.post.total_price}
           </p>
         </div>
+
+
 
         <DialogContent></DialogContent>
         <DialogContent>
@@ -75,7 +156,7 @@ export default function FormDialog() {
             id="name"
             label=""
             type="number"
-            value={1}
+            value={props.post.price_per_ticket}
             disabled={true}
             fullWidth
           />
@@ -111,7 +192,7 @@ export default function FormDialog() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Buy Tickets
           </Button>
         </DialogActions>

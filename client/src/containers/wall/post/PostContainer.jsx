@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import axios from 'axios'
+import ImageCarousel from '../../../components/imagecarousel/ImageCarousel'
 
 import PostItem from './PostItem';
 import NewPost from './NewPost';
@@ -39,6 +40,8 @@ function PostContainer(){
         <Box>
             <Container>
                 {/* text area to create new post */}
+
+                <ImageCarousel></ImageCarousel>
                 
                 <NewPost posts={posts} setPosts={setPosts}/>
 

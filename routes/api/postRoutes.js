@@ -252,10 +252,13 @@ router.post("/posts", upload.any('files'), (req, res) => {
 });
 
 router.patch("/posts/:id", (req, res) => {
+    console.log(req.body)
+    console.log(req.body.isClosed) 
     Post.findByIdAndUpdate(
         req.params.id,
         {
-            $push: req.body,
+            no_tickets_remaining: req.body.no_tickets_remaining,
+            isClosed: req.body.isClosed
         },
         { new: true, runValidators: true }
     ).then((updated) => {

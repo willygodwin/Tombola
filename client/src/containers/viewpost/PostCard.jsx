@@ -113,6 +113,7 @@ function PostCard(props) {
             {props.post.description}
             </p>
             <table style={{width:'100%', marginBottom:'20px'}}>
+            <tbody>
                 <tr>
                     <th >Total Price</th>
                     <td>
@@ -147,17 +148,18 @@ function PostCard(props) {
                     <td>
                         <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
                             <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
-                            {props.post.no_tickets}
+                            {props.post.no_tickets_remaining}
                         
                         </div>
                     </td>
                 </tr>
+                </tbody>
 
       
                 
             </table>
             <div >
-                <BuyModal></BuyModal>
+                <BuyModal post={props.post}></BuyModal>
             
             {/* <a style={{width: '100%',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center',backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}} href={`/buytickets/${props.post.id}`}>Buy Tickets</a> */}
             </div>

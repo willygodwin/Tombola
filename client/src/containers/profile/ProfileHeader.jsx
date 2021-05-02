@@ -49,7 +49,7 @@ function ProfileHeader(props) {
             </div>
             <Follow id={id}></Follow>
 
-            <button  style={{cursor:'pointer',width: '3rem',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center', backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}}>Follow</button>
+            {/* <button  style={{cursor:'pointer',width: '3rem',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center', backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}}>Follow</button> */}
             </div>
         )
     }

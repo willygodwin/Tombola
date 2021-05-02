@@ -5,8 +5,7 @@ const ticketSchema = new Schema(
     {
         no_tickets_bought: { type: Number, required: true  },
         lower_limit: { type: Number, required: true },
-        upper: { type: Number, required: true },
-        no_tickets_bought: { type: Number },
+        upper_limit: { type: Number, required: true },
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
         post_id: { type: Schema.Types.ObjectId, ref: "Post" , required: true},
     },

@@ -133,7 +133,7 @@ function ImageGridList(props) {
                 </div>
                 <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
                   <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
-                  {post.no_tickets}
+                  {post.no_tickets_remaining}
                 </div>
               </div>}>
             <div ></div>

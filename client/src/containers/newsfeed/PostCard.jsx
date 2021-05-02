@@ -14,6 +14,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
+import BuyModal from '../../components/buy/BuyModal'
+import ImageCarousel from '../../components/imagecarousel/ImageCarousel';
 
 
 
@@ -80,10 +82,11 @@ function PostCard(props) {
 
         <Card className={classes.postItem}>
             <CardContent>
-                <Carousel afterChange={onChange}>
+                {/* <Carousel afterChange={onChange}>
                 {images()}
      
-                </Carousel>
+                </Carousel> */}
+                <ImageCarousel post={props.post[0]}></ImageCarousel>
                 <Typography gutterBottom variant="h5" component="h2" style={{display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between'}}>
                     <div style={{display:'flex', flexDirection:'row', alignContent:'center'}}>
 
@@ -104,7 +107,7 @@ function PostCard(props) {
                         </div>
                         <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
                         <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
-                        {props.post[0].no_tickets}
+                        {props.post[0].no_tickets_remaining}
                         
                         </div>
                      </Typography>
@@ -132,7 +135,7 @@ function PostCard(props) {
                     {props.post[0].body}
                 </Typography> */}
 
-                
+                <BuyModal post={props.post[0]}></BuyModal>
                 
             </CardContent>
             {/* <CardActions>

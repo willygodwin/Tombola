@@ -4,6 +4,7 @@ const user = require('./api/userRoutes');
 const post = require('./api/postRoutes');
 const comment = require('./api/commentRoutes');
 const follow = require('./api/followRoutes');
+const ticket = require('./api/ticketRoutes');
 const AuthenticatedMiddleware = require("./../middleware/AuthenticatedMiddleware");
 
 
@@ -19,6 +20,7 @@ router.use(AuthenticatedMiddleware)
 router.use(user);
 router.use(follow);
 router.use(post);
+router.use(ticket);
 router.use(comment);
 
 

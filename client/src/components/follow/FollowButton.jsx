@@ -69,9 +69,9 @@ function CircularIntegration(props) {
         }   
     });
 
-    return () => {
-      clearTimeout(timer.current);
-    };
+    // return () => {
+    //   clearTimeout(timer.current);
+    // };
   }, [id, props]);
 
   //Get the info whether the people are following eachother
