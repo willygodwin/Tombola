@@ -4,7 +4,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FileList from './FileList'
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useHistory } from 'react-router';
 
@@ -20,13 +20,39 @@ const useStyles = makeStyles({
     newPost: {
         marginTop: 30,
         marginBottom: 30,
-        width: 400
+        width: '100%'
     },
     numberInput: {
-        width: 100,
-        marginRight:50
+        width: '100%',
+        marginRight:0
     }
 });
+
+const CssOutlinedInput = withStyles({
+    root: {
+//MuiInputBase-input
+    //   '&.Mui-focused': {
+          //   color:'#FF6701',
+          
+            '&.MuiOutlinedInput-root':{
+  
+                '&.Mui-focused fieldset':{
+
+                    '&.MuiOutlinedInput-notchedOutline':{
+            
+                        borderColor: '#FF6701',
+                    }
+                }
+            }
+            
+        //   borderBottom: '2px solid #FF6701',
+        //   color:'#FF6701'
+        
+        
+ 
+    //   },
+    },
+  })(OutlinedInput);
 
 function NewPost(props){
     const history = useHistory()
@@ -54,11 +80,19 @@ function NewPost(props){
         
         if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
             setTotalPrice(event.target.value)
+            setTicketPrice(event.target.value/noTickets)
             return
         }
-        else if(noTickets > 0 && ticketPrice > 0) {
+        else if(totalPrice > 0 && noTickets > 0) {
             console.log('hello');
-            setTotalPrice(noTickets * ticketPrice)
+            setTotalPrice(event.target.value)
+            setTicketPrice(event.target.value/noTickets)
+            
+        }
+        else if(noTickets > 0 ) {
+            console.log('hello');
+            setTotalPrice(event.target.value)
+            setTicketPrice(event.target.value/noTickets)
         }
         else {
             setTotalPrice(event.target.value)
@@ -71,50 +105,24 @@ function NewPost(props){
         let number
         if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
             setNoTickets(event.target.value)
+            setTicketPrice(totalPrice/event.target.value)
             return
         }
-        else if(ticketPrice > 0 && totalPrice > 0){
-            number = Math.round(totalPrice/ticketPrice)
-            setNoTickets(number)
-            setTotalPrice(number * ticketPrice)
+        else if(totalPrice > 0 && noTickets > 0) {
+            console.log('hello');
+            setNoTickets(event.target.value)
+            setTicketPrice(totalPrice/event.target.value)
+            
+        }
+        else if(noTickets > 0 ) {
+            console.log('hello');
+            setNoTickets(event.target.value)
+            setTicketPrice(totalPrice/event.target.value)
         }
         else {
             setNoTickets(event.target.value)
         }
     }
-    
-        const handleTicketPrice = (event) => {
-            let number
-            if(ticketPrice > 0 && totalPrice > 0 && noTickets > 0){
-                setTicketPrice(event.target.value)
-                return
-            }
-            else if(noTickets > 0 && totalPrice > 0) {
-                number = Math.round(totalPrice/noTickets)
-                setTicketPrice(number)
-                setTotalPrice(number * noTickets)
-            }
-            else {
-                setTicketPrice(event.target.value)
-            }
-        }
-    
-
-        // const handlePrices = (event) => {
-        //     console.log("hello");
-        //     let number
- 
-        //     else if(ticketPrice > 0 && totalPrice > 0){
-        //         number = Math.round(totalPrice/ticketPrice)
-        //         setNoTickets(number)
-        //         setTotalPrice(number * ticketPrice)
-        //     } 
-        //     else if(noTickets > 0 && ticketPrice > 0) {
-        //         console.log('hello');
-        //         setTotalPrice(noTickets * ticketPrice)
-        //     }
-          
-        // }
     
 
 
@@ -195,70 +203,102 @@ function NewPost(props){
 
   
     return (
-        <>
+        
         <Grid container justify="center">
-            <Typography variant="h5">
+            <Grid item xs={12} sm={12}>
+            <form onSubmit={createPost}>
+
+            <Typography variant="h5"  style={{textAlign: 'center'}}>
                 Upload a new Tombola
             </Typography>
-        </Grid>
+        
+            <div style={{display:'flex', flexDirection: 'column', width: '100%'}}>
 
-        <Grid container justify="center">
-            <OutlinedInput
-                onChange={handlePostTitle}
-                className={classes.newPost}
-                placeholder="Title"
-            />
-            <div style={{display:'flex', flexDirection: 'row', }}>
-                <OutlinedInput
+                <Typography variant="div">
+                Title:
+                </Typography>
+                <CssOutlinedInput
+                    onChange={handlePostTitle}
+                    className={classes.newPost}
+                    placeholder="Title"
+                />
+            </div>
+            <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between'}}>
+            <div style={{display:'flex', flexDirection: 'column'}}>
+                <Typography variant="div">
+                Total Price ($):
+                </Typography>
+                <CssOutlinedInput
                     onChange={handleTotalPrice}
+                    // style={{width: '200px'}}
                     className={classes.numberInput}
                     placeholder="Total Price"
                     type='number'
-                    value ={totalPrice}
+                    // value ={totalPrice}
                 />
+            </div>
+            <div style={{display:'flex', flexDirection: 'column'}}>
+                <Typography variant="div">
+                Ticket Price ($):
+                </Typography>
                 <OutlinedInput
-                    onChange={handleTicketPrice}
+                    // onChange={handleTicketPrice}
+                    // style={{width: '200px'}}
+                    
                     className={classes.numberInput}
                     placeholder="Price Per Ticket"
                     type='number'
                     value ={ticketPrice}
+                    disabled={true}
                 />
-                
-                <OutlinedInput
+            </div>
+            <div style={{display:'flex', flexDirection: 'column'}}>
+                <Typography variant="div">
+                Number of Tickets:
+                </Typography>
+                <CssOutlinedInput
                     onChange={handleNoTickets}
+                    // style={{width: '200px'}}
                     className={classes.numberInput}
                     placeholder="Number of Tickets"
                     type='number'
-                    value ={noTickets}
+                    // value ={noTickets}
                 />
+            </div>
                 
                
             </div>
+            <FileList onDropped={handleDrop} ></FileList>
+            
+               
+                <div style={{display:'flex', flexDirection: 'column'}}>
+                    <CssOutlinedInput
+                        onChange={handlePostBody}
+                        className={classes.newPost}
+                        placeholder="Description"
+                        multiline
+                        rows={5}
+                        rowsMax={10}
+                    />
+                </div>
+            
+                    <Grid container justify="flex-end">
+                        <Button color="primary" style={{color: '#FF6701'}} onClick={createPost}>
+                            Post!
+                        </Button>
+                    </Grid>
+                </form >
+
+
+            </Grid>
       
 
-        </Grid>
-
-        <Grid container justify="center">
-        <FileList onDropped={handleDrop} ></FileList>
         
-            <form onSubmit={createPost}>
-                <OutlinedInput
-                    onChange={handlePostBody}
-                    className={classes.newPost}
-                    placeholder="Description"
-                    multiline
-                    rows={5}
-                    rowsMax={10}
-                />
-                
-                <Grid container justify="flex-end">
-                    <Button color="primary" onClick={createPost}>
-                        Post!
-                    </Button>
-                </Grid>
-            </form >
-        </Grid>
-        </>
+            </Grid>
+        
+            
+        
+       
     )
 
 }

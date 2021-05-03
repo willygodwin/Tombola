@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios'
 
 import PostCard from './PostCard';
+import CurrentRaffles from '../../components/currentraffles/CurrentRaffles';
 
 
 
@@ -40,6 +41,7 @@ function PostContainer(){
         
         <Box>
             <Container>
+                <CurrentRaffles></CurrentRaffles>
                 {/* text area to create new post */}
                 
 
