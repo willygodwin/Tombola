@@ -93,13 +93,9 @@ export default function FormDialog(props) {
 
   const postTickets = () => {
 
-    const lower_limit = (props.post.no_tickets - props.post.no_tickets + 1)
-    const upper_limit = (parseInt(lower_limit) + parseInt(tickets) - 1)
-
+   
     const payload =  {
         no_tickets_bought: tickets,
-        lower_limit,
-        upper_limit,
         post_id: props.post._id,
     }
 
@@ -121,8 +117,7 @@ const patchPosts = (no_tickets_remaining, isClosed=false) => {
 
     console.log(no_tickets_remaining);
     const payload =  {
-        no_tickets_remaining,
-        isClosed
+        no_tickets_bought: parseInt(tickets),
 
     }
 
@@ -204,7 +199,7 @@ const patchPosts = (no_tickets_remaining, isClosed=false) => {
         className={classes.root}
         margin="dense"
         label="Tickets"
-    
+        type="number"
         id="custom-css-outlined-input"
         className={classes.root}
         fullWidth

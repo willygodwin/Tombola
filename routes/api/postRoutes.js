@@ -4,6 +4,7 @@ const Post = require("./../../models/Post");
 const Follow = require("./../../models/Follow");
 const User = require("../../models/User");
 const multer  = require('multer');
+const Ticket = require("../../models/Ticket");
 const upload = multer({ dest: 'client/public/images/' })
 
 
@@ -251,21 +252,86 @@ router.post("/posts", upload.any('files'), (req, res) => {
     });
 });
 
-router.patch("/posts/:id", (req, res) => {
+router.patch("/posts/:id", async (req, res) => {
     console.log(req.body)
     console.log(req.body.isClosed) 
+
+    // find the post
+    const currentPost = await Post.findById(req.params.id)
+        
+    // get remaining ticket
+    console.log(req.body);
+
+    const ticketBought = Number(req.body.no_tickets_bought);
+    if(Number.isNaN(ticketBought)){
+        return res.status(422).json({
+            err: "Please use a Number "
+        })
+    } 
+    const remainingTickets = currentPost.no_tickets_remaining - req.body.no_tickets_bought
+
+    // ccheck if closed
+
+    if(remainingTickets < 0){
+        return res.status(422).json({
+            err: "HETYYY YOUUU dont cheat, tickets bought is greater than tickets remaining"
+        })
+    }
+    
+
+
+
     Post.findByIdAndUpdate(
         req.params.id,
         {
-            no_tickets_remaining: req.body.no_tickets_remaining,
-            isClosed: req.body.isClosed
+            no_tickets_remaining: remainingTickets,
+            isClosed: remainingTickets === 0
         },
         { new: true, runValidators: true }
     ).then((updated) => {
+ 
+        if (updated.isClosed) {
+            // run randomize
+            const winner = Math.floor(Math.random() * updated.no_tickets) + 1 
+            console.log(winner)
+            // return Ticket.
+            const query = [
+                // { $match: { post_id: mongoose.Types.ObjectId(req.params.id), $expr: {$gte: [ winner, "$lower_limit" ]}, $expr:  {$gte: [ '$upper_limit', winner ] }}}, 
+                { $match: { post_id: mongoose.Types.ObjectId(req.params.id), lower_limit: {$lte: winner}, upper_limit: {$gte: winner}}},  
+            ]
+            
+            return Ticket.aggregate(query)
+        }
+        else {
+            res.json({
+                data: updated,
+            });
+            return
+        }
+    }).then((winner) => {
+        console.log(winner)
+        if(winner.length > 1) {
+            return res.status(422).json({
+                err: "can't be more than one winner"
+            })
+        }
+        return Post.findByIdAndUpdate(
+            winner[0].post_id,
+            {
+                winner_id: winner[0].user_id,
+
+            },
+            { new: true, runValidators: true }
+    ).then((winnerpost) => {
+        console.log(winnerpost)
         res.json({
-            data: updated,
+            data: winnerpost,
         });
-    });
+
+    })
+        
+        
+    })
 });
 
 router.delete("/posts/:id", (req, res) => {

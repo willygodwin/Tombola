@@ -13,6 +13,7 @@ const postSchema = new Schema(
         image_refs: [String],
         isClosed: {type: Boolean, default:false},
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        winner_id: { type: Schema.Types.ObjectId, ref: "User" },
     },
     { 
         timestamps: true,

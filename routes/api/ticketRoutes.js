@@ -41,14 +41,20 @@ router.get("/currentraffles", (req, res) => {
 });
 
 
-router.post("/tickets", (req, res) => {
+router.post("/tickets", async (req, res) => {
+
+    const currentPost = await Post.findById(req.body.post_id)
+
+    const lower_limit = (currentPost.no_tickets - currentPost.no_tickets_remaining + 1)
+    const upper_limit = (parseInt(lower_limit) + parseInt(req.body.no_tickets_bought) - 1)
+
 
     console.log('Body',req.body)
 
     Ticket.create({
         no_tickets_bought: req.body.no_tickets_bought,
-        lower_limit: req.body.lower_limit,
-        upper_limit: req.body.upper_limit,
+        lower_limit: lower_limit,
+        upper_limit: upper_limit,
         user_id: req.user._id,
         post_id: req.body.post_id,
 

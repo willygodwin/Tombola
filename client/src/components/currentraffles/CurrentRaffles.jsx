@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
+import ModalNotification from './ModalNotification'
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 function CurrentRaffles() {
@@ -9,7 +10,7 @@ function CurrentRaffles() {
         .then((response) => {
             console.log(response);
             
-            setRaffles(response.data.data)
+            setRaffles(response.data)
              
         });
     
@@ -33,7 +34,10 @@ function CurrentRaffles() {
     }
 
     return(
-        <div></div>
+        <div>
+            <ModalNotification ticket={raffles}></ModalNotification>
+
+        </div>
     )
 
 

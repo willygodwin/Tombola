@@ -8,6 +8,7 @@ const ticketSchema = new Schema(
         upper_limit: { type: Number, required: true },
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
         post_id: { type: Schema.Types.ObjectId, ref: "Post" , required: true},
+        isNotified: {type: Boolean, default:false},
     },
     {
         timestamps: true,
