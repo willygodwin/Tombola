@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faSearch, faUserCircle, faPlusSquare, faSafari  } from '@fortawesome/free-solid-svg-icons'
 import Grid from '@material-ui/core/Grid';
 import SearchContainer from '../../../containers/explore/searchcontent/SearchContainer'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     display: 'none',
-    color: 'white',
+    color: 'black',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -77,7 +78,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const store = GlobalStore.useGlobalContext()
-  let id 
+  const [active, setActive] = useState('') 
+  const location = useLocation();
+  let { id } = useParams();
 
   console.log(store.auth.authState.currentUser._id); 
   const logout = () => {
@@ -89,20 +92,38 @@ export default function SearchAppBar() {
         })
 }
 
+  useEffect(() => {
+    console.log(location);
+    if(location.pathname === '/newsfeed') {
+      setActive('home')
+    }
+    else if(location.pathname === '/explore') {
+      setActive('explore')
+    }
+    else if(location.pathname === '/upload') {
+      setActive('upload')
+    }
+    else if(location.pathname === `/profile/${id}`) {
+      setActive('profile')
+    }
+    
+  
+  }, [])
 
- 
+
+ //
 
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" style={{backgroundColor: 'rgba(var(--d87,255,255,255),1)', boxShadow: 'none', borderBottom: '1px solid #ccc'}}>
         <Toolbar >
-        <Grid container spacing={3}>
-                <Grid item  sm={3}>
+        <Grid container spacing={3} justify="center">
+                <Grid item sm={3}>
                    
                 </Grid>
-                <Grid item  sm={2}>
-                    <Typography variant="h6" className={classes.title}>
+                <Grid item sm={2} >
+                    <Typography variant="h6" className={classes.title} style={{paddingLeft: '10px', color: '#ff6701'}}>
                         Tombola
                     </Typography>
                 </Grid>
@@ -134,12 +155,12 @@ export default function SearchAppBar() {
                     {/* <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a> */}
                     {/* <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a>  */}
                     {/* <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a> */}
-                    <Link to='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faHome} size="lg"/></Link>
-                    <Link to='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></Link>
-                    <Link to='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faPlusSquare} size="lg"/></Link>
-                    <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></Link>
+                    <Link to='/newsfeed' style={{textDecoration:'none', color: active=== 'home' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faHome} size="lg"/></Link>
+                    <Link to='/explore' style={{textDecoration:'none', color: active=== 'explore' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></Link>
+                    <Link to='/upload' style={{textDecoration:'none', color: active=== 'upload' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon  icon={faPlusSquare} size="lg"/></Link>
+                    <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{textDecoration:'none', color: active=== 'profile' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon  icon={faUserCircle} size="lg" /></Link>
                     {/* <a onClick={getProfile} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a>  */}
-                    <Button onClick={logout} color="inherit"> Logout</Button>
+                    <Button onClick={logout} color="black"> Logout</Button>
                 </div>
 
 

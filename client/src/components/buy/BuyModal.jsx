@@ -6,18 +6,40 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles, } from "@material-ui/core/styles";
+import './styles.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center", 
   },
   dialogTitle: {
     marginBottom: "0px",
     marginTop: theme.spacing(1)
-  }
+  }, 
+
 }));
+
+const CssTextField = withStyles({
+    root: {
+
+      '& .MuiInput-root': {
+          color:'#FF6701',
+        '&.MuiInput-underline:after': {
+            borderColor: '#FF6701',
+          borderBottom: '2px solid #FF6701',
+          color:'#FF6701'
+        },
+        
+        '&.MuiInput-underline.Mui-focused:after': {
+          borderColor: '#FF6701',
+          borderBottom: '2px solid #FF6701',
+          color:'#FF6701'
+        },
+      },
+    },
+  })(TextField);
 
 export default function FormDialog(props) {
   const classes = useStyles();
@@ -119,7 +141,7 @@ const patchPosts = (no_tickets_remaining, isClosed=false) => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" style={{color:'#FF6701', borderColor: '#FF6701'}} onClick={handleClickOpen}>
         Buy Tickets
       </Button>
       <Dialog
@@ -163,16 +185,32 @@ const patchPosts = (no_tickets_remaining, isClosed=false) => {
           <DialogContentText className={classes.dialogTitle}>
             Number of Tickets
           </DialogContentText>
-          <TextField
+          {/* <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Tickets"
             type="number"
+            className={classes.root}
             fullWidth
             onChange={handleTicketInput}
             value={tickets}
-          />
+            
+            
+          /> */}
+
+        <CssTextField
+        autoFocus
+        className={classes.root}
+        margin="dense"
+        label="Tickets"
+    
+        id="custom-css-outlined-input"
+        className={classes.root}
+        fullWidth
+        onChange={handleTicketInput}
+        value={tickets}
+      />
           <DialogContentText className={classes.dialogTitle}>
             Total Price ($)
           </DialogContentText>
@@ -189,10 +227,10 @@ const patchPosts = (no_tickets_remaining, isClosed=false) => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary" style={{color:'#FF6701'}}>
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary"style={{color:'#FF6701'}}>
             Buy Tickets
           </Button>
         </DialogActions>

@@ -12,10 +12,6 @@ import axios from 'axios'
 
 
 
-
-
-
-
 function ViewPostContainer(){
 
     const history = useHistory();
@@ -53,6 +49,7 @@ function ViewPostContainer(){
                 <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <ImageCarousel post={post}/>
+                    
                     {/* <img src="/images/yeezy.jpg" alt=""/> */}
         
                 

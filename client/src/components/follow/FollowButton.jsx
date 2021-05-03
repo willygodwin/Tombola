@@ -168,6 +168,7 @@ const unfollow = (event) => {
         <Button
           variant="contained"
           color="primary"
+          style={{backgroundColor: !isFollowing ? '#ff6701' : "#ffc288"}}
           className={buttonClassname}
           disabled={loading}
           onClick={handleButtonClick}

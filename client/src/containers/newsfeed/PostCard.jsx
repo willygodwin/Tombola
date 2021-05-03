@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
 import BuyModal from '../../components/buy/BuyModal'
 import ImageCarousel from '../../components/imagecarousel/ImageCarousel';
+import { Avatar } from '@material-ui/core';
 
 
 
@@ -82,12 +83,25 @@ function PostCard(props) {
 
         <Card className={classes.postItem}>
             <CardContent>
+                <div style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'1rem'}}>
+                
+                <Avatar alt="Kanye" src="/images/kanye.png"/>
+                <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', marginBottom: '0px', marginLeft:'1rem'}}>
+                {props.post[0].user.name}
+                {/* <div style={{fontSize:'10px', display:'flex', alignItems:'center'}}>
+                {props.post[0].title}
+                
+                </div> */}
+                </Typography>
+                
+                </div>
                 {/* <Carousel afterChange={onChange}>
+
                 {images()}
      
                 </Carousel> */}
                 <ImageCarousel post={props.post[0]}></ImageCarousel>
-                <Typography gutterBottom variant="h5" component="h2" style={{display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between'}}>
+                <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between', marginTop:'1rem'}}>
                     <div style={{display:'flex', flexDirection:'row', alignContent:'center'}}>
 
                     {props.post[0].user.name}
@@ -95,7 +109,7 @@ function PostCard(props) {
                     {props.post[0].title}
                     
                     </div> */}
-                    <Typography variant="body1" color="textSecondary" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
+                    <Typography variant="body1" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'0.25rem'}}>
                     {props.post[0].title}
                      </Typography>
                     </div>

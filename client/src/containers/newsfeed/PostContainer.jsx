@@ -43,9 +43,9 @@ function PostContainer(){
                 {/* text area to create new post */}
                 
 
-                <Typography variant="h4">
+                {/* <Typography variant="h4">
                     See what others are up to...
-                </Typography>
+                </Typography> */}
                 {/* <PostCard/> */}
 
                 {posts.map((post, index) => {

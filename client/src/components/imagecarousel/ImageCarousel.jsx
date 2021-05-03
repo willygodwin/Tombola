@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./styles.css";
 
-const IMG_WIDTH = 700;
-const IMG_HEIGHT = 400;
+const IMG_WIDTH = '100%';
+const IMG_HEIGHT = '400px';
 
 class ImageCarousel extends Component {
     lastTouch = 0;
@@ -11,7 +11,9 @@ class ImageCarousel extends Component {
         imgs: this.props.post.image_refs,
         currentIndex: 0,
         movement: 0,
+        width: 0
       };
+ 
 
       handleWheel = (e) => {
         clearTimeout(this.wheelTimeout);
@@ -31,8 +33,8 @@ class ImageCarousel extends Component {
             nextMovement = 0;
           }
       
-          if (nextMovement > maxLength * IMG_WIDTH) {
-            nextMovement = maxLength * IMG_WIDTH;
+          if (nextMovement > maxLength * state.width) {
+            nextMovement = maxLength * state.width;
           }
       
           return {
@@ -59,9 +61,9 @@ class ImageCarousel extends Component {
       };
 
       handleMovementEnd = () => {
-        const { movement, currentIndex } = this.state;
+        const { movement, currentIndex , width} = this.state;
       
-        const endPosition = movement / IMG_WIDTH;
+        const endPosition = movement / width;
         const endPartial = endPosition % 1;
         const endingIndex = endPosition - endPartial;
         const deltaInteger = endingIndex - currentIndex;
@@ -84,9 +86,10 @@ class ImageCarousel extends Component {
       };
 
       transitionTo = (index, duration) => {
+        const {width} = this.state;
         this.setState({
           currentIndex: index,
-          movement: index * IMG_WIDTH,
+          movement: index * width,
           transitionDuration: `${duration}s`,
         });
       
@@ -99,14 +102,19 @@ class ImageCarousel extends Component {
         clearTimeout(this.transitionTimeout);
       };
 
+      componentDidMount() {
+        const width = this.divElement.clientWidth;
+        this.setState({ width });
+      }
       render() {
-        const { currentIndex, movement, transitionDuration, imgs } = this.state;
+        const { currentIndex, movement, transitionDuration, imgs, width } = this.state;
         const maxLength = imgs.length - 1;
-        const maxMovement = maxLength * IMG_WIDTH;
+        const maxMovement = maxLength * width;
     
         return (
           <div className="App">
             <div
+              ref={ (divElement) => { this.divElement = divElement } }
               className="main"
               style={{
                 width: `${IMG_WIDTH}px`,
@@ -124,7 +132,7 @@ class ImageCarousel extends Component {
                     }}
                 >
                     {imgs.map((src) => {
-                    return <img key={src} src={src} width="100%" height="100%" />;
+                    return <img key={src} src={src} width={width} height="100%" />;
                     })}
                 </div>
                 {
