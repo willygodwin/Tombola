@@ -57,7 +57,7 @@ function SearchContainer(props){
             <Container>
                 {/* text area to create new post */}
                 
-                <Autocomplete classes={props.classes} posts={posts} users={users}></Autocomplete>
+                <Autocomplete  posts={posts} users={users}></Autocomplete>
 
                 
             </Container>

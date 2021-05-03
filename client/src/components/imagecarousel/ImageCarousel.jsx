@@ -131,8 +131,8 @@ class ImageCarousel extends Component {
                         transitionDuration: transitionDuration,
                     }}
                 >
-                    {imgs.map((src) => {
-                    return <img key={src} src={src} width={width} height="100%" />;
+                    {imgs.map((src, index) => {
+                    return <img key={index} src={src} alt={src} width={width} height="100%" />;
                     })}
                 </div>
                 {

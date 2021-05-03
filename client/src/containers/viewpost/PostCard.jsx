@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Carousel } from 'antd';
@@ -58,15 +59,10 @@ function PostCard(props) {
 
     const classes = useStyles();
 
-    // const images = () => {
-        
-    //     return props.post.image_refs.map((image, key) => {
-    //         return (<div key={key}>
-    //                 {/* <h3 style={contentStyle}>{image}</h3> */}
-    //                 <img style={contentStyle} src={image}></img>
-    //                 </div>)
-    //     })
-    // } 
+    const handleClick = (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }
 
    
     function onChange(a, b, c) {
@@ -90,7 +86,7 @@ function PostCard(props) {
     return (
         <div>
             
-                <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <Link to={`/profile/${props.post.user._id}`} style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
                 
                 <Avatar alt="Kanye" src="/images/kanye.png"/>
                 <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0px', marginLeft:'1rem'}}>
@@ -101,7 +97,7 @@ function PostCard(props) {
                 </div> */}
                 </Typography>
                 
-                </div>
+                </Link>
                 <hr style={{color: 'rgba(0, 0, 0, 0.54)'}}/>
 
                    

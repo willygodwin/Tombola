@@ -17,6 +17,7 @@ import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
 import BuyModal from '../../components/buy/BuyModal'
 import ImageCarousel from '../../components/imagecarousel/ImageCarousel';
 import { Avatar } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 
@@ -79,21 +80,19 @@ function PostCard(props) {
       };
       
       return(
-        <a href={`/posts/${(props.post[0]._id).toString()}`}> 
+        <Link to={`/posts/${(props.post[0]._id).toString()}`}> 
 
         <Card className={classes.postItem}>
             <CardContent>
                 <div style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'1rem'}}>
-                
-                <Avatar alt="Kanye" src="/images/kanye.png"/>
-                <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', marginBottom: '0px', marginLeft:'1rem'}}>
-                {props.post[0].user.name}
-                {/* <div style={{fontSize:'10px', display:'flex', alignItems:'center'}}>
-                {props.post[0].title}
-                
-                </div> */}
-                </Typography>
-                
+                    <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
+                        <Avatar alt="Kanye" src="/images/kanye.png"/>
+                    </Link>
+                    <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
+                        <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold',color: 'black', marginBottom: '0px', marginLeft:'0.5rem'}}>
+                        {props.post[0].user.name}
+                        </Typography>
+                    </Link>
                 </div>
                 {/* <Carousel afterChange={onChange}>
 
@@ -101,14 +100,14 @@ function PostCard(props) {
      
                 </Carousel> */}
                 <ImageCarousel post={props.post[0]}></ImageCarousel>
-                <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between', marginTop:'1rem'}}>
+                <div style={{ display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between', marginTop:'1rem'}}>
                     <div style={{display:'flex', flexDirection:'row', alignContent:'center'}}>
-
-                    {props.post[0].user.name}
-                    {/* <div style={{fontSize:'10px', display:'flex', alignItems:'center'}}>
-                    {props.post[0].title}
-                    
-                    </div> */}
+                    <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
+                        <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', marginBottom:'0px', color: 'black' }}>
+                        {props.post[0].user.name}
+                        </Typography>
+                    </Link>
+                  
                     <Typography variant="body1" component="p" style={{ display:'flex', alignItems:'center', marginLeft:'0.25rem'}}>
                     {props.post[0].title}
                      </Typography>
@@ -126,7 +125,7 @@ function PostCard(props) {
                         </div>
                      </Typography>
                     </div>
-                </Typography>
+                </div>
 
                 <CardActions>
                     <CommentList 
@@ -159,7 +158,7 @@ function PostCard(props) {
                 />
             </CardActions> */}
         </Card>  
-        </a>
+        </Link>
         
       );
 }

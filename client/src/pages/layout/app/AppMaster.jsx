@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Navbar from "./Navbar";
 import Navbar2 from "./Navbar2";
 import GlobalStore from "./../../../utils/context/GlobalStore"
 import { useHistory } from "react-router-dom";
@@ -51,7 +50,7 @@ function AppMaster(props) {
             <div className={classes.root}>
             <Grid container spacing={3} justify="center">
         
-                <Grid  item xs={12} sm={6}>
+                <Grid  item xs={12} sm={6} style={{paddingTop:'0px'}}>
                     {props.children}
                 </Grid>
             

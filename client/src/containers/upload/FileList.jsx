@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, createRef } from 'react'
+import React, {useState} from 'react'
 import DragAndDrop from './DragAndDrop'
 
 function FileList(props){

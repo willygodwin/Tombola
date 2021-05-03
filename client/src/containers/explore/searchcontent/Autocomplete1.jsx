@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Avatar } from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
-import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 import "./Autocomplete.css";
 import { Link } from "react-router-dom";
@@ -163,19 +164,16 @@ const renderSuggestion = (type, searchInfo) => {
                     setSearch(event.target.value)
                 }}
             /> */}
-            <InputBase
-                placeholder="Search for posts or users"
-                classes={{
-                    root: props.classes.root,
-                    input: props.classes.input,
-                }}
+            <input
+                placeholder={`Search for posts or users`}
+                style={{color:'black', border:'none', backgroundColor:'rgba(var(--b3f,250,250,250),1)', borderRadius: '5px', marginLeft:'1rem' , width: '200px', padding:"0px 24px 0px 12px"}}
                 onClick={() => {
                 setDisplay(!display)}}
                 value={search}
                 onChange={(event) => {
                     setSearch(event.target.value)
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                
             />
             {display && (
                 <div className="autoContainer"> 

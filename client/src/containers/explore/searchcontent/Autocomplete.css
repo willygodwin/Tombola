@@ -31,6 +31,12 @@
     background-color: rgba(112, 128, 144, 0);
     color: white;
   } */
+
+  input:focus {
+      border: 'none';
+      outline: none;
+
+  }
   
   .pos-rel {
     position: relative;

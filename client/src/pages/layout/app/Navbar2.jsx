@@ -37,9 +37,10 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    color: 'black',
+    backgroundColor: 'rgba(var(--b3f,250,250,250),1)',
     '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade('rgba(var(--b3f,250,250,250),1)'),
     },
     marginLeft: 0,
     width: '100%',
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
+    color:'grey',
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -58,10 +60,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: 'black',
+    backgroundColor: 'none'
+
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
+    color: 'black',
+    backgroundColor: 'none',
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
@@ -127,24 +133,13 @@ export default function SearchAppBar() {
                         Tombola
                     </Typography>
                 </Grid>
-                <Grid item  sm={3}>
+                <Grid item  sm={3} style={{display:'flex', alignItems:'center'}}>
                     <div className={classes.search}>
                       <div className={classes.searchIcon}>
                       <SearchIcon />
                       </div>
                       <SearchContainer
-                      classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}/>
-                      {/* <InputBase
-                      placeholder="Search…"
-                      classes={{
-                          root: classes.inputRoot,
-                          input: classes.inputInput,
-                      }}
-                      inputProps={{ 'aria-label': 'search' }}
-                      /> */}
+                     />
                     </div>
                 </Grid>
                 <Grid item  sm={1}>
@@ -152,15 +147,11 @@ export default function SearchAppBar() {
                 </Grid>
                 <Grid item  sm={3}>
                 <div>
-                    {/* <a href='/newsfeed' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg"/></a> */}
-                    {/* <a href='/explore' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a>  */}
-                    {/* <a href='/upload' style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}></a> */}
                     <Link to='/newsfeed' style={{textDecoration:'none', color: active=== 'home' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faHome} size="lg"/></Link>
                     <Link to='/explore' style={{textDecoration:'none', color: active=== 'explore' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faSearch} size="lg"/></Link>
                     <Link to='/upload' style={{textDecoration:'none', color: active=== 'upload' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon  icon={faPlusSquare} size="lg"/></Link>
                     <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{textDecoration:'none', color: active=== 'profile' ? '#ff6701': 'black', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon  icon={faUserCircle} size="lg" /></Link>
-                    {/* <a onClick={getProfile} style={{textDecoration:'none', color:'white', marginLeft:'0.5rem', marginRight:'0.5rem'}}><FontAwesomeIcon icon={faUserCircle} size="lg" /></a>  */}
-                    <Button onClick={logout} color="black"> Logout</Button>
+                    <Button onClick={logout} style={{color:"black"}}> Logout</Button>
                 </div>
 
 
