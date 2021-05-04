@@ -31,7 +31,7 @@ function ModalNotification(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -41,6 +41,17 @@ function ModalNotification(props) {
     setOpen(false);
   };
 
+  useEffect(() => {
+    if(!props.ticket || props.ticket.length === 0){
+      return 
+    }
+    if(props.ticket[0].post.isClosed){
+      handleOpen()
+    }
+
+    
+  }, [props])
+
   const body = () => {
 
     console.log('ticket', props.ticket);
@@ -48,10 +59,21 @@ function ModalNotification(props) {
 
       if(!props.ticket || props.ticket.length === 0){
           return (
-              <div></div>
+            
+              <div>
+                
+              </div>
+          )
+      }
+      if(!props.ticket[0].post.isClosed){
+          return (
+              <div>
+                
+              </div>
           )
       }
       if(props.ticket[0].post.winner_id === props.ticket[0].user_id) {
+        
         return (
             <div style={modalStyle} className={classes.paper}>
               <h2 id="simple-modal-title">Congratulations! You have won the following item...</h2>

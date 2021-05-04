@@ -11,7 +11,7 @@ function PublicMaster(props){
 
             {props.children}
 
-            <img src="/Facepalm_silhouette.svg" alt="logo" />
+            {/* <img src="/Facepalm_silhouette.svg" alt="logo" /> */}
         </main>
     );
 

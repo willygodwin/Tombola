@@ -9,8 +9,8 @@ import Explore from "./pages/Explore";
 import Upload from "./pages/Upload";
 import ViewPost from "./pages/ViewPost"; 
 import Profile from "./pages/Profile";
+import CurrentTombolas from "./pages/CurrentTombolas";
 import GlobalStore from "./utils/context/GlobalStore";
-import Search from "./pages/Search";
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
                     <Route exact path="/upload" component={Upload} />
                     <Route exact path="/posts/:id" component={ViewPost} />
                     <Route exact path="/profile/:id" component={Profile} />
-                    <Route exact path="/search" component={Search} />
+                    <Route exact path="/currenttombolas" component={CurrentTombolas} />
                     
                     {/* <Route component={NoMatch} />  */}
                 </Switch>

@@ -19,9 +19,9 @@ async function seedData() {
         const pricePerTick = roundedPrice/100
         const postInfo = [
             {name: 'Dirtbike',
-             images: ["/images/dirtbike.jpg", "/images/dirtbike.jpg"]}, 
-            {name: 'Jimihendricks Guitar',
-            images: ['/images/jimiguitar.png', '/images/jimiguitar.png']}, 
+             images: ["/images/dirtbike.jpg", "/images/dirtbike.jpg", "/images/dirtbike.jpg", "/images/dirtbike.jpg"]}, 
+            {name: 'Jimihendricks Stratocaster Voodoo Child Guitar',
+            images: ['/images/jimiguitar.png']}, 
             {name: 'iPad',
             images: ['/images/ipad.jpg', '/images/ipad.jpg',]}, 
             {name: 'Yeezy Sneakers',
@@ -32,11 +32,14 @@ async function seedData() {
             images: ['/images/bracelets.jpg', '/images/bracelets.jpg']}, 
             {name: 'iPhone',
             images: ['/images/iphone.jpg','/images/iphone.jpg']}, 
+            {name: 'Yamaha WR450F',
+            images: ['/images/yamahaWR450F.jpg','/images/yamahaWR450F(1).jpg']}, 
+
         ]
         
         
-        const randomNo1 = Math.floor(Math.random() * 7)
-        const randomNo2 = Math.floor(Math.random() * 7)
+        const randomNo1 = Math.floor(Math.random() * 8)
+        const randomNo2 = Math.floor(Math.random() * 8)
 
         const post = new Post({
             title: postInfo[randomNo1].name,
@@ -47,7 +50,9 @@ async function seedData() {
             no_tickets: numberTicks,
             no_tickets_remaining: numberTicks,
             total_price: roundedPrice, 
-            image_refs: [postInfo[randomNo1].images[0], postInfo[randomNo1].images[1]]
+            image_refs: [postInfo[randomNo1].images[0], postInfo[randomNo1].images[1], postInfo[randomNo1].images[3]],
+            winner_id: null, 
+            isClosed: false
 
         });
 

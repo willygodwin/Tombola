@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 
 function CurrentRaffles() {
-    const [raffles, setRaffles] = useState([]);
+    const [tombolas, setTombolas] = useState([]);
     const classes = useStyles();
     useEffect(() => {
 
@@ -32,7 +32,7 @@ function CurrentRaffles() {
             .then((response) => {
                 console.log(response);
 
-                setRaffles(response.data)
+                setTombolas(response.data)
 
             });
 
@@ -58,9 +58,9 @@ function CurrentRaffles() {
 
     return (
         <div>
-            <ModalNotification ticket={raffles}></ModalNotification>
+            <ModalNotification ticket={tombolas}></ModalNotification>
             {
-                raffles.length === 0 ? <div></div> :
+                tombolas.length === 0 ? <div></div> :
 
 
                     <Card className={classes.postItem} >
@@ -68,21 +68,21 @@ function CurrentRaffles() {
                             <Typography gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px' }}>
                                 Current Tombolas
                             </Typography>
-                            {raffles.map((raffle, i) => {
+                            {tombolas.map((tombola, i) => {
                                 if (i < 5) {
                                     return (
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem' }}>
-                                            <Link to={`/posts/${(raffle.post._id).toString()}`} >
-                                                <Avatar alt="Kanye" src={raffle.post.image_refs[0]} style={{ width: '2rem', height: '2rem' }} />
+                                            <Link to={`/posts/${(tombola.post._id).toString()}`} >
+                                                <Avatar alt="Kanye" src={tombola.post.image_refs[0]} style={{ width: '2rem', height: '2rem' }} />
                                             </Link>
-                                            <Link to={`/posts/${(raffle.post._id).toString()}`} >
+                                            <Link to={`/posts/${(tombola.post._id).toString()}`} >
                                                 <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>
-                                                    {raffle.post.title}
+                                                    {tombola.post.title}
                                                 </Typography>
                                             </Link>
                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
                                                 <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
-                                                {raffle.no_tickets_bought}
+                                                {tombola.no_tickets_bought}
 
                                             </div>
                                         </div>
@@ -91,6 +91,10 @@ function CurrentRaffles() {
                                 }
                                 return
                             })}
+
+                            <Link to='/currenttombolas'>
+                                See More
+                            </Link>
 
                         </CardContent>
                     </Card>
