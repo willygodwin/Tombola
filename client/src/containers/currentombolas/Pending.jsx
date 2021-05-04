@@ -4,15 +4,18 @@ import { Avatar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+import WheelSpinner from "../../components/wheelspinner/WheelSpinner";
 
 
 function Pending(props) {
 
     return (
         <div>
+            <WheelSpinner won={true} ticket={props.tombolas[0]}></WheelSpinner>
             <Typography gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px' }}>
                 Upcoming Tombolas
                             </Typography>
+
             <table style={{ width: '100%' }}>
                 <thead>
                     <th>Tombola Title</th>

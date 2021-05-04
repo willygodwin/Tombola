@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Avatar } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import WheelSpinner from "../wheelspinner/WheelSpinner";
 
 
 
@@ -76,13 +77,14 @@ function ModalNotification(props) {
         
         return (
             <div style={modalStyle} className={classes.paper}>
-              <h2 id="simple-modal-title">Congratulations! You have won the following item...</h2>
+              <WheelSpinner won={true} ticket={props.ticket[0]}></WheelSpinner>
+              {/* <h2 id="simple-modal-title">Congratulations! You have won the following item...</h2>
               <Link to={`/posts/${props.ticket[0].post._id}`} style={{display:'flex', flexDirection:'row', alignItems: 'center'}}>
                 <Avatar src={props.ticket[0].post.image_refs[0]}></Avatar>
                 <p style={{color:'black', marginBottom: '0px', marginLeft: '0.25rem'}} id="simple-modal-description">
                 {props.ticket[0].post.title}
                 </p>
-              </Link>
+              </Link> */}
         
             </div>
         )
