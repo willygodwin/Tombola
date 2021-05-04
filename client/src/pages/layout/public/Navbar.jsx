@@ -29,17 +29,17 @@ function Navbar(props) {
     const classes = useStyles();
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{ backgroundColor: 'rgba(var(--d87,255,255,255),1)', boxShadow: 'none', borderBottom: '1px solid #ccc' }}>
             <Toolbar>
-                <IconButton
+                {/* <IconButton
                     edge="start"
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="menu"
                 >
                     <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
+                </IconButton> */}
+                <Typography variant="h6" className={classes.title} style={{ paddingLeft: '10px', color: '#ff6701', textAlign:'center'}}>
                     Tombola
                 </Typography>
 

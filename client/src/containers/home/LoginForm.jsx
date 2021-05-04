@@ -154,6 +154,7 @@ function LoginForm() {
                                 onClick={onSubmit}
                                 size="small"
                                 color="primary"
+                                style={{color: '#FF6701'}}
                             >
                                 Login
                             </Button>
@@ -162,6 +163,7 @@ function LoginForm() {
                                 onClick={() => history.push("/register")}
                                 size="small"
                                 color="primary"
+                                style={{color: '#FF6701'}}
                             >
                                 Register
                             </Button>

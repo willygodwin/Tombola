@@ -168,6 +168,7 @@ function SignupForm() {
                                 onClick={onSubmit}
                                 size="small"
                                 color="primary"
+                                style={{color: '#FF6701'}}
                             >
                                 Submit
                             </Button>
