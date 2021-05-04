@@ -53,15 +53,11 @@ function SearchContainer(props){
 
     // text area
     return (
-        <Box>
-            <Container>
-                {/* text area to create new post */}
+    
+                    
+                    <Autocomplete posts={posts} users={users}></Autocomplete>
+               
                 
-                <Autocomplete  posts={posts} users={users}></Autocomplete>
-
-                
-            </Container>
-        </Box>
     );
 }
 export default SearchContainer;

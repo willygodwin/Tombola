@@ -41,7 +41,7 @@ function PostContainer(){
         
         <Box>
             <Container>
-                <CurrentRaffles></CurrentRaffles>
+           
                 {/* text area to create new post */}
                 
 

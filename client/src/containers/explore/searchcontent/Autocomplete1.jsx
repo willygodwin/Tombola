@@ -152,7 +152,7 @@ const renderSuggestion = (type, searchInfo) => {
     return (
         
         
-            <div ref={wrapperRef} className="flex-container flex-column pos-rel" style={{width:'100%'}}>
+            <div ref={wrapperRef} className="flex-container flex-column pos-rel" style={{width:'200px'}}>
             
             {/* <input
                 id="auto"
@@ -166,7 +166,7 @@ const renderSuggestion = (type, searchInfo) => {
             /> */}
             <input
                 placeholder={`Search for posts or users`}
-                style={{color:'black', border:'none', backgroundColor:'rgba(var(--b3f,250,250,250),1)', borderRadius: '5px', marginLeft:'1rem' , width: '200px', padding:"0px 24px 0px 12px"}}
+                style={{color:'black', border:'none', backgroundColor:'rgba(var(--b3f,250,250,250),1)', borderRadius: '5px', width: '200px', padding:"0px 24px 0px 24px"}}
                 onClick={() => {
                 setDisplay(!display)}}
                 value={search}
@@ -189,7 +189,7 @@ const renderSuggestion = (type, searchInfo) => {
   }
 
   return (
-    <div className="auto-container">
+    <div className="auto-container" style={{width:'200px'}}>
       {renderSearchBar()}
     </div>
   )

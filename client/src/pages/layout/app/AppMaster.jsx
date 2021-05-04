@@ -50,9 +50,12 @@ function AppMaster(props) {
             <div className={classes.root}>
             <Grid container spacing={3} justify="center">
         
-                <Grid  item xs={12} sm={6} style={{paddingTop:'0px'}}>
                     {props.children}
+                {/* <Grid  item xs={12} sm={6} style={{paddingTop:'0px'}}>
                 </Grid>
+                <Grid  item xs={12} sm={3} style={{paddingTop:'0px'}}>
+                    {props.children}
+                </Grid> */}
             
             </Grid>
       
