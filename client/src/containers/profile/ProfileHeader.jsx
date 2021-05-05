@@ -21,6 +21,8 @@ function ProfileHeader(props) {
     const store = GlobalStore.useGlobalContext()
     console.log(store.auth.authState.currentUser._id);
 
+
+
     const renderList = () => {
         console.log('props', props.post);
         if (props.user.length === 0) {
@@ -29,66 +31,67 @@ function ProfileHeader(props) {
 
 
         return (
-         
-                <div style={{ display: 'flex', flexDirection: 'column', }}>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-                        <Avatar alt="Kanye" src="/images/kanye.png" className={classes.large} />
-                        <div style={{ display: 'flex', flexDirection: 'column', }}>
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0px', marginLeft: '1rem' }}>
-                                    {props.user[0].name}
+            <div style={{ display: 'flex', flexDirection: 'column', }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-
-                                </Typography>
-                                {props.user[0]._id === store.auth.authState.currentUser._id ? <div></div> : <Follow id={id}></Follow>}
-                            </div>
+                    <Avatar alt="Kanye" src="/images/kanye.png" className={classes.large} />
+                    <div style={{ display: 'flex', flexDirection: 'column', }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                            <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0px', marginLeft: '1rem' }}>
+                                {props.user[0].name}
 
 
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '250px', marginLeft: '1rem' }}>
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center',  }}>
-                                    <p style={{ fontWeight: 'bold' }}>{props.noPosts}</p>
-                                    <p style={{marginLeft: '0.25rem'}}>Posts</p>
+                            </Typography>
+                            {props.user[0]._id === store.auth.authState.currentUser._id ? <div></div> : <Follow id={id}></Follow>}
+                        </div>
 
-                                </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' ,  }}>
-                                    <p style={{ fontWeight: 'bold' }}>{props.user[0].followedby.length}</p>
-                                    <p style={{marginLeft: '0.25rem'}}>Followers</p>
-                                </div>
-
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-                                    <p style={{ fontWeight: 'bold' }}>{props.user[0].isfollowing.length}</p>
-                                    <p style={{marginLeft: '0.25rem'}}> Following</p>
-                                </div>
-                            </div>
-                            <div style={{ marginLeft: '1rem' }}>
-                                <EditProfile user={props.user[0]}></EditProfile>
-
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '250px', marginLeft: '1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+                                <p style={{ fontWeight: 'bold' }}>{props.noPosts}</p>
+                                <p style={{ marginLeft: '0.25rem' }}>Posts</p>
 
                             </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+                                <p style={{ fontWeight: 'bold' }}>{props.user[0].followedby.length}</p>
+                                <p style={{ marginLeft: '0.25rem' }}>Followers</p>
+                            </div>
+
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
+                                <p style={{ fontWeight: 'bold' }}>{props.user[0].isfollowing.length}</p>
+                                <p style={{ marginLeft: '0.25rem' }}> Following</p>
+                            </div>
+                        </div>
+                        <div style={{ marginLeft: '1rem' }}>
+                            <EditProfile user={props.user[0]} ></EditProfile>
+
 
                         </div>
+
                     </div>
-
-
-
-
-
                 </div>
 
 
 
 
-               
-           
+
+            </div>
+
+
+
+
+
+
         )
     }
 
     return (
-        <div style={{ height: '100px', width: '100%', zIndex: 10000,backgroundColor:'rgba(0, 0, 0, 0)' }}>
+        <div style={{ height: '100px', width: '100%', zIndex: 10000, backgroundColor: 'rgba(0, 0, 0, 0)' }}>
 
             {renderList()}
+
         </div>
 
 

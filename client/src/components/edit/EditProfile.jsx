@@ -62,6 +62,40 @@ function EditProfile(props) {
         setEditing(!editing)
     }
 
+
+
+    const submitInput = () => {
+        updateProfileDescription(description)
+        .then((response) => {
+            console.log(response);
+            setEditing(false)
+    
+          });
+    }
+
+    
+    const updateProfileDescription = (description) => {
+
+        const payload = {
+            profile_desc: description,
+
+        }
+
+        return fetch(`http://localhost:3001/api/profiledescription/${store.auth.authState.currentUser._id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(payload),
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+
+            },
+        })
+            .then((res) => res.json())
+
+
+
+    }
+
     console.log(editing);
 
     const renderEdit = () => {
@@ -90,7 +124,7 @@ function EditProfile(props) {
                     />
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent: "space-between" }}>
                         <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '34px', right: '4px', fontSize:'0.8em' }} onClick={showInput} icon={faTimes} size="sm" />
-                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '34px', right: '14px', fontSize: '0.7em' }} onClick={showInput} icon={faCheck} size="xs" />
+                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '34px', right: '14px', fontSize: '0.7em' }} onClick={submitInput} icon={faCheck} size="xs" />
                     </div>
                 </div>
             )

@@ -33,6 +33,26 @@ router.post('/users', (req, res) => {
 
 });
 
+router.patch('/profiledescription/:id', (req, res) => {
+    console.log(req.params.id)
+
+
+    User.findByIdAndUpdate(req.params.id, 
+        {
+            
+                profile_desc: req.body.profile_desc,
+            
+        },
+        { new: true, runValidators: true }
+    ).then((updated) => {
+        res.json({
+            data: updated,
+        });
+    });
+    
+
+})
+
 router.patch('/users/:id', (req, res) => {
 
 
