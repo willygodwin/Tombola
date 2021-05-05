@@ -68,4 +68,21 @@ router.post("/tickets", async (req, res) => {
     });
 });
 
+router.patch('/tickets/:id', (req, res) => {
+    console.log(req.params.id)
+    console.log(req.body.isNotified)
+    Ticket.findByIdAndUpdate(
+        req.params.id,
+        {
+            isNotified: req.body.isNotified,
+           
+        },
+        { new: true, runValidators: true }
+    ).then((updated) => {
+        res.json({
+            data: updated,
+        });
+    })
+});
+
 module.exports = router

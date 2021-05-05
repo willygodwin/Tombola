@@ -70,9 +70,10 @@ export default (props) => {
     const newPrizeNumber = riggedNumbers[ Math.floor(Math.random() * riggedNumbers.length )];
     console.log({newPrizeNumber});
    
-
+    
     setPrizeNumber(newPrizeNumber)
     setMustSpin(true)
+    props.onClick()
   }
 
   return (

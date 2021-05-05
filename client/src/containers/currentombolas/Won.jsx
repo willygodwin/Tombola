@@ -15,7 +15,7 @@ function Won(props) {
                 Tombolas Won
             </Typography>
 
-            <WheelSpinner></WheelSpinner>
+            
             <table style={{ width: '100%' }}>
                 <thead>
                     <th>Tombola Title</th>

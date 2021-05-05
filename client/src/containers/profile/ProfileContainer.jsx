@@ -68,19 +68,19 @@ function ProfileContainer(){
     return (
         
         <Box>
-            <Container>
+            <Container >
                 {/* text area to create new post */}
                 <Grid container spacing={3}>
                 
-                <Grid item xs={12} sm={12}>
-                <ProfileHeader user={userInfo} ></ProfileHeader>
+                <Grid item xs={12} sm={12} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}>
+                <ProfileHeader user={userInfo} noPosts={posts.length} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}></ProfileHeader>
                 
                    
                 </Grid>
 
             </Grid>
          
-            <div style={{height: '100px',  zIndex:'10000'}}></div>
+            <div style={{height: '50px',  zIndex:'10000'}}></div>
             <ProfileImageGrid posts={posts}/>
 
                 {/* <PostCard/> */}

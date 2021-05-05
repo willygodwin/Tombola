@@ -1,0 +1,17 @@
+.ExitButton {
+    color: rgba(0, 0, 0, 0.23)
+}
+
+.EditButton {
+    color: rgba(0, 0, 0, 0.23)
+
+}
+.EditButton:hover {
+    color: #FF6701
+
+}
+
+
+.ExitButton:hover {
+    color: #FF6701
+}

@@ -9,6 +9,7 @@ import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt  } from '@fortawesome/free-solid-svg-icons'
+import { findIconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 const useStyles = makeStyles({
     root: {
@@ -58,7 +59,7 @@ function CurrentRaffles() {
 
     return (
         <div>
-            <ModalNotification ticket={tombolas}></ModalNotification>
+            {tombolas.map((tombola) => <ModalNotification ticket={tombola}></ModalNotification>)}
             {
                 tombolas.length === 0 ? <div></div> :
 
@@ -69,6 +70,9 @@ function CurrentRaffles() {
                                 Current Tombolas
                             </Typography>
                             {tombolas.map((tombola, i) => {
+                                if(tombola.post.isClosed){
+                                    return
+                                }
                                 if (i < 5) {
                                     return (
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem' }}>
