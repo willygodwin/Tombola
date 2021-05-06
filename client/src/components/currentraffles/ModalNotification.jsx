@@ -66,7 +66,7 @@ function ModalNotification(props) {
 
     }
 
-    return fetch(`http://localhost:3001/api/tickets/${props.ticket._id}`, {
+    return fetch(`/api/tickets/${props.ticket._id}`, {
       method: 'PATCH',
       body: JSON.stringify(payload),
       credentials: 'include',

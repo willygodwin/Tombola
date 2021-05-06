@@ -21,7 +21,7 @@ function PostContainer(){
 
     // call post api to load all the post in page
     useEffect(() => {
-        axios.get('http://localhost:3001/api/newsfeed', {
+        axios.get('/api/newsfeed', {
             withCredentials: true,
         })
             .then((response) => {

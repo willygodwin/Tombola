@@ -81,7 +81,7 @@ function EditProfile(props) {
 
         }
 
-        return fetch(`http://localhost:3001/api/profiledescription/${store.auth.authState.currentUser._id}`, {
+        return fetch(`/api/profiledescription/${store.auth.authState.currentUser._id}`, {
             method: 'PATCH',
             body: JSON.stringify(payload),
             credentials: 'include',

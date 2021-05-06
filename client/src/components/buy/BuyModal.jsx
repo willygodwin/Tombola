@@ -110,7 +110,7 @@ export default function FormDialog(props) {
       post_id: props.post._id,
     }
 
-    return fetch(`http://localhost:3001/api/tickets`, {
+    return fetch(`/api/tickets`, {
       method: 'POST',
       body: JSON.stringify(payload),
       credentials: 'include',
@@ -132,7 +132,7 @@ export default function FormDialog(props) {
 
     }
 
-    return fetch(`http://localhost:3001/api/posts/${props.post._id}`, {
+    return fetch(`/api/posts/${props.post._id}`, {
       method: 'PATCH',
       body: JSON.stringify(payload),
       credentials: 'include',

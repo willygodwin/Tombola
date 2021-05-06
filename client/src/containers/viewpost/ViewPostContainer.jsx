@@ -20,7 +20,7 @@ function ViewPostContainer() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/posts/${id}`, {
+        axios.get(`/api/posts/${id}`, {
             withCredentials: true,
         })
             .then((response) => {

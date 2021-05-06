@@ -53,7 +53,7 @@ function CurrentTombolasContainer() {
     const getCurrentTombolas = () => {
 
 
-        return fetch(`http://localhost:3001/api/currentraffles`, {
+        return fetch(`/api/currentraffles`, {
             method: 'GET',
             credentials: 'include',
             headers: {

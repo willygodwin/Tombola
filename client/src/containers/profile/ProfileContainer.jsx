@@ -28,7 +28,7 @@ function ProfileContainer(){
 
    
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/profile/${id}`, {
+        axios.get(`/api/profile/${id}`, {
             withCredentials: true,
         })
             .then((response) => {
@@ -43,7 +43,7 @@ function ProfileContainer(){
     }, [id])
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/api/followinfo/${id}`, {
+        axios.get(`/api/followinfo/${id}`, {
             withCredentials: true,
         })
             .then((response) => {

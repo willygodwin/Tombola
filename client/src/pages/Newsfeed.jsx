@@ -8,7 +8,7 @@ import CurrentRaffles from '../components/currentraffles/CurrentRaffles';
 function Newsfeed() {
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/newsfeed', {
+        axios.get('/api/newsfeed', {
             withCredentials: true,
         })
             .then((response) => {

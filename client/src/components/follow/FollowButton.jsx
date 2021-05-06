@@ -63,7 +63,7 @@ function CircularIntegration(props) {
   const getfollow = () => {
     console.log(props.id);
 
-    return fetch(`http://localhost:3001/api/follow/${props.id}`, {
+    return fetch(`/api/follow/${props.id}`, {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -82,7 +82,7 @@ function CircularIntegration(props) {
         followee_id: props.id,
     }
 
-    fetch(`http://localhost:3001/api/follow`, {
+    fetch(`/api/follow`, {
         method: 'POST',
         body: JSON.stringify(payload),
         credentials: 'include',
@@ -106,7 +106,7 @@ const unfollow = (event) => {
         followee_id: props.id,
     }
 
-    fetch(`http://localhost:3001/api/unfollow`, {
+    fetch(`/api/unfollow`, {
         method: 'DELETE',
         body: JSON.stringify(payload),
         credentials: 'include',

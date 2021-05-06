@@ -178,7 +178,7 @@ function NewPost(props) {
 
         event.preventDefault();
 
-        fetch('http://localhost:3001/api/posts', {
+        fetch('/api/posts', {
             method: 'POST',
             // headers: {
             //     'Accept': 'application/json',

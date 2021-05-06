@@ -50,7 +50,7 @@ function PostCard(props) {
             return setComments(null);
         }
         axios
-            .get(`http://localhost:3001/api/comments?post_id=${(props.post[0]._id).toString()}`, { withCredentials: true })
+            .get(`/api/comments?post_id=${(props.post[0]._id).toString()}`, { withCredentials: true })
             .then((response) => {
 
                 setComments(response.data.data);
