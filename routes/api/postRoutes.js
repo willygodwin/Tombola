@@ -5,7 +5,8 @@ const Follow = require("./../../models/Follow");
 const User = require("../../models/User");
 const multer  = require('multer');
 const Ticket = require("../../models/Ticket");
-const upload = multer({ dest: 'client/public/images/' })
+// const upload = multer({ dest: 'client/public/images/' })
+const upload = multer({ dest: '/client/public/images/' })
 
 
    
