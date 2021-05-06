@@ -28,6 +28,7 @@ const useStyles = makeStyles({
     postItem: {
         marginTop: 30,
         marginBottom: 30,
+        padding: 0
     },
 });
 
@@ -83,8 +84,8 @@ function PostCard(props) {
         <Link to={`/posts/${(props.post[0]._id).toString()}`}> 
 
         <Card className={classes.postItem}>
-            <CardContent>
-                <div style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:'1rem'}}>
+            <CardContent style={{padding:'0px'}}>
+                <div style={{display:'flex', flexDirection:'row', alignItems:'center', margin:'1rem'}}>
                     <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
                         <Avatar alt="Kanye" src="/images/kanye.png"/>
                     </Link>
@@ -100,7 +101,7 @@ function PostCard(props) {
      
                 </Carousel> */}
                 <ImageCarousel post={props.post[0]}></ImageCarousel>
-                <div style={{ display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between', marginTop:'1rem'}}>
+                <div style={{ display:'flex', flexDirection:'row', alignContent:'center', justifyContent:'space-between', margin:'1rem'}}>
                     <div style={{display:'flex', flexDirection:'row', alignContent:'center'}}>
                     <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
                         <Typography gutterBottom variant="body1" component="p" style={{fontWeight:'bold', marginBottom:'0px', color: 'black' }}>
