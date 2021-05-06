@@ -57,7 +57,7 @@ function DragAndDrop(props){
 
     // text area
     return (
-     <div ref={dropRef} style={{display: 'inline-block', position: 'relative'}}>
+     <div ref={dropRef} style={{display: 'flex', flexDirection: 'row', overflowY: 'auto', width: '100%', justifyContent: 'space-between',minHeight: '200px',position: 'relative'}}>
         {dragging &&
         <div 
             style={{

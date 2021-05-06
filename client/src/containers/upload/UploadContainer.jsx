@@ -1,6 +1,9 @@
 import React from 'react';
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 
 import NewPost from './NewPost'
@@ -9,7 +12,7 @@ import NewPost from './NewPost'
 
 
 
-function UploadContainer(){
+function UploadContainer() {
 
 
 
@@ -18,11 +21,19 @@ function UploadContainer(){
     return (
         <Box>
             <Container>
+                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '30px' }}>
+                    Upload a new Tombola
+                </Typography>
+                <Card >
+                    <CardContent>
+
+                        <NewPost></NewPost>
+                    </CardContent>
+                </Card>
 
 
-                <NewPost></NewPost>
-       
-                
+
+
             </Container>
         </Box>
     );

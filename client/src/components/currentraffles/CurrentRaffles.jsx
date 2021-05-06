@@ -85,7 +85,7 @@ function CurrentRaffles() {
                                                 </Typography>
                                             </Link>
                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
-                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
+                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)", color:'#fea82f' }} />
                                                 {tombola.no_tickets_bought}
 
                                             </div>
@@ -96,7 +96,7 @@ function CurrentRaffles() {
                                 return
                             })}
 
-                            <Link to='/currenttombolas'>
+                            <Link to='/currenttombolas' style={{color:'#ff6701'}}>
                                 See More
                             </Link>
 

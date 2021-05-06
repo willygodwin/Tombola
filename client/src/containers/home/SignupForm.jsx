@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -28,6 +28,37 @@ const useStyles = makeStyles({
         color: "#EF5350",
     },
 });
+
+const CssTextField = withStyles({
+    root: {
+
+        // Changing text of the input
+        '&.MuiFormControl-root ': {
+            color: '#FF6701',
+            '&.MuiFormLabel-root.Mui-focused':
+                { color: '#FF6701' }
+        },
+
+        //changing border of the input
+        '& .MuiInput-root': {
+            // color: '#FF6701',
+            '&.MuiInput-underline:after': {
+                borderColor: '#FF6701',
+                borderBottom: '2px solid #FF6701',
+                color: '#FF6701'
+            },
+
+            '&.MuiInput-underline.Mui-focused:after': {
+                borderColor: '#FF6701',
+                borderBottom: '2px solid #FF6701',
+                color: '#FF6701'
+            },
+            '&.MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: '1px solid rgba(0, 0, 0, 0.42)',
+            }
+        },
+    },
+})(TextField);
 
 function SignupForm() {
     const history = useHistory();
@@ -96,7 +127,7 @@ function SignupForm() {
                                     <AccountCircle />
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    <CssTextField
                                         onChange={handleChange}
                                         id="input-with-icon-grid"
                                         type="email"
@@ -115,7 +146,7 @@ function SignupForm() {
                                     <LockIcon />
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    <CssTextField
                                         onChange={handleChange}
                                         id="input-with-icon-grid"
                                         name="password"
@@ -134,7 +165,7 @@ function SignupForm() {
                                     <LockIcon />
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    <CssTextField
                                         onChange={handleChange}
                                         id="input-with-icon-grid"
                                         name="password_again"

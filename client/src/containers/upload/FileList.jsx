@@ -45,12 +45,15 @@ function FileList(props){
 
         
         <DragAndDrop handleDrop={handleDrop}>
-        <div style={{height: 500, width: 250}}>
+        <div style={{height: 'auto', width: '100%', fontWeight: 'bold', marginBottom: '30px', marginLeft: '2px'}}>
             Drop your images here:
             {/* {files.map((file, i) =>
             <div key={i}>{file.name}</div>
             )} */}
+            <div style={{display: 'flex', flexDirection: 'row', flexFlow: 'wrap', justifyContent: 'space-between',}}>
+
              {displayUploadedImages(files)}
+            </div>
 
         </div>
         </DragAndDrop>

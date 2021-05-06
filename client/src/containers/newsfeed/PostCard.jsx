@@ -115,11 +115,11 @@ function PostCard(props) {
                     <div>
                     <Typography variant="body1" color="textSecondary" component="div" style={{ display:'flex', alignItems:'center', marginLeft:'1rem'}}>
                         <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                        <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
+                        <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem', color:'#fea82f'}} />
                         {props.post[0].price_per_ticket}
                         </div>
                         <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                        <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
+                        <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)", color:'#fea82f'}} />
                         {props.post[0].no_tickets_remaining}
                         
                         </div>

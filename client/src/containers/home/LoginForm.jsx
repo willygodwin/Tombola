@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -27,6 +27,37 @@ const useStyles = makeStyles({
         color: "#EF5350",
     },
 });
+
+const CssTextField = withStyles({
+    root: {
+
+        // Changing text of the input
+        '&.MuiFormControl-root ': {
+            color: '#FF6701',
+            '&.MuiFormLabel-root.Mui-focused':
+                { color: '#FF6701' }
+        },
+
+        //changing border of the input
+        '& .MuiInput-root': {
+            // color: '#FF6701',
+            '&.MuiInput-underline:after': {
+                borderColor: '#FF6701',
+                borderBottom: '2px solid #FF6701',
+                color: '#FF6701'
+            },
+
+            '&.MuiInput-underline.Mui-focused:after': {
+                borderColor: '#FF6701',
+                borderBottom: '2px solid #FF6701',
+                color: '#FF6701'
+            },
+            '&.MuiInput-underline:hover:not(.Mui-disabled):before': {
+                borderBottom: '1px solid rgba(0, 0, 0, 0.42)',
+            }
+        },
+    },
+})(TextField);
 
 function LoginForm() {
     const history = useHistory();
@@ -102,7 +133,7 @@ function LoginForm() {
                                     <AccountCircle />
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    <CssTextField
                                         id="input-with-icon-grid"
                                         name="email"
                                         label="Email"
@@ -120,7 +151,7 @@ function LoginForm() {
                                     <LockIcon />
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    <CssTextField
                                         id="input-with-icon-grid"
                                         name="password"
                                         type="password"
@@ -154,7 +185,7 @@ function LoginForm() {
                                 onClick={onSubmit}
                                 size="small"
                                 color="primary"
-                                style={{color: '#FF6701'}}
+                                style={{ color: '#FF6701' }}
                             >
                                 Login
                             </Button>
@@ -163,7 +194,7 @@ function LoginForm() {
                                 onClick={() => history.push("/register")}
                                 size="small"
                                 color="primary"
-                                style={{color: '#FF6701'}}
+                                style={{ color: '#FF6701' }}
                             >
                                 Register
                             </Button>

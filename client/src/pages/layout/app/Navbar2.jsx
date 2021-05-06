@@ -55,7 +55,7 @@ export default function SearchAppBar() {
 
   useEffect(() => {
     console.log(location);
-    if (location.pathname === '/newsfeed') {
+    if (location.pathname === '/newsfeed' || location.pathname === '/wall'){
       setActive('home')
     }
     else if (location.pathname === '/explore') {
