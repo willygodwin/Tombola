@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
  
 
-app.use(cors(corsConfig));
+// app.use(cors(corsConfig));
 
 
 const PORT = process.env.PORT || 3001;
