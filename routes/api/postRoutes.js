@@ -6,9 +6,17 @@ const User = require("../../models/User");
 const multer  = require('multer');
 const Ticket = require("../../models/Ticket");
 const path = require('path')
-const upload = multer({ dest: 'client/public/images/' })
+// const upload = multer({ dest: 'client/public/images/' })
 // const upload = multer({ dest: path.join(__dirname, 'client','public', 'images') })
-
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'client/public/images/')
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${file.originalname}-${+Date.now()}`)
+    }
+  })
+  const upload = multer({ storage });
 
    
 
