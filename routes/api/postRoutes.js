@@ -3,22 +3,22 @@ const mongoose = require("mongoose");
 const Post = require("./../../models/Post");
 const Follow = require("./../../models/Follow");
 const User = require("../../models/User");
-const multer  = require('multer');
+const multer = require('multer');
 const Ticket = require("../../models/Ticket");
 const path = require('path')
 // const upload = multer({ dest: 'client/public/images/' })
 // const upload = multer({ dest: path.join(__dirname, 'client','public', 'images') })
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'client/public/images/')
+        cb(null, path.join(__dirname, '..', '..', 'client', 'public', 'images'))
     },
     filename: (req, file, cb) => {
-      cb(null, `${file.originalname}-${+Date.now()}.png`)
+        cb(null, `${file.originalname}-${+Date.now()}.png`)
     }
-  })
-  const upload = multer({ storage });
+})
+const upload = multer({ storage });
 
-   
+
 
 const router = express.Router();
 
@@ -44,9 +44,9 @@ const loadCommentsAggregate = [
 
 const loadCommentsAggregateFunction = (followID) => {
 
-    return  [
-        { $match: { user_id : { $in: followID }}},
-        {            
+    return [
+        { $match: { user_id: { $in: followID } } },
+        {
             $lookup: {
                 from: "comments",
                 let: { postId: "$_id" },
@@ -64,32 +64,32 @@ const loadCommentsAggregateFunction = (followID) => {
     ];
 }
 
-const loadFolloweesAggregate = (id) =>{
+const loadFolloweesAggregate = (id) => {
     return [
-        { $match: { _id: mongoose.Types.ObjectId(id) }},
-        {   
+        { $match: { _id: mongoose.Types.ObjectId(id) } },
+        {
             $lookup: {
                 from: "follows",
-                let: { followeeId: '$_id'},
+                let: { followeeId: '$_id' },
                 pipeline: [
-                    {  
-                        $match: { 
-                        $expr: { $eq: ["$followee_id", "$$followeeId"] } 
-                        } 
+                    {
+                        $match: {
+                            $expr: { $eq: ["$followee_id", "$$followeeId"] }
+                        }
                     },
                 ],
                 as: "followedby",
             },
         },
-        {   
+        {
             $lookup: {
                 from: "follows",
-                let: { followerId: '$_id'},
+                let: { followerId: '$_id' },
                 pipeline: [
-                    {  
-                        $match: { 
-                        $expr: { $eq: ["$follower_id", "$$followerId"] } 
-                        } 
+                    {
+                        $match: {
+                            $expr: { $eq: ["$follower_id", "$$followerId"] }
+                        }
                     },
                 ],
                 as: "isfollowing",
@@ -101,28 +101,28 @@ const loadFolloweesAggregate = (id) =>{
             }
         }
     ];
-} 
+}
 
 router.get("/posts", (req, res) => {
 
-   
+
     // loading the inverse relationship, ie getting comments from post
 
     // find a way to populate user in comments
     Post.aggregate(loadCommentsAggregate)
-    // Post.find({})
-    // .populate('user')
-    .then((posts) => {
-        return Post.populate(posts, {
-            path: 'user',
+        // Post.find({})
+        // .populate('user')
+        .then((posts) => {
+            return Post.populate(posts, {
+                path: 'user',
+            })
         })
-    })
-    .then((posts) => {
-        
-        res.json({
-            data: posts,
+        .then((posts) => {
+
+            res.json({
+                data: posts,
+            });
         });
-    });
 });
 
 router.get("/profile/:id", (req, res) => {
@@ -130,28 +130,28 @@ router.get("/profile/:id", (req, res) => {
     // find a way to populate user in comments
     Post.aggregate(
         [
-            { $match: { user_id: mongoose.Types.ObjectId(req.params.id) }},
+            { $match: { user_id: mongoose.Types.ObjectId(req.params.id) } },
             {
                 $sort: {
                     createdAt: -1
                 }
             }
-    
+
         ])
-    // Post.find({})
-    // .populate('user')
-    .then((posts) => {
-        // console.log(posts)
-        return Post.populate(posts, {
-            path: 'user',
+        // Post.find({})
+        // .populate('user')
+        .then((posts) => {
+            // console.log(posts)
+            return Post.populate(posts, {
+                path: 'user',
+            })
         })
-    })
-    .then((posts) => {
-        
-        res.json({
-            data: posts,
+        .then((posts) => {
+
+            res.json({
+                data: posts,
+            });
         });
-    });
 });
 
 router.get("/followinfo/:id", (req, res) => {
@@ -165,12 +165,12 @@ router.get("/followinfo/:id", (req, res) => {
             path: 'followee',
         })
     })
-    .then((posts) => {
-        
-        res.json({
-            data: posts,
+        .then((posts) => {
+
+            res.json({
+                data: posts,
+            });
         });
-    });
 });
 
 
@@ -179,7 +179,7 @@ router.get("/newsfeed", (req, res) => {
 
     // loading the inverse relationship, ie getting comments from post
     // console.log(typeof (req.user._id.toString()))
-    
+
     User.aggregate(loadFolloweesAggregate(req.user._id)
 
     ).then((user) => {
@@ -188,33 +188,33 @@ router.get("/newsfeed", (req, res) => {
             path: 'followee',
         })
     })
-    .then((user) => {
-        // console.log(user)
-        const isFollowingArray = user.map((currentuser) => {
-            return currentuser.isfollowing
-        })
-        const isfollowingIDs = isFollowingArray.flat().map((array) => {
-            return mongoose.Types.ObjectId(array.followee_id)
-   
-        })
+        .then((user) => {
+            // console.log(user)
+            const isFollowingArray = user.map((currentuser) => {
+                return currentuser.isfollowing
+            })
+            const isfollowingIDs = isFollowingArray.flat().map((array) => {
+                return mongoose.Types.ObjectId(array.followee_id)
 
-        return Post.aggregate(loadCommentsAggregateFunction(isfollowingIDs))
+            })
 
-    })
-    .then((posts) => {
-        // console.log(posts)
-        return Post.populate(posts, {
-            path: 'user',
+            return Post.aggregate(loadCommentsAggregateFunction(isfollowingIDs))
+
         })
-    })
-    .then((posts) => {
-        // console.log(posts)
-        res.json({
-            data: posts,
+        .then((posts) => {
+            // console.log(posts)
+            return Post.populate(posts, {
+                path: 'user',
+            })
+        })
+        .then((posts) => {
+            // console.log(posts)
+            res.json({
+                data: posts,
+            });
         });
-    });
 
- 
+
 });
 
 router.get("/posts/:id", (req, res) => {
@@ -222,20 +222,20 @@ router.get("/posts/:id", (req, res) => {
     Post.findOne({
         _id: req.params.id
     })
-    .populate('user')
-    .then((result) => {
-        result.user = 
-        res.json({
-            data: result,
+        .populate('user')
+        .then((result) => {
+            result.user =
+                res.json({
+                    data: result,
+                });
         });
-    });
 });
 
 router.post("/posts", upload.any('files'), (req, res) => {
     // validation
     console.log(req.files)
     //Mapping filenames to store references
-    const filenames = req.files.map((file)=> {
+    const filenames = req.files.map((file) => {
         return `/images/${file.filename}`
     })
     // console.log(filenames)
@@ -269,26 +269,26 @@ router.patch("/posts/:id", async (req, res) => {
 
     // find the post
     const currentPost = await Post.findById(req.params.id)
-        
+
     // get remaining ticket
     // console.log(req.body);
 
     const ticketBought = Number(req.body.no_tickets_bought);
-    if(Number.isNaN(ticketBought)){
+    if (Number.isNaN(ticketBought)) {
         return res.status(422).json({
             err: "Please use a Number "
         })
-    } 
+    }
     const remainingTickets = currentPost.no_tickets_remaining - req.body.no_tickets_bought
 
     // ccheck if closed
 
-    if(remainingTickets < 0){
+    if (remainingTickets < 0) {
         return res.status(422).json({
             err: "HETYYY YOUUU dont cheat, tickets bought is greater than tickets remaining"
         })
     }
-    
+
 
 
 
@@ -300,17 +300,17 @@ router.patch("/posts/:id", async (req, res) => {
         },
         { new: true, runValidators: true }
     ).then((updated) => {
- 
+
         if (updated.isClosed) {
             // run randomize
-            const winner = Math.floor(Math.random() * updated.no_tickets) + 1 
+            const winner = Math.floor(Math.random() * updated.no_tickets) + 1
             // console.log(winner)
             // return Ticket.
             const query = [
                 // { $match: { post_id: mongoose.Types.ObjectId(req.params.id), $expr: {$gte: [ winner, "$lower_limit" ]}, $expr:  {$gte: [ '$upper_limit', winner ] }}}, 
-                { $match: { post_id: mongoose.Types.ObjectId(req.params.id), lower_limit: {$lte: winner}, upper_limit: {$gte: winner}}},  
+                { $match: { post_id: mongoose.Types.ObjectId(req.params.id), lower_limit: { $lte: winner }, upper_limit: { $gte: winner } } },
             ]
-            
+
             return Ticket.aggregate(query)
         }
         else {
@@ -321,7 +321,7 @@ router.patch("/posts/:id", async (req, res) => {
         }
     }).then((winner) => {
         // console.log(winner)
-        if(winner.length > 1) {
+        if (winner.length > 1) {
             return res.status(422).json({
                 err: "can't be more than one winner"
             })
@@ -333,15 +333,15 @@ router.patch("/posts/:id", async (req, res) => {
 
             },
             { new: true, runValidators: true }
-    ).then((winnerpost) => {
-        // console.log(winnerpost)
-        res.json({
-            data: winnerpost,
-        });
+        ).then((winnerpost) => {
+            // console.log(winnerpost)
+            res.json({
+                data: winnerpost,
+            });
 
-    })
-        
-        
+        })
+
+
     })
 });
 
