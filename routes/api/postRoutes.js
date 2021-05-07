@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
       cb(null, 'client/public/images/')
     },
     filename: (req, file, cb) => {
-      cb(null, `${file.originalname}-${+Date.now()}`)
+      cb(null, `${file.originalname}-${+Date.now()}.png`)
     }
   })
   const upload = multer({ storage });
