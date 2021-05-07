@@ -139,7 +139,7 @@ function ImageGridList(props) {
             <div ></div>
           </Hover>
           </Link>
-          <img src={post.image_refs[0]} alt={post.title}/>
+          <img src={post.image_refs[0].location} alt={post.title}/>
 
           </GridListTile>
         )})}

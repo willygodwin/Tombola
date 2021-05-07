@@ -132,7 +132,7 @@ class ImageCarousel extends Component {
                     }}
                 >
                     {imgs.map((src, index) => {
-                    return <img key={index} src={src} alt={src} style={{minWidth: '100%'}} height="auto" />;
+                    return <img key={index} src={src.location} alt={src.key} style={{minWidth: '100%'}} height="auto" />;
                     })}
                 </div>
                 {

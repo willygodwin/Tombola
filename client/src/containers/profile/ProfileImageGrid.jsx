@@ -76,7 +76,7 @@ function ProfileImageGrid(props) {
         {props.posts.map((post, i) => {
           return (
           
-            <GridListTile ref={elRefs.current[i]} key={post.image_refs[0]} cols={1}
+            <GridListTile ref={elRefs.current[i]} key={post.image_refs[0].key} cols={1}
               onMouseOver={e => (e)}  
               onMouseOut={e => (e)}  
             >

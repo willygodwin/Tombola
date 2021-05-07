@@ -49,7 +49,7 @@ const postsInfo = () => {
         //   console.log(option);
           let firstLetter
           let name 
-          let image = option.image_refs[0]
+          let image = option.image_refs[0].location
           if (option.title === undefined) {
             firstLetter = 'Z'
             name = 'Zilla'

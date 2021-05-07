@@ -39,7 +39,7 @@ function Won(props) {
                                         <td>
                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0]} style={{ width: '2rem', height: '2rem' }} />
+                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
                                                 </Link>
                                                 <Link to={`/posts/${(tombola.post._id).toString()}`} >
                                                     <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>
@@ -67,7 +67,7 @@ function Won(props) {
                                         <td>
                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                 <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0]} style={{ width: '2rem', height: '2rem' }} />
+                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
                                                 </Link>
                                                 <Link to={`/posts/${(tombola.post._id).toString()}`} >
                                                     <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>
