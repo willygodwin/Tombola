@@ -7,7 +7,7 @@ const multer  = require('multer');
 const Ticket = require("../../models/Ticket");
 const path = require('path')
 // const upload = multer({ dest: 'client/public/images/' })
-const upload = multer({ dest: path.join(__dirname, 'client', 'public', 'images') })
+const upload = multer({ dest: path.join(__dirname, '../', '../','client','public', 'images') })
 
 
    
@@ -133,7 +133,7 @@ router.get("/profile/:id", (req, res) => {
     // Post.find({})
     // .populate('user')
     .then((posts) => {
-        console.log(posts)
+        // console.log(posts)
         return Post.populate(posts, {
             path: 'user',
         })
@@ -147,7 +147,7 @@ router.get("/profile/:id", (req, res) => {
 });
 
 router.get("/followinfo/:id", (req, res) => {
-    console.log(req.params.id)
+    // console.log(req.params.id)
 
     User.aggregate(loadFolloweesAggregate(req.params.id)
 
@@ -225,6 +225,7 @@ router.get("/posts/:id", (req, res) => {
 
 router.post("/posts", upload.any('files'), (req, res) => {
     // validation
+    console.log(req.files)
     //Mapping filenames to store references
     const filenames = req.files.map((file)=> {
         return `/images/${file.filename}`
@@ -255,14 +256,14 @@ router.post("/posts", upload.any('files'), (req, res) => {
 });
 
 router.patch("/posts/:id", async (req, res) => {
-    console.log(req.body)
-    console.log(req.body.isClosed) 
+    // console.log(req.body)
+    // console.log(req.body.isClosed) 
 
     // find the post
     const currentPost = await Post.findById(req.params.id)
         
     // get remaining ticket
-    console.log(req.body);
+    // console.log(req.body);
 
     const ticketBought = Number(req.body.no_tickets_bought);
     if(Number.isNaN(ticketBought)){
@@ -295,7 +296,7 @@ router.patch("/posts/:id", async (req, res) => {
         if (updated.isClosed) {
             // run randomize
             const winner = Math.floor(Math.random() * updated.no_tickets) + 1 
-            console.log(winner)
+            // console.log(winner)
             // return Ticket.
             const query = [
                 // { $match: { post_id: mongoose.Types.ObjectId(req.params.id), $expr: {$gte: [ winner, "$lower_limit" ]}, $expr:  {$gte: [ '$upper_limit', winner ] }}}, 
@@ -311,7 +312,7 @@ router.patch("/posts/:id", async (req, res) => {
             return
         }
     }).then((winner) => {
-        console.log(winner)
+        // console.log(winner)
         if(winner.length > 1) {
             return res.status(422).json({
                 err: "can't be more than one winner"
@@ -325,7 +326,7 @@ router.patch("/posts/:id", async (req, res) => {
             },
             { new: true, runValidators: true }
     ).then((winnerpost) => {
-        console.log(winnerpost)
+        // console.log(winnerpost)
         res.json({
             data: winnerpost,
         });
