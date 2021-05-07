@@ -8,16 +8,16 @@ const Ticket = require("../../models/Ticket");
 const path = require('path')
 // const upload = multer({ dest: 'client/public/images/' })
 // const upload = multer({ dest: path.join(__dirname, 'client','public', 'images') })
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '..', '..', 'client', 'public', 'images'))
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${file.originalname}-${+Date.now()}.png`)
-    }
-})
-const upload = multer({ storage });
-
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, path.join(__dirname, '..', '..', 'client', 'public', 'images'))
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, `${file.originalname}-${+Date.now()}.png`)
+//     }
+// })
+// const upload = multer({ storage });
+const uploadImages = require('./utils/imageUpload-S3')
 
 
 const router = express.Router();
@@ -231,19 +231,25 @@ router.get("/posts/:id", (req, res) => {
         });
 });
 
-router.post("/posts", upload.any('files'), (req, res) => {
+// upload.any('files')
+
+router.post("/posts", uploadImages.any('files'), (req, res) => {
     // validation
     console.log(req.files)
     //Mapping filenames to store references
-    const filenames = req.files.map((file) => {
-        return `/images/${file.filename}`
-    })
+    // const filenames = req.files.map((file) => {
+    //     return `/images/${file.filename}`
+    // })
+    const imagesURL = req.files.map((img) => {
+        return { key: img.key, location: img.location };
+      });
+      console.log(imagesURL)
     // console.log(filenames)
     Post.create({
         title: req.body.title,
         description: req.body.description,
         user_id: req.user._id,
-        image_refs: filenames,
+        image_refs: imagesURL,
         price_per_ticket: req.body.ticketPrice,
         total_price: req.body.totalPrice,
         no_tickets: req.body.noTickets,

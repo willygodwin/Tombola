@@ -10,7 +10,7 @@ const postSchema = new Schema(
         no_tickets: {type: Number},
         no_tickets_remaining: {type: Number},
         description: { type: String},
-        image_refs: [String],
+        image_refs: [],
         isClosed: {type: Boolean, default:false},
         user_id: { type: Schema.Types.ObjectId, ref: "User", required: true },
         winner_id: { type: Schema.Types.ObjectId, ref: "User" },

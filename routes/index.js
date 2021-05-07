@@ -7,11 +7,7 @@ const follow = require('./api/followRoutes');
 const ticket = require('./api/ticketRoutes');
 const AuthenticatedMiddleware = require("./../middleware/AuthenticatedMiddleware");
 
-
-
 const router = express.Router()
-
-
 
 // to protect the following routes
 router.use(auth);
