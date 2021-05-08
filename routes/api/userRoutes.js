@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require('./../../models/User');
 const router = express.Router();
+const uploadImages = require('./utils/imageUpload-S3')
 
 
 
@@ -41,6 +42,29 @@ router.patch('/profiledescription/:id', (req, res) => {
         {
             
                 profile_desc: req.body.profile_desc,
+                
+            
+        },
+        { new: true, runValidators: true }
+    ).then((updated) => {
+        res.json({
+            data: updated,
+        });
+    });
+    
+
+})
+
+router.patch('/userdetails', uploadImages.single('file'), (req, res) => {
+    console.log(req.params.id)
+
+    console.log(req.file)
+
+    User.findByIdAndUpdate(req.body.id, 
+        {
+                profile_image: { key: req.file.key, location: req.file.location },
+                name: req.body.name,
+                profile_desc: req.body.description,
             
         },
         { new: true, runValidators: true }

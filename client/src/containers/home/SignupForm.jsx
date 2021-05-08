@@ -98,7 +98,7 @@ function SignupForm() {
                 withCredentials: true
             })
             .then((res) => {
-                history.push("/wall");
+                history.push("/userdetails");
             })
             .catch((err) => {
                 console.log(err.response);

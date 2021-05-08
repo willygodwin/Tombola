@@ -10,6 +10,7 @@ import Upload from "./pages/Upload";
 import ViewPost from "./pages/ViewPost"; 
 import Profile from "./pages/Profile";
 import CurrentTombolas from "./pages/CurrentTombolas";
+import UserDetails from "./pages/UserDetails";
 import GlobalStore from "./utils/context/GlobalStore";
 
 
@@ -23,6 +24,7 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/login" component={Home} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/userdetails" component={UserDetails} />
                     <Route exact path="/wall" component={Newsfeed} />
                     <Route exact path="/newsfeed" component={Newsfeed} />
                     <Route exact path="/explore" component={Explore} />
