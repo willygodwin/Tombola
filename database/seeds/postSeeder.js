@@ -64,12 +64,17 @@ async function seedData() {
                 images: [{ key: 'joyPerfume(1).jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/joyPerfume%281%29.jpg' }, { key: 'joyPerfume.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/joyPerfume.jpg' }], 
                 description: "Jean Patou’s Joy, created in 1930, has always been notoriously pricey. It was, for most of the 20th century, considered the costliest perfume you could buy due to the sheer extravagance of its floral content—an astonishing 10,600 jasmine flowers and 28 dozens or roses per bottle. This limited-edition marvel ups the ante even more with a keepsake Baccarat bottle—an expression of Joy that isn't fleeting."
             },
+            {
+                name: '2 Person Trip To Thailand',
+                price: 8000,
+                images: [{ key: '1620642048333-trip-to-thailand.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/1620642048333-trip-to-thailand.jpg' }], 
+                description: "Trip to Thailand for two people inclusive of flights and accommodation at the Sheraton Hotel in the luxury penthouse suite."
+            },
 
         ]
         
 
-        const randomNo1 = Math.floor(Math.random() * 8)
-        const randomNo2 = Math.floor(Math.random() * 8)
+        const randomNo1 = Math.floor(Math.random() * 9)
 
         const post = new Post({
             title: postInfo[randomNo1].name,
