@@ -18,13 +18,14 @@ Tombola is a fun and exciting adaptation of the online marketplace. A combinatio
 Visit the deployed URL https://tombola-project3.herokuapp.com/
 
 Register for tombola on the registration page - 
+
 ![Alt text](/client/public/screenshots/register.JPG?raw=true "register")
 
 
 
 ## Usage Information 
 Newfeeds post display - 
-![Alt text](/client/public/screenshots/post.PNG?raw=true "post")
+![Alt text](/client/public/screenshots/post.png?raw=true "post")
 
 Explore feature to discover items - 
 ![Alt text](/client/public/screenshots/explore.JPG?raw=true "explore")
