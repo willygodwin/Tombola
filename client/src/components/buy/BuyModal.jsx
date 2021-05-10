@@ -147,7 +147,7 @@ export default function FormDialog(props) {
   }
 
   return (
-    <div>
+    <div onClick={(e) =>{e.preventDefault(); e.stopPropagation()}}>
       <Button variant="outlined" style={{ color: '#FF6701', borderColor: '#FF6701' }} onClick={handleClickOpen}>
         Buy Tickets
       </Button>
@@ -217,6 +217,7 @@ export default function FormDialog(props) {
             fullWidth
             onChange={handleTicketInput}
             value={tickets}
+            onClick={(e) =>{e.preventDefault();e.stopPropagation()}}
           />
           <DialogContentText className={classes.dialogTitle}>
             Total Price ($)
