@@ -25,6 +25,7 @@ Register for tombola on the registration page -
 
 ## Usage Information 
 Newfeeds post display - 
+
 ![Alt text](/client/public/screenshots/post.png?raw=true "post")
 
 Explore feature to discover items - 
