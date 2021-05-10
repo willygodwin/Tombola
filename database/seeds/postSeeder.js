@@ -25,7 +25,7 @@ async function seedData() {
             {
                 name: 'iPad',
                 price: 500, 
-                images: [{ key: 'ipad.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/ipad.jpg' }, { key: 'ipad(1).jfif', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/ipad%281%29.jfif' }],
+                images: [{ key: 'ipad.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/ipad.jpg' }],
                 description: '128 GB iPad unused and still in the box'
             },
             {

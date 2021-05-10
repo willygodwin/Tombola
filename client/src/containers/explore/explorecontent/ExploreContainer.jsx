@@ -1,20 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
 import ExploreGrid from './ExploreGrid'
 import axios from 'axios'
 
 
 
+function UploadContainer() {
 
-
-function UploadContainer(){
-
-    const history = useHistory();
     const [posts, setPosts] = useState([])
 
 
@@ -27,16 +21,16 @@ function UploadContainer(){
             .then((response) => {
                 console.log(response);
                 const openPosts = response.data.data.filter((post) => {
-                    if(!post.isClosed){
+                    if (!post.isClosed) {
                         return post
                     }
                 })
                 console.log(openPosts);
                 setPosts(openPosts)
             }).catch((err) => {
-                console.log({err});
-                if(err.response.status === 401){
-                    
+                console.log({ err });
+                if (err.response.status === 401) {
+
                 }
             })
     }, [])
@@ -47,11 +41,11 @@ function UploadContainer(){
     return (
         <Box>
             <Container>
-                
 
-                <ExploreGrid posts={posts}/>
 
-              
+                <ExploreGrid posts={posts} />
+
+
             </Container>
         </Box>
     );

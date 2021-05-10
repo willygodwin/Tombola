@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
@@ -6,25 +6,25 @@ import Autocomplete from './Autocomplete1'
 import axios from 'axios'
 
 
-const  getUsers =  ()=>{
+const getUsers = () => {
     return axios.get('/api/users', {
         withCredentials: true,
     })
 
- 
+
 }
 
 const getPosts = () => {
     return axios.get('/api/posts', {
-            withCredentials: true,
-        })
-  
+        withCredentials: true,
+    })
+
 
 }
 
 
 
-function SearchContainer(props){
+function SearchContainer(props) {
 
     const history = useHistory();
     const [posts, setPosts] = useState([])
@@ -37,27 +37,27 @@ function SearchContainer(props){
             setUsers(results.data.data)
             return getPosts()
         })
-        .then((results) => {
-            setPosts(results.data.data)
-        })
-        
-        
-       
-        
+            .then((results) => {
+                setPosts(results.data.data)
+            })
+
+
+
+
     }, [])
 
     // console.log(users);
     // console.log(posts);
 
-  
+
 
     // text area
     return (
-    
-                    
-                    <Autocomplete posts={posts} users={users}></Autocomplete>
-               
-                
+
+
+        <Autocomplete posts={posts} users={users}></Autocomplete>
+
+
     );
 }
 export default SearchContainer;

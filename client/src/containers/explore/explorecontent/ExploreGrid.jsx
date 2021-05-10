@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, createRef} from 'react';
+import React, { useRef, createRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import './styles.css'
-import ImgWrapper from './ImgWrapper';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTicketAlt, faDollarSign  } from '@fortawesome/free-solid-svg-icons'
+import { faTicketAlt, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 // import tileData from './tileData';
 
@@ -21,23 +20,23 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     width: '100%',
     height: '100%',
-    
+
   },
-  hoverText: { 
-    height: '200px', 
-    width: '100%',  
-    backgroundColor:'rgba(128, 128, 128, 0.616)', 
+  hoverText: {
+    height: '200px',
+    width: '100%',
+    backgroundColor: 'rgba(128, 128, 128, 0.616)',
     color: 'white',
-    position: "absolute", 
-    left: "0px", 
-    top: '0px', 
+    position: "absolute",
+    left: "0px",
+    top: '0px',
     zIndex: '1000',
 
   }
 }));
 
 const columnsLayout = [
-  1,1,1,2,1,1,2,3,2,1,1,2,3,2,1,1,1,1,2,1
+  1, 1, 1, 2, 1, 1, 2, 3, 2, 1, 1, 2, 3, 2, 1, 1, 1, 1, 2, 1
 ]
 
 const randomArrayShuffle = (array) => {
@@ -76,7 +75,7 @@ function ImageGridList(props) {
   const elRefs = useRef([]);
   const shuffledPosts = randomArrayShuffle(props.posts)
 
-  
+
 
   //Set references 
   if (elRefs.current.length !== arrLength) {
@@ -84,8 +83,8 @@ function ImageGridList(props) {
   }
 
   const layoutColumns = (i) => {
-    const index = i%10
-    if(i<20){
+    const index = i % 10
+    if (i < 20) {
       return columnsLayout[i]
     } else {
       return columnsLayout[index]
@@ -93,11 +92,11 @@ function ImageGridList(props) {
   }
 
   const Hover = ({ height, width, onHover, children }) => (
-    <div className="hover" style={{height, width}}>
-        <div className="hover__no-hover" >{children}</div>
-        <div className="hover__hover" style={{height, width}}>{onHover}</div>
+    <div className="hover" style={{ height, width }}>
+      <div className="hover__no-hover" >{children}</div>
+      <div className="hover__hover" style={{ height, width }}>{onHover}</div>
     </div>
-)
+  )
 
   //Changing columns depending on screen size
   const getGridListCols = () => {
@@ -112,9 +111,9 @@ function ImageGridList(props) {
     if (isWidthUp('md', props.width)) {
       return 2;
     }
-    
+
     return 1;
-}
+  }
 
   return (
     <div className={classes.root}>
@@ -122,29 +121,30 @@ function ImageGridList(props) {
         {shuffledPosts.map((post, i) => {
 
           return (<GridListTile ref={elRefs.current[i]} key={i} cols={layoutColumns(i)}
-            onMouseOver={e => (e)}  
-            onMouseOut={e => (e)}  
+            onMouseOver={e => (e)}
+            onMouseOut={e => (e)}
           >
             <Link to={`/posts/${(post._id).toString()}`}>
-            <Hover height='200px'width='100%' onHover={
-              <div className={classes.hoverText}  >
-                <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                  <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />
-                  {post.price_per_ticket}
-                </div>
-                <div  style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
-                  <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight:'0.25rem', transform: "rotate(135deg)"}} />
-                  {post.no_tickets_remaining}
-                </div>
-              </div>}>
-            <div ></div>
-          </Hover>
-          </Link>
-          <img src={post.image_refs[0].location} alt={post.title}/>
+              <Hover height='200px' width='100%' onHover={
+                <div className={classes.hoverText}  >
+                  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
+                    <FontAwesomeIcon icon={faDollarSign} style={{ marginRight: '0.25rem' }} />
+                    {post.price_per_ticket}
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
+                    <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
+                    {post.no_tickets_remaining}
+                  </div>
+                </div>}>
+                <div ></div>
+              </Hover>
+            </Link>
+            <img src={post.image_refs[0].location} alt={post.title} />
 
           </GridListTile>
-        )})}
-        
+          )
+        })}
+
       </GridList>
     </div>
   );

@@ -5,7 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function Grouped(props) {
   console.log(props);
-  
+
   // const options = top100Films.map((option) => {
   //   const firstLetter = option.title[0].toUpperCase();
   //   return {
@@ -14,7 +14,7 @@ export default function Grouped(props) {
   //   };
   // });
 
-  const options = () =>{
+  const options = () => {
     let posts
     let users
     users = props.users.map((option) => {
@@ -22,7 +22,7 @@ export default function Grouped(props) {
       let firstLetter
       if (option.name === undefined) {
         firstLetter = 'Z'
-      } else{
+      } else {
         firstLetter = option.name[0].toUpperCase();
       }
       console.log(firstLetter);
@@ -30,15 +30,15 @@ export default function Grouped(props) {
         firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
         type: "Users",
         ...option,
-    };
+      };
     });
-    
+
     posts = props.posts.map((option) => {
       console.log(option);
       let firstLetter
       if (option.name === undefined) {
         firstLetter = 'Z'
-      } else{
+      } else {
         firstLetter = option.title[0].toUpperCase();
       }
       console.log(firstLetter);
@@ -47,21 +47,20 @@ export default function Grouped(props) {
         type: 'Posts',
         name: option.title,
         ...option,
-    };
+      };
 
- 
-  });
-  return [...users, ...posts]
-} 
 
-console.log(options());
+    });
+    return [...users, ...posts]
+  }
+
+  console.log(options());
 
   const renderSearchBar = () => {
-    if (props.posts.length === 0 ) {
+    if (props.posts.length === 0) {
       return (<div>Loaddingnngngng.......</div>)
     }
-    else if(props.users.length === 0 )
-    {
+    else if (props.users.length === 0) {
       return (<div>Loaddingnngngng.......</div>)
     }
 
@@ -71,17 +70,19 @@ console.log(options());
         id="grouped-demo"
         options={options().sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
         groupBy={(option) => option.type}
-        getOptionLabel={(option) => (option.name === undefined)?'Zilla':option.name}
+        getOptionLabel={(option) => (option.name === undefined) ? 'Zilla' : option.name}
         style={{ width: 300 }}
-        renderInput={(params) => {return (
+        renderInput={(params) => {
+          return (
 
-          <div>
-            
-            <TextField {...params} label="With categories" variant="outlined"  InputProps={<img src="/images/kanye.png" alt="" style={{height:'5px', width:'5px'}}/>}>
-            
+            <div>
+
+              <TextField {...params} label="With categories" variant="outlined" InputProps={<img src="/images/kanye.png" alt="" style={{ height: '5px', width: '5px' }} />}>
+
               </TextField>
             </div>
-        )}}
+          )
+        }}
       />
     );
   }
@@ -89,7 +90,7 @@ console.log(options());
   return (
     renderSearchBar()
   )
-  
+
 }
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top

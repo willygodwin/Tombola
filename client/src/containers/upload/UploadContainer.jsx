@@ -4,12 +4,7 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
-
 import NewPost from './NewPost'
-
-
-
 
 
 function UploadContainer() {
@@ -21,7 +16,7 @@ function UploadContainer() {
     return (
         <Box>
             <Container>
-                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '20px', marginTop:'10px' }}>
+                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>
                     Upload a new Tombola
                 </Typography>
                 <Card >

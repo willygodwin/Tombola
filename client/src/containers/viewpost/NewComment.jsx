@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 
-function NewComment(props){
+function NewComment(props) {
 
 
     const [comment, setComment] = useState("")
@@ -20,7 +20,7 @@ function NewComment(props){
             post_id: props.post._id,
             body: comment
         }, { withCredentials: true }).then((response) => {
-            
+
 
             props.addComment(response.data.data);
 
@@ -35,8 +35,8 @@ function NewComment(props){
 
     return (
         <form onSubmit={onSubmit}>
-            <TextField 
-                name="comment" 
+            <TextField
+                name="comment"
                 onChange={handleChange} type="text" value={comment} label="Comment" />
         </form>
     )

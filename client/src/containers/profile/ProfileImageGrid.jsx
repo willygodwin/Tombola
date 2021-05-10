@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import './styles.css'
-
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign } from '@fortawesome/free-solid-svg-icons'
@@ -95,7 +94,7 @@ function ProfileImageGrid(props) {
                     </div>
                   </div>}>
                   <div style={{ height: '200px', width: '100%', position: 'absolute', zIndex: '1000', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px', color: '#ff6701' }}>
-                    {post.isClosed?"Closed":''}
+                    {post.isClosed ? "Closed" : ''}
                   </div>
                   <div ></div>
                 </Hover>

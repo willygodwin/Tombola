@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalNotification from './ModalNotification'
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTicketAlt  } from '@fortawesome/free-solid-svg-icons'
-import { findIconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 const useStyles = makeStyles({
     root: {
@@ -70,7 +69,7 @@ function CurrentRaffles() {
                                 Current Tombolas
                             </Typography>
                             {tombolas.map((tombola, i) => {
-                                if(tombola.post.isClosed){
+                                if (tombola.post.isClosed) {
                                     return
                                 }
                                 if (i < 5) {
@@ -85,7 +84,7 @@ function CurrentRaffles() {
                                                 </Typography>
                                             </Link>
                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
-                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)", color:'#fea82f' }} />
+                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)", color: '#fea82f' }} />
                                                 {tombola.no_tickets_bought}
 
                                             </div>
@@ -96,7 +95,7 @@ function CurrentRaffles() {
                                 return
                             })}
 
-                            <Link to='/currenttombolas' style={{color:'#ff6701'}}>
+                            <Link to='/currenttombolas' style={{ color: '#ff6701' }}>
                                 See More
                             </Link>
 

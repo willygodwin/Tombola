@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { Avatar, Button } from '@material-ui/core';
+import {  Button } from '@material-ui/core';
 import Pending from "./Pending";
 import Won from "./Won";
 
@@ -75,11 +72,11 @@ function CurrentTombolasContainer() {
 
                     <Card className={classes.postItem} >
                         <CardContent>
-                            <div style={{ textAlign: 'center', marginBottom:'20px' }}>
-                                <Button onClick={onWon} style={{backgroundColor:won?'#fea82f8f':''}}>Won</Button>
-                                <Button onClick={onPending} style={{backgroundColor:!won?'#fea82f8f':''}}>Pending</Button>
+                            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                                <Button onClick={onWon} style={{ backgroundColor: won ? '#fea82f8f' : '' }}>Won</Button>
+                                <Button onClick={onPending} style={{ backgroundColor: !won ? '#fea82f8f' : '' }}>Pending</Button>
                             </div>
-                            {won ? <Won tombolas={tombolas}/>:<Pending tombolas={tombolas}/>}
+                            {won ? <Won tombolas={tombolas} /> : <Pending tombolas={tombolas} />}
 
                         </CardContent>
                     </Card>

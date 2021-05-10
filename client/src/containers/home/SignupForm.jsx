@@ -1,19 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
-import isEmpty from "lodash/isEmpty";
 import Typography from "@material-ui/core/Typography";
 import axios from 'axios'
 
@@ -86,7 +83,7 @@ function SignupForm() {
     const onSubmit = async (event) => {
         event.preventDefault();
         // check if password submitted are the same 
-        if(payload.password !== payload.password_again){
+        if (payload.password !== payload.password_again) {
             return setErrors([
                 'Passwords do not match!'
             ])
@@ -199,7 +196,7 @@ function SignupForm() {
                                 onClick={onSubmit}
                                 size="small"
                                 color="primary"
-                                style={{color: '#FF6701'}}
+                                style={{ color: '#FF6701' }}
                             >
                                 Submit
                             </Button>

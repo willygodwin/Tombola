@@ -47,8 +47,8 @@ function ViewPostContainer() {
         <Box>
             <Container>
                 {/* text area to create new post */}
-                
-                <Grid container spacing={3} style={{paddingTop: '10px'}}>
+
+                <Grid container spacing={3} style={{ paddingTop: '10px' }}>
                     <Grid item xs={12} sm={6}>
                         {post.length === 0 ? <div></div> : <ImageCarousel post={post} />}
 

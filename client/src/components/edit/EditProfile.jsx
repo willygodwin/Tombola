@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Button from "@material-ui/core/Button";
-import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons'
-import GlobalStore from "../../utils/context/GlobalStore"; 
+import GlobalStore from "../../utils/context/GlobalStore";
 import './styles.css'
-import { faAudioDescription } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -67,15 +65,15 @@ function EditProfile(props) {
 
     const submitInput = () => {
         updateProfileDescription(description)
-        .then((response) => {
-            console.log(response);
-            setEditing(false)
-            props.handleEditDescription()
-    
-          });
+            .then((response) => {
+                console.log(response);
+                setEditing(false)
+                props.handleEditDescription()
+
+            });
     }
 
-    
+
     const updateProfileDescription = (description) => {
 
         const payload = {
@@ -103,11 +101,11 @@ function EditProfile(props) {
     const renderEdit = () => {
         if (!editing) {
             return (
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent: "space-between", fontSize: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", fontSize: '12px' }}>
 
                     {props.user.profile_desc}
-                    {props.user._id === store.auth.authState.currentUser._id ? <FontAwesomeIcon className='EditButton' style={{ cursor: 'Pointer' }} onClick={showInput} icon={faEdit} size="md" />: <div></div> }
-                    
+                    {props.user._id === store.auth.authState.currentUser._id ? <FontAwesomeIcon className='EditButton' style={{ cursor: 'Pointer' }} onClick={showInput} icon={faEdit} size="md" /> : <div></div>}
+
                 </div>
 
             )
@@ -124,8 +122,8 @@ function EditProfile(props) {
                         rows={2}
                         rowsMax={2}
                     />
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent: "space-between" }}>
-                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '4px', right: '4px', fontSize:'0.8em' }} onClick={showInput} icon={faTimes} size="sm" />
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: "space-between" }}>
+                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '4px', right: '4px', fontSize: '0.8em' }} onClick={showInput} icon={faTimes} size="sm" />
                         <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '4px', right: '14px', fontSize: '0.7em' }} onClick={submitInput} icon={faCheck} size="xs" />
                     </div>
                 </div>
