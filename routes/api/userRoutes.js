@@ -25,6 +25,7 @@ router.post('/users', (req, res) => {
     // validation 
 
 
+
     User.create(req.body).then((created)=> {
         res.json({
             data: created

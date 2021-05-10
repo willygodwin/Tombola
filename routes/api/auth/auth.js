@@ -29,6 +29,8 @@ router.post('/register', (req, res, next) => {
   const user = new User({
       email: req.body.email,
       password: req.body.password,
+      name:'user', 
+      profile_image: {key: '', location:''}
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {

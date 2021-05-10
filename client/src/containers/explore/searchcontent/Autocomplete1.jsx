@@ -101,9 +101,10 @@ useEffect(() => {
 
 const renderSuggestion = (type, searchInfo) => {
     return (<div> 
-    <Typography gutterBottom variant="body1" component="h2" style={{ marginBottom: '0px', marginLeft:'1rem'}}>
+    <Typography gutterBottom variant="body1" component="h2" style={{ marginBottom: '0px', marginLeft:'1rem', marginTop:'5px'}}>
         {type}
-    </Typography>   
+    </Typography> 
+
     {searchInfo
         .filter((value) => {
             return value.name.toLowerCase().includes(search.toLowerCase())})

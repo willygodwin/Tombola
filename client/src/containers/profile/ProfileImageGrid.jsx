@@ -72,7 +72,9 @@ function ProfileImageGrid(props) {
 
   return (
     <div className={classes.root}>
+      
       <GridList spacing={15} cellHeight={200} className={classes.gridList} cols={getGridListCols()}>
+      
         {props.posts.map((post, i) => {
           return (
           

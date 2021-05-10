@@ -266,7 +266,7 @@ function NewPost(props) {
 
 
                     </div>
-                    <FileList onDropped={handleDrop} ></FileList>
+                    <FileList onDropped={handleDrop} label='Drop your images here:'></FileList>
 
 
                     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>

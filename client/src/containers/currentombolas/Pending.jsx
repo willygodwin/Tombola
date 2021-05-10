@@ -12,11 +12,11 @@ function Pending(props) {
     return (
         <div>
            
-            <Typography gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px' }}>
+            {/* <Typography gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px' }}>
                 Upcoming Tombolas
-                            </Typography>
+                            </Typography> */}
 
-            <table style={{ width: '100%' }}>
+            <table style={{ width: '100%', borderSpacing:'0 10px', borderCollapse:'unset'}}>
                 <thead>
                     <th>Tombola Title</th>
                     <th>Tickets Bought</th>

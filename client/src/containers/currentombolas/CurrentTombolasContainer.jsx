@@ -75,9 +75,9 @@ function CurrentTombolasContainer() {
 
                     <Card className={classes.postItem} >
                         <CardContent>
-                            <div style={{ textAlign: 'center' }}>
-                                <Button onClick={onWon}>Won</Button>
-                                <Button onClick={onPending}>Pending</Button>
+                            <div style={{ textAlign: 'center', marginBottom:'20px' }}>
+                                <Button onClick={onWon} style={{backgroundColor:won?'#fea82f8f':''}}>Won</Button>
+                                <Button onClick={onPending} style={{backgroundColor:!won?'#fea82f8f':''}}>Pending</Button>
                             </div>
                             {won ? <Won tombolas={tombolas}/>:<Pending tombolas={tombolas}/>}
 

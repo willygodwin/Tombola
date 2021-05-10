@@ -21,8 +21,8 @@ function UserDetailsContainer() {
     return (
         <Box>
             <Container>
-                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    Upload a new Tombola
+                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '20px', marginTop: '10px' }}>
+                    Enter you profile details below
                 </Typography>
                 <Card >
                     <CardContent>

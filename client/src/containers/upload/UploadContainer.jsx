@@ -21,7 +21,7 @@ function UploadContainer() {
     return (
         <Box>
             <Container>
-                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <Typography variant="h5" style={{ textAlign: 'center', marginBottom: '20px', marginTop:'10px' }}>
                     Upload a new Tombola
                 </Typography>
                 <Card >

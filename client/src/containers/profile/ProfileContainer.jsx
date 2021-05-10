@@ -68,11 +68,12 @@ function ProfileContainer(){
     return (
         
         <Box>
-            <Container >
+            <Container style={{paddingTop:'10px'}}>
                 {/* text area to create new post */}
                 <Grid container spacing={3}>
                 
                 <Grid item xs={12} sm={12} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}>
+                    
                 <ProfileHeader user={userInfo} noPosts={posts.length} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}></ProfileHeader>
                 
                    
@@ -80,7 +81,9 @@ function ProfileContainer(){
 
             </Grid>
          
-            <div style={{height: '50px',  zIndex:'10000'}}></div>
+            <div style={{height: '25px',  zIndex:'10000'}}></div>
+            <hr style={{ color: 'rgba(0, 0, 0, 0.54)' }} />
+            <div style={{height: '15px',  zIndex:'10000'}}></div>
             <ProfileImageGrid posts={posts}/>
 
                 {/* <PostCard/> */}

@@ -78,11 +78,6 @@ function UserDetailsForm(props) {
         setName(event.target.value)
     }
 
-  
-
-
-
-
     const handleDrop = (filesDropped) => {
         setFile(filesDropped)
     }
@@ -170,8 +165,8 @@ function UserDetailsForm(props) {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginBottom: '30px' }}>
 
                         <Typography variant="div" style={{ marginBottom: '5px', marginLeft: '2px', fontWeight: 'bold' }}>
-                            Title:
-                </Typography>
+                            Name:
+                        </Typography>
                         <CssOutlinedInput
                             onChange={handlePostName}
                             className={classes.newPost}
@@ -181,8 +176,8 @@ function UserDetailsForm(props) {
 
 
 
-        
-                    <FileList onDropped={handleDrop} ></FileList>
+
+                    <FileList onDropped={handleDrop} label='Drop your profile picture here:'></FileList>
 
 
                     <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>
@@ -201,7 +196,7 @@ function UserDetailsForm(props) {
 
                     <Grid container justify="flex-end">
                         <Button color="primary" style={{ color: '#FF6701' }} onClick={updateUser}>
-                            Post!
+                            Submit!
                         </Button>
                     </Grid>
                 </form >

@@ -46,7 +46,7 @@ function FileList(props){
         
         <DragAndDrop handleDrop={handleDrop}>
         <div style={{height: 'auto', width: '100%', fontWeight: 'bold', marginBottom: '30px', marginLeft: '2px'}}>
-            Drop your images here:
+            {props.label}
             {/* {files.map((file, i) =>
             <div key={i}>{file.name}</div>
             )} */}
