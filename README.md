@@ -20,7 +20,7 @@ Visit the deployed URL https://tombola-project3.herokuapp.com/
 
 ## Usage Information 
 Search bar - Choose your filter key and then search by that choice. 
-![Alt text](/screenshots/search.JPG?raw=true "search")
+![Alt text](/client/public/screenshots/register.JPG?raw=true "search")
 
 Sort by Column - Date of Birth Ascending
 ![Alt text](/screenshots/dobfilter.JPG?raw=true "filter dob")
