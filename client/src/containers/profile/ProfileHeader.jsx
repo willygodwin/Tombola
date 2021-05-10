@@ -35,7 +35,7 @@ function ProfileHeader(props) {
             <div style={{ display: 'flex', flexDirection: 'column', }}>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-                    <Avatar alt="Kanye" src="/images/kanye.png" className={classes.large} />
+                    <Avatar alt="Kanye" src={props.user[0].profile_image.location} className={classes.large} />
                     <div style={{ display: 'flex', flexDirection: 'column', }}>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0px', marginLeft: '1rem' }}>

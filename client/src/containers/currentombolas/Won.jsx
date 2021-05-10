@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import { Avatar, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import WheelSpinner from "../../components/wheelspinner/WheelSpinner";
 
 
@@ -15,94 +15,43 @@ function Won(props) {
                 Tombolas Won
             </Typography>
 
-            
-            <table style={{ width: '100%' }}>
-                <thead>
-                    <th>Tombola Title</th>
-                    <th>Tickets Bought</th>
-                    <th>Ticket Percentage</th>
-                    <th>Posted By</th>
-                    <th>Tickets Remaining</th>
-                    <th>Total Price</th>
-
-                </thead>
-
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexFlow: 'wrap', justifyContent: 'space-between' }}>
 
                 {props.tombolas.map((tombola, i) => {
                     if (tombola.post.isClosed) {
                         if (tombola.post.winner_id === tombola.user_id) {
 
                             return (
-                                <tbody>
-                                    <tr>
 
-                                        <td>
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
-                                                </Link>
-                                                <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>
-                                                        {tombola.post.title}
-                                                    </Typography>
-                                                </Link>
-                                            </div>
-                                        </td>
-                                        <td>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '300px', height: 'auto', }}>
+                                    <Link to={`/posts/${(tombola.post._id).toString()}`} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginBottom: '10px' }}>
+                                        <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', }}>
+                                            {tombola.post.title}
+                                        </Typography>
 
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
-                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
-                                                {tombola.no_tickets_bought}
+                                    </Link>
+                                    <Link to={`/posts/${(tombola.post._id).toString()}`} style={{position:'relative'}}>
+                                        <Avatar alt={tombola.post.image_refs[0].key} src={tombola.post.image_refs[0].location} style={{ width: '250px', height: '250px' }} />
+                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem', color: 'orange', position:'absolute', top:'47%', right:'45%' }}>
+                                            <FontAwesomeIcon icon={faDollarSign} size="sm" style={{ color: 'orange', marginRight: '0.25rem' }} />
+                                            {tombola.post.total_price}
 
-                                            </div>
-                                        </td>
-                                        <td>
+                                        </div>
+                                    </Link>
 
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
 
-                                                {tombola.no_tickets_bought / tombola.post.no_tickets * 100}%
 
-                                                    </div>
-                                        </td>
-                                        <td>
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
-                                                </Link>
-                                                <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                    <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>
-                                                        {tombola.post.title}
-                                                    </Typography>
-                                                </Link>
-                                            </div>
-                                        </td>
-                                        <td>
+                                </div>
 
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
-                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
-                                                {tombola.post.no_tickets_remaining}
-
-                                            </div>
-                                        </td>
-                                        <td>
-
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
-                                                <FontAwesomeIcon icon={faTicketAlt} size="sm" style={{ marginRight: '0.25rem', transform: "rotate(135deg)" }} />
-                                                {tombola.post.total_price}
-
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
                             )
                         }
                     }
 
                     return
                 })}
+            </div>
 
-            </table>
+
         </div>
     )
 }

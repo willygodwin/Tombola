@@ -50,7 +50,7 @@ function FileList(props){
             {/* {files.map((file, i) =>
             <div key={i}>{file.name}</div>
             )} */}
-            <div style={{display: 'flex', flexDirection: 'row', flexFlow: 'wrap', justifyContent: 'space-between',}}>
+            <div style={{display: 'flex', flexDirection: 'row', flexFlow: 'wrap', justifyContent: 'space-evenly',}}>
 
              {displayUploadedImages(files)}
             </div>

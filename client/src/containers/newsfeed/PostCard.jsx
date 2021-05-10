@@ -87,7 +87,7 @@ function PostCard(props) {
                 <CardContent style={{ padding: '0px' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '1rem' }}>
                         <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
-                            <Avatar alt="Kanye" src="/images/kanye.png" />
+                            <Avatar alt={props.post[0].user.profile_image.location} src={props.post[0].user.profile_image.location} />
                         </Link>
                         <Link to={`/profile/${(props.post[0].user._id).toString()}`} >
                             <Typography gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>

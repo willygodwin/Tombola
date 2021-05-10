@@ -15,12 +15,13 @@ const Auto = (props) => {
   const wrapperRef = useRef(null);
 
 const usersInfo = () => {
-    const image = 'images/kanye.png'
+    
 
     return props.users.map((option) => {
         // console.log(option);
         let firstLetter
         let name
+        const image = option.profile_image.location
         if (option.name === undefined) {
           firstLetter = 'Z'
           name = "dwillis"
