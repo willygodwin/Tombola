@@ -6,6 +6,7 @@ import './styles.css'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTicketAlt, faDollarSign } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 // import tileData from './tileData';
 
 const useStyles = makeStyles((theme) => ({
@@ -81,7 +82,7 @@ function ProfileImageGrid(props) {
               onMouseOver={e => (e)}
               onMouseOut={e => (e)}
             >
-              <a href={`/posts/${(post._id).toString()}`}>
+              <Link to={`/posts/${(post._id).toString()}`}>
                 <Hover height='200px' width='100%' onHover={
                   <div className={classes.hoverText}  >
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
@@ -99,7 +100,7 @@ function ProfileImageGrid(props) {
                   <div ></div>
                 </Hover>
 
-              </a>
+              </Link>
 
               <img src={post.image_refs[0].location} alt={post.title} />
 
