@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import ImageCarousel from '../../components/imagecarousel/ImageCarousel';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment'
-
 import PostCard from './PostCard'
 import axios from 'axios'
 
