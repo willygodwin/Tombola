@@ -17,16 +17,20 @@ Tombola is a fun and exciting adaptation of the online marketplace. A combinatio
 ## Installation Instructions
 Visit the deployed URL https://tombola-project3.herokuapp.com/
 
+Register for tombola on the registration page - 
+![Alt text](/client/public/screenshots/register.JPG?raw=true "register")
+
+
 
 ## Usage Information 
-Search bar - Choose your filter key and then search by that choice. 
-![Alt text](/client/public/screenshots/register.JPG?raw=true "search")
+Newfeeds post display - 
+![Alt text](/client/public/screenshots/post.PNG?raw=true "post")
 
-Sort by Column - Date of Birth Ascending
-![Alt text](/screenshots/dobfilter.JPG?raw=true "filter dob")
+Explore feature to discover items - 
+![Alt text](/client/public/screenshots/explore.JPG?raw=true "explore")
 
-Sort by Column - Last Name Descending
-![Alt text](/screenshots/lastnamefilter.JPG?raw=true "filter last name")
+User Profile - 
+![Alt text](/client/public/screenshots/profile.JPG?raw=true "profile")
 
 
 ## License
