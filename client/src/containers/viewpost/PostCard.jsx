@@ -88,13 +88,16 @@ function PostCard(props) {
 
                 <Link to={`/profile/${props.post.user._id}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-                    <Avatar alt="Kanye" src="/images/kanye.png" />
-                    <Typography gutterBottom variant="h5" component="h2" style={{ marginBottom: '0px', marginLeft: '1rem' }}>
+                    <Avatar alt="Kanye" src={props.post.user.profile_image.location} />
+                    <Typography  gutterBottom variant="body1" component="p" style={{ fontWeight: 'bold', color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }} >
                         {props.post.user.name}
                         {/* <div style={{fontSize:'10px', display:'flex', alignItems:'center'}}>
                 {props.post[0].title}
                 
                 </div> */}
+                    </Typography>
+                    <Typography variant="body1" component="p" style={{ display: 'flex', alignItems: 'center', marginLeft: '0.25rem', color: '#ff6701' }}>
+                        {props.post.isClosed ? ' - Closed' : ''}
                     </Typography>
 
                 </Link>
@@ -102,7 +105,7 @@ function PostCard(props) {
 
 
 
-                <Typography variant="body1" color="textSecondary" component="p" style={{ display: 'flex', alignItems: 'center', }}>
+                <Typography variant="body1"  component="p" style={{ display: 'flex', alignItems: 'center', }}>
                     {props.post.title}
                 </Typography>
                 <p style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
@@ -155,7 +158,7 @@ function PostCard(props) {
 
                 </table>
                 <div >
-                    <BuyModal post={props.post}></BuyModal>
+                    <BuyModal post={props.post} handleTicketsBought={props.handleTicketsBought}></BuyModal>
 
                     {/* <a style={{width: '100%',height: '2rem', display: 'flex', justifyContent: 'center',  alignItems: 'center',backgroundColor:'rgba(0, 0, 0, 0.54)',color:'white'}} href={`/buytickets/${props.post.id}`}>Buy Tickets</a> */}
                 </div>

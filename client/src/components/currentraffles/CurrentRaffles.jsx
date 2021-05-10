@@ -75,9 +75,9 @@ function CurrentRaffles() {
                                 }
                                 if (i < 5) {
                                     return (
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem' }}>
+                                        <div key={tombola._id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1rem' }}>
                                             <Link to={`/posts/${(tombola.post._id).toString()}`} >
-                                                <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
+                                                <Avatar alt={tombola.post.image_refs[0].key} src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
                                             </Link>
                                             <Link to={`/posts/${(tombola.post._id).toString()}`} >
                                                 <Typography gutterBottom variant="body1" component="p" style={{ color: 'black', marginBottom: '0px', marginLeft: '0.5rem' }}>

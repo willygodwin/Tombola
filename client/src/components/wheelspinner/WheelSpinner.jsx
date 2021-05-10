@@ -1,6 +1,7 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Wheel } from 'react-custom-roulette'
-import {shuffle} from './../../utils/shuffle';
+import { shuffle } from './../../utils/shuffle';
+import Button from "@material-ui/core/Button";
 
 
 const TOTAL_PIES = 30;
@@ -9,37 +10,41 @@ const LOSE_COLOUR = '#fcecdd';
 
 
 function createWinPie(option = 0) {
-    return { option: option, style: { 
-        backgroundColor: WIN_COLOUR,
-        textColor: 'white',
-        
-     }}
+  return {
+    option: option, style: {
+      backgroundColor: WIN_COLOUR,
+      textColor: 'white',
+
+    }
+  }
 }
 
-function createLosePie(option = 0){
-    return { option: option, style: { 
-        backgroundColor: LOSE_COLOUR ,
-        textColor: 'grey',
+function createLosePie(option = 0) {
+  return {
+    option: option, style: {
+      backgroundColor: LOSE_COLOUR,
+      textColor: 'grey',
 
-    }}
+    }
+  }
 }
 
-function generateSpinnerData(winRate){
-    const data = [];
-    
-    const totalWinPies = Math.ceil(TOTAL_PIES * winRate);
+function generateSpinnerData(winRate) {
+  const data = [];
 
-    const totalLosePies = TOTAL_PIES - totalWinPies;
+  const totalWinPies = Math.ceil(TOTAL_PIES * winRate);
 
-    for (let index = 0; index < totalWinPies; index++) {
-        data.push(createWinPie(index)); 
-    }
+  const totalLosePies = TOTAL_PIES - totalWinPies;
 
-    for (let index = 0; index < totalLosePies; index++) {
-        data.push(createLosePie(index + totalWinPies));
-    }
+  for (let index = 0; index < totalWinPies; index++) {
+    data.push(createWinPie(index));
+  }
 
-    return shuffle(data);
+  for (let index = 0; index < totalLosePies; index++) {
+    data.push(createLosePie(index + totalWinPies));
+  }
+
+  return shuffle(data);
 
 
 
@@ -52,7 +57,7 @@ export default (props) => {
   const [data, setData] = useState([])
   const [won, setWon] = useState(false)
 
-  const ticketsBought = (props.ticket.no_tickets_bought/props.ticket.post.no_tickets);
+  const ticketsBought = (props.ticket.no_tickets_bought / props.ticket.post.no_tickets);
 
   useEffect(() => {
     setWon(props.won)
@@ -62,15 +67,15 @@ export default (props) => {
 
 
   const handleSpinClick = () => {
-    const riggedColour = won ? WIN_COLOUR : LOSE_COLOUR;  
+    const riggedColour = won ? WIN_COLOUR : LOSE_COLOUR;
 
     // find green pie index
     const riggedNumbers = data.map((item, index) => item.style.backgroundColor === riggedColour ? index : null).filter(x => x);
-    console.log({riggedNumbers});
-    const newPrizeNumber = riggedNumbers[ Math.floor(Math.random() * riggedNumbers.length )];
-    console.log({newPrizeNumber});
-   
-    
+    console.log({ riggedNumbers });
+    const newPrizeNumber = riggedNumbers[Math.floor(Math.random() * riggedNumbers.length)];
+    console.log({ newPrizeNumber });
+
+
     setPrizeNumber(newPrizeNumber)
     setMustSpin(true)
     props.onClick()
@@ -82,21 +87,24 @@ export default (props) => {
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
         data={data}
-        innerRadius ={40}
+        innerRadius={40}
         innerBorderWidth={5}
         outerBorderWidth={5}
         radiusLineWidth={2}
         innerBorderColor='#ffc55c' //'#ffc894ff'
-        outerBorderColor= '#ffc55c'
+        outerBorderColor='#ffc55c'
         radiusLineColor='#ffc55c'
         backgroundColors={['#3e3e3e', '#df3428']}
         textDistance={80}
 
-        // onStopSpinning={() => {
-        //   setMustSpin(false)
-        // }}
+      // onStopSpinning={() => {
+      //   setMustSpin(false)
+      // }}
       />
-      <button onClick={handleSpinClick}>SPIN</button>
+      {/* <button onClick={handleSpinClick}>SPIN</button> */}
+      <Button onClick={handleSpinClick} color="primary" style={{ color: '#FF6701' }}>
+        SPIN
+      </Button>
     </>
   )
 }

@@ -15,8 +15,7 @@ import axios from 'axios'
 function ViewPostContainer() {
     let { id } = useParams();
     const [post, setPost] = useState([])
-    console.log(id);
-
+    const [ticketsBought, setTicketsBought] = useState(false)
 
 
     useEffect(() => {
@@ -32,9 +31,13 @@ function ViewPostContainer() {
 
                 }
             })
-    }, [id])
+    }, [id, ticketsBought])
 
     console.log(post);
+
+    const handleTicketsBought = () => {
+        setTicketsBought(!ticketsBought)
+    }
 
 
 
@@ -45,7 +48,7 @@ function ViewPostContainer() {
             <Container>
                 {/* text area to create new post */}
                 
-                <Grid container spacing={3}>
+                <Grid container spacing={3} style={{paddingTop: '10px'}}>
                     <Grid item xs={12} sm={6}>
                         {post.length === 0 ? <div></div> : <ImageCarousel post={post} />}
 
@@ -55,7 +58,7 @@ function ViewPostContainer() {
 
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <PostCard post={post}></PostCard>
+                        <PostCard post={post} handleTicketsBought={handleTicketsBought}></PostCard>
 
                     </Grid>
                     <Grid item xs={12} sm={12}>

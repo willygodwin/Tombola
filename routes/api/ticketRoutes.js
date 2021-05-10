@@ -16,6 +16,7 @@ router.get("/currentraffles", (req, res) => {
 
     // loading the inverse relationship, ie getting comments from post
     // console.log(typeof (req.user._id.toString()))
+    
     const query = [
         { $match: { user_id: mongoose.Types.ObjectId(req.user._id) }},
         {
@@ -23,7 +24,11 @@ router.get("/currentraffles", (req, res) => {
                 createdAt: -1
             }
         }]
+    
+    
+    
     Ticket.aggregate(query)
+ 
     .then((tickets) => {
         console.log(tickets)
         return Ticket.populate(tickets, {
@@ -31,7 +36,7 @@ router.get("/currentraffles", (req, res) => {
         })
     })
     .then((tickets) => {
-        // console.log(posts)
+        console.log(tickets)
         res.json({
             data: tickets,
         });

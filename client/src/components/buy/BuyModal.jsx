@@ -92,6 +92,7 @@ export default function FormDialog(props) {
           .then((response) => {
             console.log(response);
             setOpen(false)
+            props.handleTicketsBought()
 
           });
       });

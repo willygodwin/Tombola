@@ -26,7 +26,13 @@ function UploadContainer(){
         })
             .then((response) => {
                 console.log(response);
-                setPosts(response.data.data)
+                const openPosts = response.data.data.filter((post) => {
+                    if(!post.isClosed){
+                        return post
+                    }
+                })
+                console.log(openPosts);
+                setPosts(openPosts)
             }).catch((err) => {
                 console.log({err});
                 if(err.response.status === 401){

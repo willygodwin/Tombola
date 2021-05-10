@@ -41,7 +41,7 @@ async function seedData() {
                 description: '9ct Gold Diamond Miracle Set Huggie Earrings. External Size= 12mm x 3mm.'
             },
             {
-                name: 'Bracelet',
+                name: 'Tennis Bracelet',
                 price: 1000,
                 images: [{ key: '/bracelets.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/bracelets.jpg' }],
                 description: 'Swarovski Tennis Deluxe Bracelet White, Rose-gold tone plated'

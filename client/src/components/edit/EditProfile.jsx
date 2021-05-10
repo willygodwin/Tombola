@@ -16,12 +16,12 @@ const useStyles = makeStyles({
         maxWidth: 345,
     },
     postItem: {
-        marginTop: 30,
-        marginBottom: 30,
+        // marginTop: 30,
+        // marginBottom: 30,
     },
     newPost: {
-        marginTop: 30,
-        marginBottom: 30,
+        // marginTop: 30,
+        // marginBottom: 30,
         width: '100%',
         position: 'relative',
         fontSize: '0.75rem'
@@ -34,6 +34,7 @@ const CssOutlinedInput = withStyles({
 
 
         '&.MuiOutlinedInput-root': {
+            padding: '12.5px 10px',
 
             '&.Mui-focused fieldset': {
 
@@ -69,6 +70,7 @@ function EditProfile(props) {
         .then((response) => {
             console.log(response);
             setEditing(false)
+            props.handleEditDescription()
     
           });
     }
@@ -123,8 +125,8 @@ function EditProfile(props) {
                         rowsMax={2}
                     />
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent: "space-between" }}>
-                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '34px', right: '4px', fontSize:'0.8em' }} onClick={showInput} icon={faTimes} size="sm" />
-                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '34px', right: '14px', fontSize: '0.7em' }} onClick={submitInput} icon={faCheck} size="xs" />
+                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '4px', right: '4px', fontSize:'0.8em' }} onClick={showInput} icon={faTimes} size="sm" />
+                        <FontAwesomeIcon className='ExitButton' style={{ cursor: 'Pointer', position: 'absolute', top: '4px', right: '14px', fontSize: '0.7em' }} onClick={submitInput} icon={faCheck} size="xs" />
                     </div>
                 </div>
             )

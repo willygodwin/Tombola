@@ -23,7 +23,12 @@ function ProfileContainer(){
     let { id } = useParams();
     const [posts, setPosts] = useState([])
     const [userInfo, setUserInfo] = useState([])
+    const [editDescription, setEditDescription] = useState(false)
     console.log(id);
+
+    const handleEditDescription = () => {
+        setEditDescription(!editDescription)
+    }
 
 
    
@@ -55,7 +60,7 @@ function ProfileContainer(){
                     
                 }
             })
-    }, [id])
+    }, [id, editDescription])
 
     
 
@@ -74,7 +79,7 @@ function ProfileContainer(){
                 
                 <Grid item xs={12} sm={12} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}>
                     
-                <ProfileHeader user={userInfo} noPosts={posts.length} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}></ProfileHeader>
+                <ProfileHeader handleEditDescription={handleEditDescription} user={userInfo} noPosts={posts.length} style={{backgroundColor:'rgba(0, 0, 0, 0)'}}></ProfileHeader>
                 
                    
                 </Grid>

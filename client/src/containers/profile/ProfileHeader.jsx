@@ -33,7 +33,7 @@ function ProfileHeader(props) {
         return (
 
             <div style={{ display: 'flex', flexDirection: 'column', }}>
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'row',  }}>
 
                     <Avatar alt="Kanye" src={props.user[0].profile_image.location} className={classes.large} />
                     <div style={{ display: 'flex', flexDirection: 'column', }}>
@@ -65,7 +65,7 @@ function ProfileHeader(props) {
                             </div>
                         </div>
                         <div style={{ marginLeft: '1rem' }}>
-                            <EditProfile user={props.user[0]} ></EditProfile>
+                            <EditProfile user={props.user[0]} handleEditDescription={props.handleEditDescription}></EditProfile>
 
 
                         </div>

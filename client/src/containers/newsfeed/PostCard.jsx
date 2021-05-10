@@ -94,6 +94,10 @@ function PostCard(props) {
                                 {props.post[0].user.name}
                             </Typography>
                         </Link>
+                        <Typography variant="body1" component="p" style={{ display: 'flex', alignItems: 'center', marginLeft: '0.25rem', color: '#ff6701' }}>
+                            {props.post[0].isClosed ? ' - Closed' : ''}
+                        </Typography>
+
                     </div>
                     {/* <Carousel afterChange={onChange}>
 
@@ -127,12 +131,12 @@ function PostCard(props) {
                             </Typography>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', alignItems:'flex-end', margin: '1rem' }}>
-                        <Typography gutterBottom variant="caption" component="p" style={{marginBottom: '0px'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', alignItems: 'flex-end', margin: '1rem' }}>
+                        <Typography gutterBottom variant="caption" component="p" style={{ marginBottom: '0px' }}>
                             {moment(props.post[0].createdAt).from(moment()).toLocaleUpperCase()}
                             {/* {moment(props.post[0].createdAt).format("Do MMMM YYYY")} */}
                         </Typography>
-                        <BuyModal post={props.post[0]}></BuyModal>
+                        <BuyModal post={props.post[0]} handleTicketsBought={props.handleTicketsBought}></BuyModal>
                     </div>
                     {/* <CommentList 
                         comments={comments}

@@ -17,6 +17,7 @@ function PostContainer(){
 
     const history = useHistory();
     const [posts, setPosts] = useState([])
+    const [ticketsBought, setTicketsBought] = useState(false)
 
 
     // call post api to load all the post in page
@@ -33,7 +34,11 @@ function PostContainer(){
                     
                 }
             })
-    }, [])
+    }, [ticketsBought])
+
+    const handleTicketsBought = () => {
+        setTicketsBought(!ticketsBought)
+    }
 
 
     // text area
@@ -56,6 +61,8 @@ function PostContainer(){
                         postIndex={index} 
                         key={post._id} 
                         post={postEdit} 
+                        handleTicketsBought ={handleTicketsBought}
+
                     />
                 })}
             </Container>

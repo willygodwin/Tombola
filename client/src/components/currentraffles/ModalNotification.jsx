@@ -123,7 +123,7 @@ function ModalNotification(props) {
 
               <h2 id="simple-modal-title">Congratulations! You have won the following item...</h2>
               <Link to={`/posts/${props.ticket.post._id}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <Avatar src={props.ticket.post.image_refs[0]}></Avatar>
+                <Avatar alt={props.ticket.post.image_refs[0].key} src={props.ticket.post.image_refs[0].location}></Avatar>
                 <p style={{ color: 'black', marginBottom: '0px', marginLeft: '0.25rem' }} id="simple-modal-description">
                   {props.ticket.post.title}
                 </p>

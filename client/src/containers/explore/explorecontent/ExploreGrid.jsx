@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   hoverText: { 
     height: '200px', 
-    width: '700px',  
+    width: '100%',  
     backgroundColor:'rgba(128, 128, 128, 0.616)', 
     color: 'white',
     position: "absolute", 
@@ -120,12 +120,13 @@ function ImageGridList(props) {
     <div className={classes.root}>
       <GridList spacing={15} cellHeight={200} className={classes.gridList} cols={getGridListCols()}>
         {shuffledPosts.map((post, i) => {
+
           return (<GridListTile ref={elRefs.current[i]} key={i} cols={layoutColumns(i)}
             onMouseOver={e => (e)}  
             onMouseOut={e => (e)}  
           >
             <Link to={`/posts/${(post._id).toString()}`}>
-            <Hover height='200px'width='700px' onHover={
+            <Hover height='200px'width='100%' onHover={
               <div className={classes.hoverText}  >
                 <div style={{ display:'flex', flexDirection:'row',alignItems:'center', marginLeft:'0.5rem'}}>
                   <FontAwesomeIcon icon={faDollarSign} style={{ marginRight:'0.25rem'}} />

@@ -21,7 +21,6 @@ function Pending(props) {
                     <th>Tombola Title</th>
                     <th>Tickets Bought</th>
                     <th>Ticket Percentage</th>
-                    <th>Posted By</th>
                     <th>Tickets Remaining</th>
                     <th>Total Price</th>
 
@@ -63,7 +62,7 @@ function Pending(props) {
 
                                                     </div>
                                     </td>
-                                    <td>
+                                    {/* <td>
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                             <Link to={`/posts/${(tombola.post._id).toString()}`} >
                                                 <Avatar alt="Kanye" src={tombola.post.image_refs[0].location} style={{ width: '2rem', height: '2rem' }} />
@@ -74,7 +73,7 @@ function Pending(props) {
                                                 </Typography>
                                             </Link>
                                         </div>
-                                    </td>
+                                    </td> */}
                                     <td>
 
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '0.5rem' }}>
