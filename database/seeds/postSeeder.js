@@ -67,7 +67,7 @@ async function seedData() {
             {
                 name: '2 Person Trip To Thailand',
                 price: 8000,
-                images: [{ key: '1620642048333-trip-to-thailand.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/1620642048333-trip-to-thailand.jpg' }], 
+                images: [{ key: '1620642135482-thailand-trip.jpg', location: 'https://tombolaproject3.sfo3.digitaloceanspaces.com/1620642135482-thailand-trip.jpg' }], 
                 description: "Trip to Thailand for two people inclusive of flights and accommodation at the Sheraton Hotel in the luxury penthouse suite."
             },
 

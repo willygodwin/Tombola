@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
 const mongoose = require("mongoose");
 
 // Connect to the Mongo DB
