@@ -60,7 +60,7 @@ export default function SearchAppBar() {
   const logout = () => {
     axios.get('/api/logout')
       .then((response) => {
-        window.location.href = '/'
+        // window.location.href = '/'
       }).catch((err) => {
         console.log(err);
       })
@@ -166,9 +166,10 @@ export default function SearchAppBar() {
 
             </Grid>
             <Grid item sm={2} >
-              <Typography variant="h6" className={classes.title} style={{ paddingLeft: '10px', color: '#ff6701' }}>
+              <img src="/images/Tombola-04.png" style={{height:'65px'}}alt="Tombola" />
+              {/* <Typography variant="h6" className={classes.title} style={{ paddingLeft: '10px', color: '#ff6701' }}>
                 Tombola
-                    </Typography>
+                    </Typography> */}
             </Grid>
             <Grid item sm={4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 

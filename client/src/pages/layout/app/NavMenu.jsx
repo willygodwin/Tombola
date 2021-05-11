@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -21,21 +21,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CssButton = withStyles({
-    root: {
-      '&.MuiButton-root': {
-        minWidth:'unset', 
-        padding:'0px',
-        marginBottom: '2px'
+  root: {
+    '&.MuiButton-root': {
+      minWidth: 'unset',
+      padding: '0px',
+      marginBottom: '2px'
 
-      },
-      '&.MuiButton-text': {
-        padding: "0px" 
-        
-      }
+    },
+    '&.MuiButton-text': {
+      padding: "0px"
 
     }
 
-  })(Button);
+  }
+
+})(Button);
 
 export default function MenuListComposition(props) {
   const classes = useStyles();
@@ -71,40 +71,42 @@ export default function MenuListComposition(props) {
     prevOpen.current = open;
   }, [open]);
 
-  return (
-    // <div className={classes.root}>
-      <div style={{width:'auto', height:'auto', marginLeft:'0.5rem', marginRight:'0.5rem'}}>
-        <CssButton
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-          
-        >
-          {<FontAwesomeIcon icon={props.icon} style={{ color: props.active === 'profile' ? '#ff6701' : 'black' }} size="lg" />}
-        </CssButton>
-        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                      
-                    {props.links.map(link => {
-                        return <MenuItem onClick={handleClose}><Link to={link.to} style={{ textDecoration: 'none', color: props.active === link.name.toLowerCase() ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>{link.name}</Link></MenuItem>
-                    })}
-                    
 
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    // </div>
+
+  return (<div style={{ width: 'auto', height: 'auto', marginLeft: '0.5rem', marginRight: '0.5rem' }}>
+
+    <CssButton
+      ref={anchorRef}
+      aria-controls={open ? 'menu-list-grow' : undefined}
+      aria-haspopup="true"
+      onClick={handleToggle}
+
+    >
+      <FontAwesomeIcon icon={props.icon} style={{ color: props.active === 'profile' ? '#ff6701' : 'black' }} size="lg" />
+    </CssButton>
+
+    <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+      {({ TransitionProps, placement }) => (
+        <Grow
+          {...TransitionProps}
+          style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+        >
+          <Paper>
+            <ClickAwayListener onClickAway={handleClose}>
+              <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+
+                {props.links.map(link => {
+                  return <MenuItem onClick={handleClose}><Link to={link.to} style={{ textDecoration: 'none', color: props.active === link.name.toLowerCase() ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>{link.name}</Link></MenuItem>
+                })}
+
+
+              </MenuList>
+            </ClickAwayListener>
+          </Paper>
+        </Grow>
+      )}
+    </Popper>
+  </div>
+
   );
 }
