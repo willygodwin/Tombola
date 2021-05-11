@@ -16,7 +16,7 @@ import { faHome, faSearch, faUserCircle, faPlusSquare, faBars } from '@fortaweso
 import Grid from '@material-ui/core/Grid';
 import SearchContainer from '../../../containers/explore/searchcontent/SearchContainer'
 import { Link, useLocation, useParams } from 'react-router-dom';
-import NavMenu from '../../../components/navmenu/NavMenu'
+import NavMenu from './NavMenu'
 
 
 
@@ -68,8 +68,7 @@ export default function SearchAppBar() {
 
   useEffect(() => {
     // console.log(location);
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
+
     if (location.pathname === '/newsfeed' || location.pathname === '/wall') {
       setActive('home')
     }
@@ -82,7 +81,8 @@ export default function SearchAppBar() {
     else if (location.pathname === `/profile/${id}`) {
       setActive('profile')
     }
-
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
 
   }, [])
@@ -90,24 +90,51 @@ export default function SearchAppBar() {
 
   //
   const propsPC = {
-    icon: <FontAwesomeIcon icon={faUserCircle} style={{ color: active === 'profile' ? '#ff6701' : 'black' }} size="lg" />,
+    icon: faUserCircle,
+    active: active,
 
-    links: [
-      <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Profile</Link>,
-      <div onClick={logout} style={{ color: "black", marginLeft: '0.5rem', marginRight: '0.5rem' }}> Logout</div>
+    links: [{
+      to:`/profile/${store.auth.authState.currentUser._id}` ,
+      name: 'Profile'
+    }, 
+    {
+      onClick: logout, 
+      to: '/',
+      name: 'Logout'
+    }
+      
     ]
 
   }
 
   const propsMobile = {
-    icon: <FontAwesomeIcon icon={faBars} size="lg" />,
+    icon: faBars,
+    active: active,
 
     links: [
-      <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Home</Link>,
-      <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Explore</Link>,
-      <Link to='/upload' style={{ textDecoration: 'none', color: active === 'upload' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Upload</Link>,
-      <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Profile</Link>,
-      <div onClick={logout} style={{ color: "black", marginLeft: '0.5rem', marginRight: '0.5rem' }}> Logout</div>
+      {
+        to:`/newsfeed` ,
+        name: 'Home'
+      },
+      {
+        to:`/explore` ,
+        name: 'Explore'
+      },
+      {
+        to:`/upload` ,
+        name: 'Upload'
+        
+      },
+      {
+        to:`/profile/${store.auth.authState.currentUser._id}` ,
+        name: 'Profile'
+      },
+      {
+        onClick: logout, 
+        to: '/',
+        name: 'Logout'
+      } 
+   
     ]
   }
 
@@ -137,7 +164,8 @@ export default function SearchAppBar() {
                   <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg" /></Link>
                   <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faSearch} size="lg" /></Link>
                   <Link to='/upload' style={{ textDecoration: 'none', color: active === 'upload' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faPlusSquare} size="lg" /></Link>
-                  <NavMenu {...propsPC}></NavMenu>
+                  <NavMenu {...propsPC}>
+                  </NavMenu>
                   {/* <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faUserCircle} size="lg" /></Link>
                   <Button onClick={logout} style={{ color: "black" }}> Logout</Button> */}
                 </div>

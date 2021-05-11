@@ -81,7 +81,7 @@ export default function MenuListComposition(props) {
           onClick={handleToggle}
           
         >
-          {props.icon}
+          {<FontAwesomeIcon icon={props.icon} style={{ color: props.active === 'profile' ? '#ff6701' : 'black' }} size="lg" />}
         </CssButton>
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
@@ -92,8 +92,9 @@ export default function MenuListComposition(props) {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                      
                     {props.links.map(link => {
-                        return <MenuItem onClick={handleClose}>{link}</MenuItem>
+                        return <MenuItem onClick={handleClose}><Link to={link.to} style={{ textDecoration: 'none', color: props.active === link.name.toLowerCase() ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>{link.name}</Link></MenuItem>
                     })}
                     
 
