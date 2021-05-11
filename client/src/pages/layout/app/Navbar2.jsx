@@ -12,10 +12,11 @@ import GlobalStore from "../../../utils/context/GlobalStore";
 import isEmpty from "lodash/isEmpty";
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faSearch, faUserCircle, faPlusSquare, faSafari } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faSearch, faUserCircle, faPlusSquare, faBars } from '@fortawesome/free-solid-svg-icons'
 import Grid from '@material-ui/core/Grid';
 import SearchContainer from '../../../containers/explore/searchcontent/SearchContainer'
 import { Link, useLocation, useParams } from 'react-router-dom';
+import NavMenu from '../../../components/navmenu/NavMenu'
 
 
 
@@ -39,11 +40,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const store = GlobalStore.useGlobalContext()
-  const [active, setActive] = useState('')
   const location = useLocation();
   let { id } = useParams();
+  const [active, setActive] = useState('')
+  const [width, setWindowWidth] = useState(0);
 
-  console.log(store.auth.authState.currentUser._id);
+
+
+  const updateDimensions = () => {
+    const width = window.innerWidth;
+    setWindowWidth(width);
+  };
+
+  const responsive = {
+    showTopNavMenu: width > 1023
+  }
+
+  // console.log(store.auth.authState.currentUser._id);
   const logout = () => {
     axios.get('/api/logout')
       .then((response) => {
@@ -54,8 +67,10 @@ export default function SearchAppBar() {
   }
 
   useEffect(() => {
-    console.log(location);
-    if (location.pathname === '/newsfeed' || location.pathname === '/wall'){
+    // console.log(location);
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    if (location.pathname === '/newsfeed' || location.pathname === '/wall') {
       setActive('home')
     }
     else if (location.pathname === '/explore') {
@@ -68,11 +83,33 @@ export default function SearchAppBar() {
       setActive('profile')
     }
 
+    return () => window.removeEventListener("resize", updateDimensions);
 
   }, [])
 
 
   //
+  const propsPC = {
+    icon: <FontAwesomeIcon icon={faUserCircle} style={{ color: active === 'profile' ? '#ff6701' : 'black' }} size="lg" />,
+
+    links: [
+      <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Profile</Link>,
+      <div onClick={logout} style={{ color: "black", marginLeft: '0.5rem', marginRight: '0.5rem' }}> Logout</div>
+    ]
+
+  }
+
+  const propsMobile = {
+    icon: <FontAwesomeIcon icon={faBars} size="lg" />,
+
+    links: [
+      <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Home</Link>,
+      <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Explore</Link>,
+      <Link to='/upload' style={{ textDecoration: 'none', color: active === 'upload' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Upload</Link>,
+      <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}>Profile</Link>,
+      <div onClick={logout} style={{ color: "black", marginLeft: '0.5rem', marginRight: '0.5rem' }}> Logout</div>
+    ]
+  }
 
 
   return (
@@ -88,21 +125,25 @@ export default function SearchAppBar() {
                 Tombola
                     </Typography>
             </Grid>
-            <Grid item sm={4} style={{ display: 'flex', alignItems: 'center', justifyContent:'center'}}>
-              
-                <SearchContainer
-                />
-              
-            </Grid>
-            <Grid item sm={2} style={{textAlign:'right'}}>
-              <div>
-                <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg" /></Link>
-                <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faSearch} size="lg" /></Link>
-                <Link to='/upload' style={{ textDecoration: 'none', color: active === 'upload' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faPlusSquare} size="lg" /></Link>
-                <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faUserCircle} size="lg" /></Link>
-                <Button onClick={logout} style={{ color: "black" }}> Logout</Button>
-              </div>
+            <Grid item sm={4} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
+              <SearchContainer
+              />
+
+            </Grid>
+            <Grid item sm={2} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+              {responsive.showTopNavMenu ?
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                  <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg" /></Link>
+                  <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faSearch} size="lg" /></Link>
+                  <Link to='/upload' style={{ textDecoration: 'none', color: active === 'upload' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faPlusSquare} size="lg" /></Link>
+                  <NavMenu {...propsPC}></NavMenu>
+                  {/* <Link to={`/profile/${store.auth.authState.currentUser._id}`} style={{ textDecoration: 'none', color: active === 'profile' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faUserCircle} size="lg" /></Link>
+                  <Button onClick={logout} style={{ color: "black" }}> Logout</Button> */}
+                </div>
+                : <div >
+                  <NavMenu {...propsMobile}></NavMenu>
+                </div>}
             </Grid>
             <Grid item sm={2}>
 
