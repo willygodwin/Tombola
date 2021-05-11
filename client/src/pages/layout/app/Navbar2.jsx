@@ -132,7 +132,7 @@ export default function SearchAppBar() {
 
             </Grid>
             <Grid item sm={2} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              {responsive.showTopNavMenu ?
+              {responsive.showTopNavMenu?
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                   <Link to='/newsfeed' style={{ textDecoration: 'none', color: active === 'home' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faHome} size="lg" /></Link>
                   <Link to='/explore' style={{ textDecoration: 'none', color: active === 'explore' ? '#ff6701' : 'black', marginLeft: '0.5rem', marginRight: '0.5rem' }}><FontAwesomeIcon icon={faSearch} size="lg" /></Link>
